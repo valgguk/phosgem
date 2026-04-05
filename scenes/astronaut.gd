@@ -1,12 +1,17 @@
 extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
+@export var color: int = 0
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -900.0
 const Gravity_factor = 2 #Aumenta la gravedad en este factor (x2 etc)
 
 var walking = false
+
+
+func _ready():
+	animated_sprite.frame= color
 
 func _physics_process(delta):
 	# Add the gravity.
