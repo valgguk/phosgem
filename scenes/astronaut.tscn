@@ -52,12 +52,23 @@ size = Vector2(55, 88)
 [node name="Astronaut" type="CharacterBody2D" unique_id=653814398]
 scale = Vector2(1.1902589, 1.1902589)
 script = ExtResource("1_dmfei")
+metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1317052871]
 position = Vector2(-1.999999, -2)
 scale = Vector2(0.30468753, 0.3199219)
 sprite_frames = SubResource("SpriteFrames_2evn4")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1536158883]
 position = Vector2(-4.5, 11)
 shape = SubResource("RectangleShape2D_v06w7")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="." unique_id=1509812445]
+offset_left = -31.925833
+offset_top = -95.77749
+offset_right = 12.074167
+offset_bottom = -72.77749
+scale = Vector2(1.4, 1.4)
+text = "name"
