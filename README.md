@@ -1,4 +1,4 @@
-# Proyecto PhosGem (Nombre del juego en desarrollo)
+# Proyecto PhosGem (✦ Crashtronauts ✦)
 ## Descripción
 Un grupo de personajes excéntricos se embarca en una peligrosa aventura espacial para mantener con vida una nave de dudosa procedencia (porque estaba en oferta). Entre fallas técnicas, amenazas alienígenas y el caos del espacio, deberán trabajar en equipo para sobrevivir y cumplir su sueño de explorar la galaxia.
 
@@ -41,17 +41,14 @@ El juego destaca por su enfoque en:
 - Valentina Ramírez  
 - Xavier Sepúlveda  
 
-
-## Guía rápida de RPC (Godot)
-
+---
+> ## Guía rápida de RPC (Godot)
 ### 1) Quién ejecuta el llamado
 - `authority`: solo lo ejecuta la autoridad del nodo (normalmente host/servidor), no el proxy.
 - `any_peer`: puede ejecutarlo cualquier peer, incluyendo proxies.
-
 ### 2) Dónde se ejecuta
 - `call_remote`: se ejecuta de forma remota en los peers correspondientes.
 - `call_local`: se ejecuta en remoto y también localmente en quien hace el llamado.
-
 ### 3) Modo de transferencia
 - `reliable`:
   - Garantiza entrega.
@@ -66,15 +63,13 @@ El juego destaca por su enfoque en:
   - Prioriza lo más reciente y descarta paquetes viejos cuando hay pérdida.
   - Útil para movimiento/posición.
   - Rápido y en orden temporal para evitar inconsistencias.
-
 ### 4) `transfer_channel` (canal de envío)
 - Define por qué canal viajan los paquetes.
 - Permite separar tipos de datos para evitar saturación.
 - Ejemplo práctico:
   - Canal `0`: eventos críticos (`reliable`).
   - Canal `1`: movimiento/estado frecuente (`unreliable` o `unreliable_ordered`).
-
-### Regla práctica rápida
+ ### Regla práctica rápida
 - Eventos importantes: `reliable`.
 - Movimiento y estado continuo: `unreliable_ordered`.
 - Datos que no importa perder: `unreliable`.
