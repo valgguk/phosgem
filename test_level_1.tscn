@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://s5oh057a6vxi"]
+[gd_scene format=3 uid="uid://s5oh057a6vxi"]
 
 [ext_resource type="PackedScene" uid="uid://k0rn1h3ux3do" path="res://scenes/astronaut.tscn" id="1_eb0lg"]
 [ext_resource type="Texture2D" uid="uid://cenralcgdy82r" path="res://assets/blue-stars.png" id="1_qtenh"]
