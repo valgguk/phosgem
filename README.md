@@ -41,5 +41,43 @@ El juego destaca por su enfoque en:
 - Valentina Ramírez  
 - Xavier Sepúlveda  
 
+
+## Guía rápida de RPC (Godot)
+
+### 1) Quién ejecuta el llamado
+- `authority`: solo lo ejecuta la autoridad del nodo (normalmente host/servidor), no el proxy.
+- `any_peer`: puede ejecutarlo cualquier peer, incluyendo proxies.
+
+### 2) Dónde se ejecuta
+- `call_remote`: se ejecuta de forma remota en los peers correspondientes.
+- `call_local`: se ejecuta en remoto y también localmente en quien hace el llamado.
+
+### 3) Modo de transferencia
+- `reliable`:
+  - Garantiza entrega.
+  - Útil para acciones importantes (ej.: disparar, usar habilidad).
+  - Más seguro, pero más lento.
+- `unreliable`:
+  - No garantiza entrega.
+  - Si se pierde un paquete, no importa.
+  - Útil para datos frecuentes.
+  - Más rápido.
+- `unreliable_ordered`:
+  - Prioriza lo más reciente y descarta paquetes viejos cuando hay pérdida.
+  - Útil para movimiento/posición.
+  - Rápido y en orden temporal para evitar inconsistencias.
+
+### 4) `transfer_channel` (canal de envío)
+- Define por qué canal viajan los paquetes.
+- Permite separar tipos de datos para evitar saturación.
+- Ejemplo práctico:
+  - Canal `0`: eventos críticos (`reliable`).
+  - Canal `1`: movimiento/estado frecuente (`unreliable` o `unreliable_ordered`).
+
+### Regla práctica rápida
+- Eventos importantes: `reliable`.
+- Movimiento y estado continuo: `unreliable_ordered`.
+- Datos que no importa perder: `unreliable`.
+- Separar tráfico por canal mejora estabilidad de red.
 ---
 > Proyecto desarrollado en Godot
