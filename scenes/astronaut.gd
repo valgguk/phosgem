@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var color: int = 0
 @onready var label: Label = $Label
 
+var _data: Statics.PlayerData
+
 const SPEED = 400.0
 const JUMP_VELOCITY = -900.0
 const Gravity_factor = 2 #Aumenta la gravedad en este factor (x2 etc)
@@ -35,6 +37,9 @@ func _physics_process(delta):
 		
 
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("test"):
+		test()
 
 
 #for the direction of the sprite, probably a simpler way to do this exists
@@ -67,5 +72,11 @@ func walking_wobble(direction):
 	
 	
 func setup(data: Statics.PlayerData) -> void:
+	_data = data
 	name = str(data.id)
 	label.text = data.name
+	
+# defecto : ("authority", "call_remote", "reliable")
+@rpc("authority", "call_remote", "reliable")
+func test() -> void:
+	Debug.log("test %s" % _data.name)
