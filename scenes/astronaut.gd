@@ -17,29 +17,32 @@ func _ready():
 	animated_sprite.frame= color
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * Gravity_factor* delta
+	# si soy authority : me puedo mover
+	if is_multiplayer_authority():
+		# Add the gravity.
+		if not is_on_floor():
+			velocity += get_gravity() * Gravity_factor* delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		# Handle jump.
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	var direction = Input.get_axis("move_left", "move_right")
-	if direction:
-		velocity.x = direction * SPEED
-		change_sprite_direction(direction)
-		manage_animations(direction)
-	else:
+		# Get the input direction and handle the movement/deceleration.
+		var direction = Input.get_axis("move_left", "move_right")
+		if direction:
+			velocity.x = direction * SPEED
+			change_sprite_direction(direction)
+			manage_animations(direction)
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			
+
+		move_and_slide()
 		
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
-
-	move_and_slide()
+		send_position.rpc(global_position)
 	
-	if Input.is_action_just_pressed("test"):
-		test()
+	if Input.is_action_just_pressed("test") and is_multiplayer_authority():
+		test.rpc()
 
 
 #for the direction of the sprite, probably a simpler way to do this exists
@@ -75,8 +78,13 @@ func setup(data: Statics.PlayerData) -> void:
 	_data = data
 	name = str(data.id)
 	label.text = data.name
+	set_multiplayer_authority(data.id, false)
 	
 # defecto : ("authority", "call_remote", "reliable")
-@rpc("authority", "call_remote", "reliable")
+@rpc("authority", "call_local", "reliable")
 func test() -> void:
 	Debug.log("test %s" % _data.name)
+
+@rpc("authority", "call_remote", "unreliable_ordered")
+func send_position(pos: Vector2) -> void:
+	global_position = pos
