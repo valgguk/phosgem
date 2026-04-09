@@ -206,6 +206,6 @@ color = 1
 position = Vector2(-328, -142)
 color = 2
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=428155401]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=457947721]
 position = Vector2(443, 236)
 zoom = Vector2(0.35, 0.35)

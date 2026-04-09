@@ -1,4 +1,4 @@
-# Proyecto PhosGem (Nombre del juego en desarrollo)
+# Proyecto PhosGem (✦ Crashtronauts ✦)
 ## Descripción
 Un grupo de personajes excéntricos se embarca en una peligrosa aventura espacial para mantener con vida una nave de dudosa procedencia (porque estaba en oferta). Entre fallas técnicas, amenazas alienígenas y el caos del espacio, deberán trabajar en equipo para sobrevivir y cumplir su sueño de explorar la galaxia.
 
@@ -41,5 +41,66 @@ El juego destaca por su enfoque en:
 - Valentina Ramírez  
 - Xavier Sepúlveda  
 
+
+> ## Guía rápida de RPC (Godot)
+### 1) Quién envia la orden de ejecutar funcion.
+- `authority`: solo lo pide la autoridad del nodo (normalmente host/servidor), no el proxy.
+- `any_peer`: puede pedirlo cualquier peer, incluyendo proxies.
+### 2) Dónde se ejecuta
+- `call_remote`: se ejecuta de forma remota en los peers correspondientes.
+- `call_local`: se ejecuta en remoto y también localmente en quien hace el llamado (no hace chequeos de autoridad).
+### 3) Modo de transferencia
+- `reliable`:
+  - Garantiza entrega.
+  - Útil para acciones importantes (ej.: disparar, usar habilidad).
+  - Más seguro, pero más lento.
+- `unreliable`:
+  - No garantiza entrega.
+  - Si se pierde un paquete, no importa.
+  - Útil para datos frecuentes.
+  - Más rápido.
+- `unreliable_ordered`:
+  - Prioriza lo más reciente y descarta paquetes viejos cuando hay pérdida.
+  - Útil para movimiento/posición.
+  - Rápido y en orden temporal para evitar inconsistencias.
+### 4) `transfer_channel` (canal de envío)
+- Define por qué canal viajan los paquetes.
+- Permite separar tipos de datos para evitar saturación.
+- Ejemplo práctico:
+  - Canal `0`: eventos críticos (`reliable`).
+  - Canal `1`: movimiento/estado frecuente (`unreliable` o `unreliable_ordered`).
+ ### Regla práctica rápida
+- Eventos importantes: `reliable`.
+- Movimiento y estado continuo: `unreliable_ordered`.
+- Datos que no importa perder: `unreliable`.
+- Separar tráfico por canal mejora estabilidad de red.
+
+
+> ## Cómo conectarse (Multijugador)
+
+### (==) Misma red (WiFi)
+
+1. Host obtiene su IP:
+
+   ```
+   ipconfig → IPv4 (ej: 192.168.x.x)
+   ```
+2. Join ingresa esa IP en el juego
+3. Usar mismo puerto (ej: `7777`)
+
+### (!=) Distintas redes (Internet)
+
+1. Host obtiene su IP pública (buscar "mi IP")
+2. Abrir puerto en el router (ej: `7777`)
+3. Join usa esa IP
+
+
+### (!) Si no funciona
+
+* Revisar firewall
+* Revisar IP
+* Revisar puerto
+
+Recomendado: probar primero en la misma red
 ---
 > Proyecto desarrollado en Godot
