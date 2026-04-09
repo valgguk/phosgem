@@ -41,7 +41,7 @@ El juego destaca por su enfoque en:
 - Valentina Ramírez  
 - Xavier Sepúlveda  
 
----
+
 > ## Guía rápida de RPC (Godot)
 ### 1) Quién envia la orden de ejecutar funcion.
 - `authority`: solo lo pide la autoridad del nodo (normalmente host/servidor), no el proxy.
@@ -74,5 +74,33 @@ El juego destaca por su enfoque en:
 - Movimiento y estado continuo: `unreliable_ordered`.
 - Datos que no importa perder: `unreliable`.
 - Separar tráfico por canal mejora estabilidad de red.
+
+
+> ## Cómo conectarse (Multijugador)
+
+### (==) Misma red (WiFi)
+
+1. Host obtiene su IP:
+
+   ```
+   ipconfig → IPv4 (ej: 192.168.x.x)
+   ```
+2. Join ingresa esa IP en el juego
+3. Usar mismo puerto (ej: `7777`)
+
+### (!=) Distintas redes (Internet)
+
+1. Host obtiene su IP pública (buscar "mi IP")
+2. Abrir puerto en el router (ej: `7777`)
+3. Join usa esa IP
+
+
+### (!) Si no funciona
+
+* Revisar firewall
+* Revisar IP
+* Revisar puerto
+
+Recomendado: probar primero en la misma red
 ---
 > Proyecto desarrollado en Godot
