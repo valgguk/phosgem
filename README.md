@@ -43,12 +43,12 @@ El juego destaca por su enfoque en:
 
 ---
 > ## Guía rápida de RPC (Godot)
-### 1) Quién ejecuta el llamado
-- `authority`: solo lo ejecuta la autoridad del nodo (normalmente host/servidor), no el proxy.
-- `any_peer`: puede ejecutarlo cualquier peer, incluyendo proxies.
+### 1) Quién envia la orden de ejecutar funcion.
+- `authority`: solo lo pide la autoridad del nodo (normalmente host/servidor), no el proxy.
+- `any_peer`: puede pedirlo cualquier peer, incluyendo proxies.
 ### 2) Dónde se ejecuta
 - `call_remote`: se ejecuta de forma remota en los peers correspondientes.
-- `call_local`: se ejecuta en remoto y también localmente en quien hace el llamado.
+- `call_local`: se ejecuta en remoto y también localmente en quien hace el llamado (no hace chequeos de autoridad).
 ### 3) Modo de transferencia
 - `reliable`:
   - Garantiza entrega.
