@@ -2,6 +2,10 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var label: Label = $Label
+@onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
+@onready var input_synchronizer: InputSynchronizer = $InputSynchronizer
+@onready var sync_timer: Timer = $SyncTimer
+
 
 var _data: Statics.PlayerData
 
@@ -11,30 +15,33 @@ const Gravity_factor = 2 #Aumenta la gravedad en este factor (x2 etc)
 
 var walking = false
 
+func _ready() -> void:
+	sync_timer.timeout.connect(_on_sync_timeout)
+
 func _physics_process(delta):
-	# si soy authority : me puedo mover
-	if is_multiplayer_authority():
-		# Add the gravity.
-		if not is_on_floor():
-			velocity += get_gravity() * Gravity_factor* delta
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * Gravity_factor* delta
 
-		# Handle jump.
-		if Input.is_action_just_pressed("jump") and is_on_floor():
-			velocity.y = JUMP_VELOCITY
+	# Handle jump.
+	if input_synchronizer.jump and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+		input_synchronizer.jump = false
 
-		# Get the input direction and handle the movement/deceleration.
-		var direction = Input.get_axis("move_left", "move_right")
-		if direction:
-			velocity.x = direction * SPEED
-			change_sprite_direction(direction)
-			manage_animations(direction)
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			
-
-		move_and_slide()
+	# Get the input direction and handle the movement/deceleration.
+	var direction = input_synchronizer.move_input
+	if direction:
+		velocity.x = direction * SPEED
+		change_sprite_direction(direction)
+		manage_animations(direction)
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-		send_position.rpc(global_position)
+
+	move_and_slide()
+	
+	# rpc manual de movimiento -> mejor multiplayer_synchronizer
+	#send_position.rpc(global_position)
 	
 	if Input.is_action_just_pressed("test") and is_multiplayer_authority():
 		test.rpc()
@@ -74,6 +81,11 @@ func setup(data: Statics.PlayerData) -> void:
 	name = str(data.id)
 	label.text = data.name
 	set_multiplayer_authority(data.id, false)
+	multiplayer_synchronizer.set_multiplayer_authority(data.id, false)
+	input_synchronizer.set_multiplayer_authority(data.id, false)
+	if is_multiplayer_authority():
+		sync_timer.start()
+		
 	
 # defecto : ("authority", "call_remote", "reliable")
 @rpc("authority", "call_local", "reliable")
@@ -82,4 +94,9 @@ func test() -> void:
 
 @rpc("authority", "call_remote", "unreliable_ordered")
 func send_position(pos: Vector2) -> void:
-	global_position = pos
+	global_position = lerp(global_position, pos, 0.5)
+
+func _on_sync_timeout() -> void:
+	send_position.rpc(global_position)
+	
+	

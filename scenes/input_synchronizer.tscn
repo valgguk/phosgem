@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://rf1sn4byj10t"]
+
+[ext_resource type="Script" uid="uid://5s56jy00rklq" path="res://scenes/input_synchronizer.gd" id="1_lerr1"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_tenqv"]
+properties/0/path = NodePath("InputSynchronizer:move_input")
+properties/0/spawn = false
+properties/0/replication_mode = 1
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" unique_id=794443324]
+replication_config = SubResource("SceneReplicationConfig_tenqv")
+script = ExtResource("1_lerr1")
