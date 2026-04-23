@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bc707k062h4d2"]
+
+[ext_resource type="Script" uid="uid://bh0t63fylj3m7" path="res://scenes/Lever.gd" id="1_7u13s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7u13s"]
+
+[node name="Lever" type="Area2D" unique_id=1108067853]
+script = ExtResource("1_7u13s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=367217837]
+shape = SubResource("RectangleShape2D_7u13s")
