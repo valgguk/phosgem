@@ -6,13 +6,14 @@ extends CharacterBody2D
 @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var input_synchronizer: InputSynchronizer = $InputSynchronizer
 @onready var sync_timer: Timer = $SyncTimer
+@onready var interact_area = $InteractArea
 
 
 var _data: Statics.PlayerData
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -900.0
-const Gravity_factor = 2 #Aumenta la gravedad en este factor (x2 etc)
+const Gravity_factor=2
 
 var walking = false
 
@@ -39,7 +40,7 @@ func _physics_process(delta):
 		manage_animations(direction)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
+	
 
 	move_and_slide()
 	
@@ -48,7 +49,14 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("test") and is_multiplayer_authority():
 		test.rpc()
-
+	if Input.is_action_just_pressed("area_interact"):
+		_check_interact()
+		
+	
+func _check_interact() -> void:
+	for area in interact_area.get_overlapping_areas():
+		if area is Area2D and area.has_method("area_interact"):
+			area.area_interact()
 
 #for the direction of the sprite, probably a simpler way to do this exists
 func change_sprite_direction(direction:int)-> void:
@@ -101,5 +109,3 @@ func send_position(pos: Vector2) -> void:
 
 func _on_sync_timeout() -> void:
 	send_position.rpc(global_position)
-	
-	

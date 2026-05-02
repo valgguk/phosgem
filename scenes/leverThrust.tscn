@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bf37aval36plk"]
+
+[ext_resource type="Texture2D" uid="uid://816fjomi2guj" path="res://assets/platformerPack_industrial_tilesheet.png" id="1_43ltf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ws7rw"]
+
+[node name="LeverThrust" type="Area2D" unique_id=841255005]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1178101164]
+shape = SubResource("RectangleShape2D_ws7rw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1332683029]
+texture = ExtResource("1_43ltf")
+region_enabled = true
+region_rect = Rect2(73.68262, 422.7578, 62.51329, 134.63873)
