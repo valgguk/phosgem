@@ -3,10 +3,11 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @export var color: int = 0
 @onready var label: Label = $Label
-@onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
+# @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var input_synchronizer: InputSynchronizer = $InputSynchronizer
 @onready var sync_timer: Timer = $SyncTimer
 @onready var interact_area = $InteractArea
+var ship_velocity: Vector2 = Vector2.ZERO
 
 
 var _data: Statics.PlayerData
@@ -23,6 +24,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta):
+	if not is_multiplayer_authority():
+		return
+		
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * Gravity_factor* delta
@@ -42,10 +46,12 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 
+	velocity += ship_velocity
 	move_and_slide()
+	velocity -= ship_velocity
 	
-	# rpc manual de movimiento -> mejor multiplayer_synchronizer
-	#send_position.rpc(global_position)
+	# rpc manual de movimiento o multiplayer_synchronizer
+	send_position.rpc(global_position)
 	
 	if Input.is_action_just_pressed("test") and is_multiplayer_authority():
 		test.rpc()
@@ -92,7 +98,6 @@ func setup(data: Statics.PlayerData) -> void:
 	name = str(data.id)
 	label.text = data.name
 	set_multiplayer_authority(data.id, false)
-	multiplayer_synchronizer.set_multiplayer_authority(data.id, false)
 	input_synchronizer.set_multiplayer_authority(data.id, false)
 	if is_multiplayer_authority():
 		sync_timer.start()
@@ -105,7 +110,11 @@ func test() -> void:
 
 @rpc("authority", "call_remote", "unreliable_ordered")
 func send_position(pos: Vector2) -> void:
-	global_position = lerp(global_position, pos, 0.5)
+	global_position = lerp(global_position, pos, 0.2)
 
 func _on_sync_timeout() -> void:
-	send_position.rpc(global_position)
+	if is_multiplayer_authority():
+		send_position.rpc(global_position)
+	
+func apply_ship_motion(vel: Vector2, delta: float) -> void:
+	ship_velocity = vel
