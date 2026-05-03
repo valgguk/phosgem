@@ -1,9 +1,11 @@
 extends Node2D
 
+
 @export var player_scene: PackedScene
-@onready var players: Node2D = $Level/Players
-@onready var level: Node2D=$Level
-@onready var spawn_points: Node2D = $Level/SpawnPoints
+@onready var players: Node2D = $Players
+
+@onready var ship: Node2D = $Ship
+@onready var spawn_points: Node2D = $Ship/SpawnPoints
 @onready var camera: Camera2D=$Camera2D
 @onready var space_background: Sprite2D = $spaceBackground
 
@@ -16,6 +18,7 @@ const rotation_vel=1.5
 const acceleration: float=50.0
 const max_vel:float=300.0
 
+var target_rotation := 0.0
 var rotating:=0
 var is_rotating:=false
 
@@ -25,7 +28,26 @@ var ship_thrust: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta: float) -> void:
+	if is_rotating:
+		target_rotation += rotating * rotation_vel * delta
+		
+	ship.rotation = lerp_angle(ship.rotation, target_rotation, 0.2)
+		
+	var forward: Vector2 = Vector2(cos(ship.rotation), sin(ship.rotation))
+
+	if ship_thrust != 0:
+		ship_velocity += forward * ship_thrust * acceleration * delta
+		ship_velocity = ship_velocity.limit_length(max_vel)
+	else:
+		ship_velocity = ship_velocity.move_toward(Vector2.ZERO, acceleration * delta)
+
+	ship.position += ship_velocity * delta
+	_apply_ship_motion_to_players(delta)
 	_update_camera()
+	space_background.global_position = camera.global_position
+	
+	if multiplayer.is_server():
+		sync_ship.rpc(ship.position, ship.rotation)
 	
 func _update_camera() -> void:
 	var children = players.get_children()
@@ -54,26 +76,26 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if is_rotating:
-		level.rotation+=rotating*rotation_vel*delta
-		
-	var forward: Vector2 = Vector2(cos(level.rotation), sin(level.rotation))
-
-	# Aplicar empuje o frenar
-	if ship_thrust != 0:
-		ship_velocity += forward * ship_thrust *acceleration* delta
-		ship_velocity = ship_velocity.limit_length(max_vel)
-	else:
-		ship_velocity = ship_velocity.move_toward(Vector2.ZERO,acceleration* delta)
-	level.position += ship_velocity * delta
-	space_background.global_position = camera.global_position
-		
-@rpc("any_peer", "call_local", "reliable")
+	pass
+	
+	
+# unreliable garantiza inputs continuos	
+@rpc("any_peer", "call_local", "unreliable")
 func input_rotation(direction: int)->void:
 	rotating=direction
 	is_rotating=direction!=0
 	
 	
-@rpc("any_peer", "call_local", "reliable")
+@rpc("any_peer", "call_local", "unreliable")
 func input_thrust(direction: int) -> void:
 	ship_thrust = direction
+	
+func _apply_ship_motion_to_players(delta: float) -> void:
+	for player in players.get_children():
+		if player.has_method("apply_ship_motion"):
+			player.apply_ship_motion(ship_velocity, delta)
+
+@rpc("authority", "call_remote", "unreliable")
+func sync_ship(pos: Vector2, rot: float):
+	ship.position = ship.position.lerp(pos, 0.2)
+	ship.rotation = lerp_angle(ship.rotation, rot, 0.2)
