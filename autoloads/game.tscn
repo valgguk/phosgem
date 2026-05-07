@@ -11,14 +11,21 @@ role = 1
 
 [sub_resource type="Resource" id="Resource_ckjww"]
 script = ExtResource("2_xaonh")
-name = "client"
+name = "client 1"
 role = 2
+
+[sub_resource type="Resource" id="Resource_du0e2"]
+script = ExtResource("2_xaonh")
+name = "client 2"
+role = 3
+metadata/_custom_type_script = "uid://bnqpng0o60r43"
 
 [node name="Game" type="Node" unique_id=140572591]
 script = ExtResource("1_fmbhi")
 multiplayer_test = true
 all_roles = false
-test_players = Array[ExtResource("2_xaonh")]([SubResource("Resource_nviqh"), SubResource("Resource_ckjww")])
+min_players = 3
+test_players = Array[ExtResource("2_xaonh")]([SubResource("Resource_nviqh"), SubResource("Resource_ckjww"), SubResource("Resource_du0e2")])
 main_scene = ExtResource("3_du0e2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=378952356]

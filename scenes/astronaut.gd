@@ -110,6 +110,8 @@ func test() -> void:
 
 @rpc("authority", "call_remote", "unreliable_ordered")
 func send_position(pos: Vector2) -> void:
+	if is_multiplayer_authority() :
+		return
 	global_position = lerp(global_position, pos, 0.2)
 
 func _on_sync_timeout() -> void:
