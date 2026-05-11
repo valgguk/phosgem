@@ -72,6 +72,10 @@ reverse={
 ]
 }
 
+[physics]
+
+2d/default_gravity_vector=Vector2(1.016, 0)
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.278431, 0.54902, 0.74902, 1)

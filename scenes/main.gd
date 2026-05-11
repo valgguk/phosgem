@@ -2,7 +2,7 @@ extends Node2D
 
 
 @export var player_scene: PackedScene
-@onready var players: Node2D = $Players
+@onready var players: Node2D = $Ship/Players
 
 @onready var ship: Node2D = $Ship
 @onready var spawn_points: Node2D = $Ship/SpawnPoints
@@ -12,6 +12,7 @@ extends Node2D
 @export var camera_max_zoom: float=1.5
 @export var camera_min_zoom: float=0.3
 @export var camera_zoom_factor: float=7000.0
+@onready var gravity_zone: Area2D = $Ship/GravityZone
 
 
 const rotation_vel=1.5
@@ -32,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		target_rotation += rotating * rotation_vel * delta
 		
 	ship.rotation = lerp_angle(ship.rotation, target_rotation, 0.2)
-		
+	gravity_zone.gravity_direction = ship.global_transform.y
 	var forward: Vector2 = Vector2(cos(ship.rotation), sin(ship.rotation))
 
 	if ship_thrust != 0:
@@ -68,6 +69,7 @@ func _ready() -> void:
 	for i in Game.players.size():
 		var player_data = Game.players[i]
 		var player_inst = player_scene.instantiate()
+		player_inst.color = i
 		players.add_child(player_inst, true)
 		var spawn_point = spawn_points.get_child(i)
 		player_inst.global_position = spawn_point.global_position

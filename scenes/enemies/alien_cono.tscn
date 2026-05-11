@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://b18b6wkeb7aya"]
+
+[ext_resource type="Texture2D" uid="uid://3jjkrn5pvhym" path="res://assets/aliens/Aliens.png" id="1_mq1sh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8rjw"]
+
+[node name="Alien_Cono" type="CharacterBody2D" unique_id=1641389146]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=877642715]
+texture = ExtResource("1_mq1sh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1920325956]
+shape = SubResource("CapsuleShape2D_u8rjw")
+debug_color = Color(0.68413234, 0.2954554, 1, 0.41960785)
