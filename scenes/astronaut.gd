@@ -26,11 +26,11 @@ func _ready() -> void:
 func _physics_process(delta):
 	if not is_multiplayer_authority():
 		return
-		
+	var local_vel = velocity.rotated(-global_transform.y.angle())
 	# Add the gravity.
+	Debug.log(get_gravity(), 2*delta)
 	if not is_on_floor():
-		velocity += get_gravity() * Gravity_factor* delta
-
+		local_vel.y += 980 * Gravity_factor* delta
 	# Handle jump.
 	if input_synchronizer.jump and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -39,16 +39,20 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	var direction = input_synchronizer.move_input
 	if direction:
-		velocity.x = direction * SPEED
+		local_vel.x = direction * SPEED
 		change_sprite_direction(direction)
 		manage_animations(direction)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		local_vel.x = move_toward(local_vel.x, 0, SPEED)
+	
+	local_vel.rotated(global_transform.y.angle())
+	
+	velocity = local_vel
 	
 
-	velocity += ship_velocity
+	#velocity += ship_velocity
 	move_and_slide()
-	velocity -= ship_velocity
+	#velocity -= ship_velocity
 	
 	# rpc manual de movimiento o multiplayer_synchronizer
 	send_position.rpc(global_position)
