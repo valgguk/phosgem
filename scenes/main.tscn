@@ -173,6 +173,11 @@ sources/0 = SubResource("TileSetAtlasSource_tipki")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
 size = Vector2(212.04445, 280)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_85g3d"]
+properties/0/path = NodePath("Ship:rotation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Main" type="Node2D" unique_id=862381458]
 script = ExtResource("1_o5qli")
 player_scene = ExtResource("2_sugp2")
@@ -252,3 +257,6 @@ position = Vector2(48.728806, 343.00003)
 scale = Vector2(1, 5.0799994)
 shape = SubResource("RectangleShape2D_85g3d")
 metadata/_edit_lock_ = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1117597723]
+replication_config = SubResource("SceneReplicationConfig_85g3d")
