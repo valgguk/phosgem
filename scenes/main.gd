@@ -29,10 +29,11 @@ var ship_thrust: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta: float) -> void:
-	if is_rotating:
-		target_rotation += rotating * rotation_vel * delta
+	if multiplayer.is_server():
+		if is_rotating: 
+			target_rotation += rotating * rotation_vel * delta
+		ship.rotation = lerp_angle(ship.rotation, target_rotation, 0.2) #solo cambia en el server
 		
-	ship.rotation = lerp_angle(ship.rotation, target_rotation, 0.2)
 	gravity_zone.gravity_direction = ship.global_transform.y
 	var forward: Vector2 = Vector2(cos(ship.rotation), sin(ship.rotation))
 
@@ -79,10 +80,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-	
-	
+
+# mandarle rotacion al server 
+# se llama cuando se aprieta el boton
 # unreliable garantiza inputs continuos	
-@rpc("any_peer", "call_local", "unreliable")
+@rpc("any_peer", "call_local", "reliable")
 func input_rotation(direction: int)->void:
 	rotating=direction
 	is_rotating=direction!=0

@@ -26,37 +26,37 @@ func _ready() -> void:
 func _physics_process(delta):
 	if not is_multiplayer_authority():
 		return
-	var local_vel = velocity.rotated(-global_transform.y.angle())
-	# Add the gravity.
-	Debug.log(get_gravity(), 2*delta)
+	var move_input = input_synchronizer.move_input
+	var vertical_direction = get_gravity().normalized()
+	var vertical_speed = velocity.dot(vertical_direction)
+	  
+	var vertical_velocity = vertical_direction * vertical_speed
 	if not is_on_floor():
-		local_vel.y += 980 * Gravity_factor* delta
+		vertical_velocity += get_gravity() * delta
 	# Handle jump.
-	if input_synchronizer.jump and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		input_synchronizer.jump = false
-
-	# Get the input direction and handle the movement/deceleration.
-	var direction = input_synchronizer.move_input
-	if direction:
-		local_vel.x = direction * SPEED
-		change_sprite_direction(direction)
-		manage_animations(direction)
+	elif input_synchronizer.jump:
+		vertical_velocity = vertical_direction * JUMP_VELOCITY
+	input_synchronizer.jump = false
+	var horizontal_direction = vertical_direction.rotated(-PI/2)
+	var horizontal_speed = velocity.dot(horizontal_direction)
+	
+	if move_input:
+		horizontal_speed = move_input * SPEED
 	else:
-		local_vel.x = move_toward(local_vel.x, 0, SPEED)
+		horizontal_speed = move_toward(horizontal_speed, 0, SPEED)
 	
-	local_vel.rotated(global_transform.y.angle())
+	var horizontal_velocity = horizontal_direction * horizontal_speed
+	velocity = horizontal_velocity + vertical_velocity
+	if move_input:
+		change_sprite_direction(move_input)
+		manage_animations(move_input)
 	
-	velocity = local_vel
-	
-
-	#velocity += ship_velocity
+	# cambiar si se rota demasiado, para que el player detecte bien lo que es suelo
+	up_direction = -vertical_direction 
 	move_and_slide()
-	#velocity -= ship_velocity
-	
 	# rpc manual de movimiento o multiplayer_synchronizer
-	send_position.rpc(global_position)
-	
+	# con position tirita -> ver como mandar la position de los players
+	send_position.rpc(position) 
 	if Input.is_action_just_pressed("test") and is_multiplayer_authority():
 		test.rpc()
 	if Input.is_action_just_pressed("area_interact"):
@@ -116,11 +116,11 @@ func test() -> void:
 func send_position(pos: Vector2) -> void:
 	if is_multiplayer_authority() :
 		return
-	global_position = lerp(global_position, pos, 0.2)
+	position = lerp(position, pos, 0.2)
 
 func _on_sync_timeout() -> void:
 	if is_multiplayer_authority():
-		send_position.rpc(global_position)
+		send_position.rpc(position)
 	
 func apply_ship_motion(vel: Vector2, delta: float) -> void:
 	ship_velocity = vel
