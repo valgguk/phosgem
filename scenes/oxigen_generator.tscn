@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://b5nbnoh566dn2"]
+
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_3ai7d"]
+[ext_resource type="Script" uid="uid://cm04cy5xmh8le" path="res://scenes/oxigen_generator.gd" id="1_8hlu6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ai7d"]
+size = Vector2(42, 43)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8hlu6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hlu6"]
+bg_color = Color(0.86467505, 0.86467516, 0.864675, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.33288068, 0.33288074, 0.33288044, 1)
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7m052"]
+bg_color = Color(0.5589296, 0.79737, 0.9804407, 1)
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+
+[node name="OxigenGenerator" type="Area2D" unique_id=432383899]
+scale = Vector2(4.820023, 4.820023)
+script = ExtResource("1_8hlu6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1483646165]
+position = Vector2(0, 10.373396)
+scale = Vector2(0.16381957, 0.16381957)
+texture = ExtResource("1_3ai7d")
+
+[node name="lever" type="Sprite2D" parent="." unique_id=1070947161]
+position = Vector2(0.6224036, -4.356826)
+scale = Vector2(0.22136442, 0.035540268)
+texture = ExtResource("1_3ai7d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=73368794]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_3ai7d")
+debug_color = Color(0.78417087, 0.11045133, 0.99999994, 0.41960785)
+
+[node name="OxigenGenerator" type="Node2D" parent="." unique_id=1868010012]
+
+[node name="Timer" type="Timer" parent="." unique_id=1801401802]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=270763262]
+replication_config = SubResource("SceneReplicationConfig_8hlu6")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1916701322]
+offset_left = 27.0
+offset_top = 20.0
+offset_right = 123.4
+offset_bottom = 42.0
+rotation = -1.5707964
+theme_override_styles/background = SubResource("StyleBoxFlat_8hlu6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7m052")
+value = 50.0
+show_percentage = false
