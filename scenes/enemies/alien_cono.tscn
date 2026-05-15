@@ -4,7 +4,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8rjw"]
 
-[node name="Alien_Cono" type="CharacterBody2D" unique_id=1641389146]
+[node name="Alien_Arbol" type="CharacterBody2D" unique_id=1641389146]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=877642715]
 texture = ExtResource("1_mq1sh")
