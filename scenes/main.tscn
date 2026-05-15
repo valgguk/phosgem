@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bf37aval36plk" path="res://scenes/leverThrust.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://nkscoxvh6eys" path="res://scenes/LeverAnti.tscn" id="8_choun"]
 [ext_resource type="Script" uid="uid://b3mpmu4twac7o" path="res://scenes/lever_thrust.gd" id="9_choun"]
+[ext_resource type="PackedScene" uid="uid://b5nbnoh566dn2" path="res://scenes/oxigen_generator.tscn" id="10_choun"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o6xl0"]
 
@@ -171,7 +172,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_tipki")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
-size = Vector2(212.04445, 280)
+size = Vector2(238.45334, 206.29926)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_85g3d"]
 properties/0/path = NodePath("Ship:rotation")
@@ -253,10 +254,14 @@ scale = Vector2(9.4400015, 1)
 gravity_space_override = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/GravityZone" unique_id=71736829]
-position = Vector2(48.728806, 343.00003)
+position = Vector2(45.180065, 270)
 scale = Vector2(1, 5.0799994)
 shape = SubResource("RectangleShape2D_85g3d")
+debug_color = Color(0, 0.6, 0.69803923, 0.1254902)
 metadata/_edit_lock_ = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1117597723]
 replication_config = SubResource("SceneReplicationConfig_85g3d")
+
+[node name="OxigenGenerator" parent="." unique_id=432383899 instance=ExtResource("10_choun")]
+position = Vector2(169, 668)
