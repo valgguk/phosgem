@@ -51,10 +51,10 @@ debug_color = Color(0.78417087, 0.11045133, 0.99999994, 0.41960785)
 replication_config = SubResource("SceneReplicationConfig_8hlu6")
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1916701322]
-offset_left = 27.0
-offset_top = 20.0
-offset_right = 123.4
-offset_bottom = 42.0
+offset_left = 21.369192
+offset_top = 19.916918
+offset_right = 69.22172
+offset_bottom = 41.916916
 rotation = -1.5707964
 theme_override_styles/background = SubResource("StyleBoxFlat_8hlu6")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7m052")

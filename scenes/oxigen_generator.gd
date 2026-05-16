@@ -5,6 +5,7 @@ const OXIGEN_MAX: int = 120*3
 var _Oxigen_level: int
 var difficulty: int= 1 #how fast oxygen gets consumed
 var polarity = -1 # postion of the lever
+var oxigen_per_pump = 2
 @onready var timer: Timer = $Timer
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var lever: Sprite2D = $lever
@@ -38,7 +39,7 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("area_interact"):
 		move_lever.rpc()
-		increaseOxigen(1)
+		increaseOxigen(oxigen_per_pump)
 
 func _on_body_entered(body: Node) -> void:
 	if body is CharacterBody2D and body.is_multiplayer_authority():

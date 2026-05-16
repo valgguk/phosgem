@@ -13,10 +13,10 @@ var ship_velocity: Vector2 = Vector2.ZERO
 var _data: Statics.PlayerData
 
 const SPEED = 400.0
-const JUMP_VELOCITY = -900.0
-const Gravity_factor=2
+const JUMP_VELOCITY = -900.0 
+const Gravity_factor=2 #1 is like a super jump
 
-var walking = false
+@export var walking = false
 
 func _ready() -> void:
 	sync_timer.timeout.connect(_on_sync_timeout)
@@ -32,7 +32,7 @@ func _physics_process(delta):
 	  
 	var vertical_velocity = vertical_direction * vertical_speed
 	if not is_on_floor():
-		vertical_velocity += get_gravity() * delta
+		vertical_velocity += get_gravity() * delta * Gravity_factor
 	# Handle jump.
 	elif input_synchronizer.jump:
 		vertical_velocity = vertical_direction * JUMP_VELOCITY
@@ -77,14 +77,16 @@ func change_sprite_direction(direction:int)-> void:
 	else: return
 
 
-#for animation of the character
 func manage_animations(direction):
-	if direction and is_on_floor():
-		walking_wobble(direction)
+	
+	if direction:  #and is_on_floor():
+		walking_wobble.rpc(direction)
 	else: return
 	
 #walking animation with tweens
+@rpc("authority", "call_local", "reliable")
 func walking_wobble(direction):
+	#Debug.log("testing2")
 	if walking:
 		return
 	walking =true
