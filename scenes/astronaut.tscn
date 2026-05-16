@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://diagk2n6a6d8b" path="res://scenes/astronaut.gd" id="1_dmfei"]
 [ext_resource type="Texture2D" uid="uid://c1rokltx4w7kt" path="res://assets/AstronautSprites.png" id="1_v06w7"]
+[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/monogram-extended.ttf" id="3_a75ng"]
 [ext_resource type="PackedScene" uid="uid://rf1sn4byj10t" path="res://scenes/input_synchronizer.tscn" id="3_lk35g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v06w7"]
@@ -69,11 +70,15 @@ shape = SubResource("RectangleShape2D_v06w7")
 metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="." unique_id=1509812445]
-offset_left = -31.925829
-offset_top = -95.77748
-offset_right = 133.07417
-offset_bottom = -12.777481
+offset_left = -82.72727
+offset_top = -122.72727
+offset_right = 82.27273
+offset_bottom = -39.727272
+theme_override_fonts/font = ExtResource("3_a75ng")
+theme_override_font_sizes/font_size = 56
 text = "name"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="InputSynchronizer" parent="." unique_id=794443324 instance=ExtResource("3_lk35g")]
 
