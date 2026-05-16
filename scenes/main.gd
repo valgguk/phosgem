@@ -7,12 +7,13 @@ extends Node2D
 @onready var ship: Node2D = $Ship
 @onready var spawn_points: Node2D = $Ship/SpawnPoints
 @onready var camera: Camera2D=$Camera2D
-@onready var space_background: Sprite2D = $spaceBackground
+@onready var space_background: Sprite2D = $Parallax2D2/spaceBackground
 
 @export var camera_max_zoom: float=1.5
 @export var camera_min_zoom: float=0.3
 @export var camera_zoom_factor: float=7000.0
 @onready var gravity_zone: Area2D = $Ship/GravityZone
+@onready var lever_thrust = $Ship/LeverThrust
 
 
 const rotation_vel=1.5
@@ -79,6 +80,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	pass
 
 # mandarle rotacion al server 
