@@ -3,9 +3,20 @@
 [ext_resource type="Script" uid="uid://bh0t63fylj3m7" path="res://scenes/Lever.gd" id="1_7u13s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7u13s"]
+size = Vector2(67, 75)
 
 [node name="Lever" type="Area2D" unique_id=1108067853]
 script = ExtResource("1_7u13s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=367217837]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(1.5593104, 1.5195906)
 shape = SubResource("RectangleShape2D_7u13s")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1334465059]
+offset_left = -46.0
+offset_top = -52.0
+offset_right = -6.0
+offset_bottom = -12.0
+scale = Vector2(2.1751356, 2.5943792)
+color = Color(0.4117647, 1, 1, 1)

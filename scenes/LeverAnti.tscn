@@ -3,10 +3,21 @@
 [ext_resource type="Script" uid="uid://bh0t63fylj3m7" path="res://scenes/Lever.gd" id="1_6angw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63dwm"]
+size = Vector2(104.65277, 115.436226)
 
 [node name="LeverAnti" type="Area2D" unique_id=887291864]
 script = ExtResource("1_6angw")
 direction = -1
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1136107220]
+offset_left = -51.0
+offset_top = -53.0
+offset_right = -34.0
+offset_bottom = -35.0
+scale = Vector2(5.8026953, 6.4229198)
+color = Color(1, 0.5372549, 1, 1)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1976457907]
+position = Vector2(1.8172283, 6.6434364)
+scale = Vector2(1.2265853, 1.1669918)
 shape = SubResource("RectangleShape2D_63dwm")
