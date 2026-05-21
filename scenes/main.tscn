@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://m5670h8vjdwv" path="res://assets/0x72_16x16RobotTileset.v1.png" id="6_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bf37aval36plk" path="res://scenes/leverThrust.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://nkscoxvh6eys" path="res://scenes/LeverAnti.tscn" id="8_choun"]
-[ext_resource type="Script" uid="uid://b3mpmu4twac7o" path="res://scenes/lever_thrust.gd" id="9_choun"]
 [ext_resource type="PackedScene" uid="uid://b5nbnoh566dn2" path="res://scenes/oxigen_generator.tscn" id="10_choun"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o6xl0"]
@@ -723,14 +722,13 @@ gizmo_extents = 100.0
 metadata/_edit_lock_ = true
 
 [node name="LeverAnti2" parent="Ship" unique_id=887291864 instance=ExtResource("8_choun")]
-position = Vector2(1225, 97)
+position = Vector2(1992, 342)
 
 [node name="Lever2" parent="Ship" unique_id=1108067853 instance=ExtResource("6_tipki")]
 position = Vector2(-561, 697)
 
 [node name="LeverThrust" parent="Ship" unique_id=841255005 instance=ExtResource("8_85g3d")]
 position = Vector2(600, 8)
-script = ExtResource("9_choun")
 
 [node name="GravityZone" type="Area2D" parent="Ship" unique_id=339119337]
 scale = Vector2(9.4400015, 1)
