@@ -1,14 +1,19 @@
 extends Area2D
 class_name OxigenGenerator
 
-const OXIGEN_MAX: int = 120*3
-var _Oxigen_level: int
-var difficulty: int= 1 #how fast oxygen gets consumed
-var polarity = -1 # postion of the lever
-var oxigen_per_pump = 2
 @onready var timer: Timer = $Timer
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var lever: Sprite2D = $lever
+
+@export var OXIGEN_MAX: int = 120*3
+@export var difficulty: int= 1 #how fast oxygen gets consumed
+@export var oxigen_per_pump = 2
+
+
+var _Oxigen_level: int
+var polarity = -1 # postion of the lever
+
+signal game_over
 
 
 #ALWAYS USE THIS FUNCTIONS TO CHANGE OXIGEN OR IT WILL DESYNC
@@ -32,6 +37,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if _Oxigen_level <= 0:
+		game_over.emit()
+		return
+		
 	progress_bar.value = _Oxigen_level
 	
 	if not player_inside:

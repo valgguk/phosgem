@@ -78,10 +78,7 @@ func _ready() -> void:
 		player_inst.setup(player_data)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	
-	pass
+
 
 # mandarle rotacion al server 
 # se llama cuando se aprieta el boton

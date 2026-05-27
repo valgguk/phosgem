@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://cexe47xg318do"]
+
+[ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="1_q036t"]
+[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/monogram-extended.ttf" id="2_uv2ba"]
+
+[node name="GamOver" type="Node2D" unique_id=1794529264]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=664623207]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=358053090]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1507764724]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MarginContainer" unique_id=1842893225]
+visible = false
+layout_mode = 2
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer" unique_id=1863724182]
+layout_mode = 2
+theme = ExtResource("1_q036t")
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
+theme_override_colors/font_outline_color = Color(0.23753396, 0, 0.07162895, 1)
+theme_override_font_sizes/font_size = 108
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/MarginContainer" unique_id=481598237]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
+theme_override_colors/font_outline_color = Color(0.23753396, 0, 0.07162895, 1)
+theme_override_fonts/font = ExtResource("2_uv2ba")
+text = "Returning to Menu..."
+horizontal_alignment = 1

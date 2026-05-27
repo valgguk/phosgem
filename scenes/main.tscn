@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://da8se6ko85ouh" path="res://scenes/main.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://chfs6t0yd0kab" path="res://scenes/tileset.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://k0rn1h3ux3do" path="res://scenes/astronaut.tscn" id="2_sugp2"]
+[ext_resource type="Script" uid="uid://dyi3a3b3mkxo7" path="res://scripts/event_manager.gd" id="3_choun"]
+[ext_resource type="PackedScene" uid="uid://b1bpe256ypmj1" path="res://ui/gam_over.tscn" id="3_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://816fjomi2guj" path="res://assets/platformerPack_industrial_tilesheet.png" id="5_tefeu"]
 [ext_resource type="PackedScene" uid="uid://bc707k062h4d2" path="res://scenes/Lever.tscn" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://m5670h8vjdwv" path="res://assets/0x72_16x16RobotTileset.v1.png" id="6_ya4ey"]
@@ -635,6 +637,12 @@ properties/0/replication_mode = 1
 script = ExtResource("1_o5qli")
 player_scene = ExtResource("2_sugp2")
 
+[node name="EventManager" type="Node" parent="." unique_id=678394225 node_paths=PackedStringArray("LoseNodes", "GameOverLayer")]
+process_mode = 3
+script = ExtResource("3_choun")
+LoseNodes = [NodePath("../Ship/OxigenGenerator")]
+GameOverLayer = NodePath("../Ship/CanvasLayer/GameOver")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=445521014]
 position = Vector2(443, 236)
 zoom = Vector2(0.5, 0.5)
@@ -702,6 +710,7 @@ tile_set = SubResource("TileSet_trceg")
 
 [node name="OxigenGenerator" parent="Ship" unique_id=432383899 instance=ExtResource("10_choun")]
 position = Vector2(169, 668)
+OXIGEN_MAX = 10
 
 [node name="Players" type="Node2D" parent="Ship" unique_id=2142308801]
 
@@ -727,8 +736,16 @@ position = Vector2(1992, 342)
 [node name="Lever2" parent="Ship" unique_id=1108067853 instance=ExtResource("6_tipki")]
 position = Vector2(-561, 697)
 
+[node name="Polygon2D" type="Polygon2D" parent="Ship/Lever2" unique_id=428334972]
+position = Vector2(3112, -1041)
+polygon = PackedVector2Array(-572, 728, -546, 728, -532, 697, -541, 663, -529, 657, -564, 649, -570, 673, -555, 666, -548, 697, -560, 718, -577, 711)
+
 [node name="LeverThrust" parent="Ship" unique_id=841255005 instance=ExtResource("8_85g3d")]
 position = Vector2(600, 8)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Ship/LeverThrust" unique_id=1390815999]
+position = Vector2(-612, -12)
+polygon = PackedVector2Array(-570, 736, -538, 735, -546, 728, -532, 697, -537, 671, -564, 654, -578, 667, -551, 675, -548, 696, -560, 718, -573, 709)
 
 [node name="GravityZone" type="Area2D" parent="Ship" unique_id=339119337]
 scale = Vector2(9.4400015, 1)
@@ -740,6 +757,12 @@ scale = Vector2(1, 5.0799994)
 shape = SubResource("RectangleShape2D_85g3d")
 debug_color = Color(0, 0.6, 0.69803923, 0.1254902)
 metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Ship" unique_id=1321271366]
+process_mode = 3
+
+[node name="GameOver" parent="Ship/CanvasLayer" unique_id=1794529264 instance=ExtResource("3_ya4ey")]
+visible = false
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1117597723]
 replication_config = SubResource("SceneReplicationConfig_85g3d")

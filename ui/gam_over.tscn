@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://b1bpe256ypmj1"]
+
+[ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="1_i6eii"]
+[ext_resource type="Script" uid="uid://btvsl532boew8" path="res://ui/gam_over.gd" id="1_ymx6i"]
+[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/monogram-extended.ttf" id="2_iyd6r"]
+[ext_resource type="AudioStream" uid="uid://infuq5a506q2" path="res://assets/audio/alienVersionGameover.wav" id="3_iyd6r"]
+
+[node name="GameOver" type="Control" unique_id=2037970509]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ymx6i")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=358053090]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1507764724]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1863724182]
+layout_mode = 2
+theme = ExtResource("1_i6eii")
+theme_override_colors/font_color = Color(0.81411994, 0.0073774816, 4.1392445e-06, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
+theme_override_colors/font_outline_color = Color(0.40671927, 2.7675182e-07, 0.14486402, 1)
+theme_override_font_sizes/font_size = 139
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=1842893225]
+visible = false
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.41146058, 0.51871574, 1)
+theme_override_fonts/normal_font = ExtResource("2_iyd6r")
+text = "you let oxygen run out..."
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer" unique_id=481598237]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
+theme_override_colors/font_outline_color = Color(0.23753396, 0, 0.07162895, 1)
+theme_override_fonts/font = ExtResource("2_iyd6r")
+text = "Returning to Menu..."
+horizontal_alignment = 1
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="." unique_id=25985416]
+stream = ExtResource("3_iyd6r")
