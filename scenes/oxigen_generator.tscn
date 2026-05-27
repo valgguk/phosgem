@@ -27,6 +27,7 @@ border_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
 [node name="OxigenGenerator" type="Area2D" unique_id=432383899]
 scale = Vector2(4.820023, 4.820023)
 script = ExtResource("1_8hlu6")
+OXIGEN_MAX = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1483646165]
 position = Vector2(0, 10.373396)
