@@ -19,4 +19,4 @@ offset_top = -52.0
 offset_right = -6.0
 offset_bottom = -12.0
 scale = Vector2(2.1751356, 2.5943792)
-color = Color(0.4117647, 1, 1, 1)
+color = Color(0, 0.70152044, 0.7037482, 1)

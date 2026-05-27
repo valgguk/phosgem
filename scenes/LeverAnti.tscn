@@ -15,7 +15,7 @@ offset_top = -53.0
 offset_right = -34.0
 offset_bottom = -35.0
 scale = Vector2(5.8026953, 6.4229198)
-color = Color(1, 0.5372549, 1, 1)
+color = Color(0.84939, 0.0006713277, 0.8671331, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1976457907]
 position = Vector2(1.8172283, 6.6434364)
