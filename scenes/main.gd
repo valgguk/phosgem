@@ -9,6 +9,7 @@ extends Node2D
 @onready var camera: Camera2D=$Camera2D
 @onready var space_background: Sprite2D = $Parallax2D2/spaceBackground
 @onready var label = $Ship/CanvasLayer/Label
+@onready var asteroid_spawner: AsteroidSpawner= $AsteroidSpawner
 
 @export var camera_max_zoom: float=1.5
 @export var camera_min_zoom: float=0.3
@@ -78,6 +79,8 @@ func _ready() -> void:
 		var spawn_point = spawn_points.get_child(i)
 		player_inst.global_position = spawn_point.global_position
 		player_inst.setup(player_data)
+	if multiplayer.is_server():
+		asteroid_spawner.initialize(ship)
 
 
 
