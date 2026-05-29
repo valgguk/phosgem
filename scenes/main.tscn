@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bf37aval36plk" path="res://scenes/leverThrust.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://nkscoxvh6eys" path="res://scenes/LeverAnti.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://b5nbnoh566dn2" path="res://scenes/oxigen_generator.tscn" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/scoreTracker.tscn" id="12_eb6dy"]
+[ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="13_trceg"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o6xl0"]
 
@@ -710,7 +712,6 @@ tile_set = SubResource("TileSet_trceg")
 
 [node name="OxigenGenerator" parent="Ship" unique_id=432383899 instance=ExtResource("10_choun")]
 position = Vector2(169, 668)
-OXIGEN_MAX = 10
 
 [node name="Players" type="Node2D" parent="Ship" unique_id=2142308801]
 
@@ -763,6 +764,11 @@ process_mode = 3
 
 [node name="GameOver" parent="Ship/CanvasLayer" unique_id=1794529264 instance=ExtResource("3_ya4ey")]
 visible = false
+
+[node name="Label" parent="Ship/CanvasLayer" unique_id=359397464 instance=ExtResource("12_eb6dy")]
+theme = ExtResource("13_trceg")
+theme_override_colors/font_shadow_color = Color(0, 0.47843137, 0.6, 0)
+text = "SCORE:"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1117597723]
 replication_config = SubResource("SceneReplicationConfig_85g3d")
