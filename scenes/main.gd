@@ -71,6 +71,7 @@ func _update_camera() -> void:
 	
 	
 func _ready() -> void:
+	players.add_to_group("players_container")
 	for i in Game.players.size():
 		var player_data = Game.players[i]
 		var player_inst = player_scene.instantiate()

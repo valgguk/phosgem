@@ -1,9 +1,9 @@
 shader_type canvas_item;
 
 uniform float time_offset : hint_range(0.0, 100.0) = 0.0;
-uniform vec4 base_color : source_color = vec4(0.35, 0.30, 0.25, 1.0);
-uniform vec4 dark_color : source_color = vec4(0.15, 0.12, 0.10, 1.0);
-uniform vec4 highlight_color : source_color = vec4(0.55, 0.50, 0.45, 1.0);
+uniform vec4 base_color : source_color = vec4(0.55, 0.45, 0.35, 1.0);
+uniform vec4 dark_color : source_color = vec4(0.25, 0.18, 0.12, 1.0);
+uniform vec4 highlight_color : source_color = vec4(0.85, 0.70, 0.50, 1.0);
 uniform float crack_intensity : hint_range(0.0, 1.0) = 0.6;
 uniform float roughness : hint_range(1.0, 8.0) = 4.0;
 
@@ -81,7 +81,9 @@ void fragment() {
     rock_color.rgb *= shading;
     
     float rim = smoothstep(0.38, 0.50, dist) * (1.0 - edge_noise * 2.0);
-    rock_color = mix(rock_color, dark_color * 0.5, rim * 0.7);
-    
-    COLOR = vec4(rock_color.rgb, circle_mask);
+	    // Tinte cálido de meteorito
+	vec3 hot_tint = vec3(1.0, 0.6, 0.3);
+	rock_color.rgb = mix(rock_color.rgb, rock_color.rgb * hot_tint, 0.4);
+
+	COLOR = vec4(rock_color.rgb, circle_mask);
 }

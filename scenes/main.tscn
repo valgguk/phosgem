@@ -681,6 +681,14 @@ metadata/_edit_lock_ = true
 [node name="AsteroidSpawner" type="Node2D" parent="." unique_id=347591073]
 script = ExtResource("4_trceg")
 asteroid_scene = ExtResource("5_trceg")
+spawn_interval_min = null
+spawn_interval_max = null
+speed_min = null
+speed_max = null
+size_min = null
+size_max = null
+spawn_radius = null
+despawn_radius = null
 
 [node name="Ship" type="Node2D" parent="." unique_id=625195637]
 metadata/_edit_lock_ = true
@@ -775,6 +783,7 @@ visible = false
 theme = ExtResource("13_trceg")
 theme_override_colors/font_shadow_color = Color(0, 0.47843137, 0.6, 0)
 text = "SCORE:"
+metadata/_edit_use_anchors_ = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1117597723]
 replication_config = SubResource("SceneReplicationConfig_85g3d")

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cut6vt5d6b66t"]
 
 [ext_resource type="Script" uid="uid://cq7bfrdvbx30q" path="res://scenes/enemies/asteroid.gd" id="1_jrb2b"]
+[ext_resource type="Texture2D" uid="uid://m2ok53h57j0f" path="res://assets/brackeys_vfx_bundle/brackeys_vfx_bundle/particles/opague/trace_04.png" id="3_08eb2"]
 [ext_resource type="Shader" uid="uid://cbhvhx2kybskc" path="res://scenes/asteroid_shader.gdshader" id="3_j2n00"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w7b4c"]
@@ -14,7 +15,19 @@ shader_parameter/highlight_color = Color(0.55, 0.5, 0.45, 1)
 shader_parameter/crack_intensity = 0.6
 shader_parameter/roughness = 4.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2h6hj"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_j2n00"]
+_data = [Vector2(0.024844721, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_w7b4c"]
+offsets = PackedFloat32Array(0, 0.13671875, 0.48046875, 0.73828125, 0.98828125)
+colors = PackedColorArray(0, 0, 0, 1, 0.84705883, 0.14509805, 0.043137256, 1, 0.9882353, 0.5137255, 0.15686275, 1, 0.7043509, 0.789928, 0.23901337, 1, 18.892157, 18.892157, 18.892157, 1)
+
 [node name="Asteroid" type="Area2D" unique_id=682462807]
+collision_layer = 2
 script = ExtResource("1_jrb2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1223345958]
@@ -22,5 +35,24 @@ shape = SubResource("CircleShape2D_w7b4c")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1259757140]
 material = SubResource("ShaderMaterial_prswt")
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -33.0
+offset_top = -68.0
+offset_right = 7.0
+offset_bottom = -28.0
+rotation = 0.45875612
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=976564498]
+material = SubResource("CanvasItemMaterial_2h6hj")
+position = Vector2(-22, 21)
+amount = 30
+texture = ExtResource("3_08eb2")
+direction = Vector2(-1, -1)
+spread = 5.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_j2n00")
+color = Color(1, 0.4, 0, 1)
+color_initial_ramp = SubResource("Gradient_w7b4c")
