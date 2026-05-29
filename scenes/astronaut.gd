@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var interact_area = $InteractArea
 var ship_velocity: Vector2 = Vector2.ZERO
 
+@onready var health_component: HealthComponent = $HurtboxComponent/HealthComponent
 
 var _data: Statics.PlayerData
 
@@ -21,6 +22,7 @@ const Gravity_factor=2 #1 is like a super jump
 func _ready() -> void:
 	sync_timer.timeout.connect(_on_sync_timeout)
 	animated_sprite.frame= color
+	health_component.health_changed.connect(_on_health_changed)
 
 
 func _physics_process(delta):
@@ -126,3 +128,11 @@ func _on_sync_timeout() -> void:
 	
 func apply_ship_motion(vel: Vector2, delta: float) -> void:
 	ship_velocity = vel
+	
+	
+func take_damage(damage: int) -> void:
+	Debug.log("damage: %d" % damage)
+	
+
+func _on_health_changed(value: int) -> void:
+	Debug.log(value)

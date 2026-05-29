@@ -1,14 +1,58 @@
 [gd_scene format=3 uid="uid://b18b6wkeb7aya"]
 
-[ext_resource type="Texture2D" uid="uid://3jjkrn5pvhym" path="res://assets/aliens/Aliens.png" id="1_mq1sh"]
+[ext_resource type="Script" uid="uid://dcl0oee01dm0c" path="res://scenes/enemies/alien_cono.gd" id="1_bsy73"]
+[ext_resource type="Texture2D" uid="uid://bvkskmvjwv67n" path="res://assets/aliens/Alien Arbol tira.png" id="1_mq1sh"]
+[ext_resource type="Script" uid="uid://b7owxkq83i2m2" path="res://components/hurtbox_component.gd" id="3_hkdws"]
+[ext_resource type="Script" uid="uid://dnu0ib00h5rhg" path="res://components/health_component.gd" id="4_hkdws"]
+[ext_resource type="Script" uid="uid://b4jdacy8shnmu" path="res://components/hitbox_component.gd" id="5_bduiy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8rjw"]
+height = 32.0
 
-[node name="Alien_Cono" type="CharacterBody2D" unique_id=1641389146]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bduiy"]
+radius = 19.0
+height = 38.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kswie"]
+radius = 15.0
+height = 32.0
+
+[node name="Alien_Arbol" type="CharacterBody2D" unique_id=1641389146]
+script = ExtResource("1_bsy73")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=877642715]
+scale = Vector2(2, 2)
 texture = ExtResource("1_mq1sh")
+hframes = 29
+frame = 7
+region_enabled = true
+region_rect = Rect2(0, 0, 928, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1920325956]
 shape = SubResource("CapsuleShape2D_u8rjw")
 debug_color = Color(0.68413234, 0.2954554, 1, 0.41960785)
+
+[node name="HurtboxComponent" type="Area2D" parent="." unique_id=1461966723 node_paths=PackedStringArray("health_component")]
+process_mode = 4
+visible = false
+monitoring = false
+monitorable = false
+script = ExtResource("3_hkdws")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://b7owxkq83i2m2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1682298012]
+shape = SubResource("CapsuleShape2D_bduiy")
+debug_color = Color(1, 0, 0.13725491, 0.24313726)
+
+[node name="HealthComponent" type="Node" parent="." unique_id=888197935]
+script = ExtResource("4_hkdws")
+metadata/_custom_type_script = "uid://dnu0ib00h5rhg"
+
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=1214464490]
+script = ExtResource("5_bduiy")
+metadata/_custom_type_script = "uid://b4jdacy8shnmu"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=1966575059]
+shape = SubResource("CapsuleShape2D_kswie")
+debug_color = Color(0.078431375, 0.7647059, 0, 0.40392157)
