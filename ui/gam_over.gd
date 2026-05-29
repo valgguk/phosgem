@@ -4,8 +4,8 @@ class_name GameOverScreen
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _ready()-> void:
+	add_to_group("game_over_screen")
 
 
 func play_game_over():

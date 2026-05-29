@@ -5,7 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://k0rn1h3ux3do" path="res://scenes/astronaut.tscn" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://dyi3a3b3mkxo7" path="res://scripts/event_manager.gd" id="3_choun"]
 [ext_resource type="PackedScene" uid="uid://b1bpe256ypmj1" path="res://ui/gam_over.tscn" id="3_ya4ey"]
+[ext_resource type="Script" uid="uid://bl0dwog53qpuk" path="res://scenes/enemies/asteroid_spawner.gd" id="4_trceg"]
 [ext_resource type="Texture2D" uid="uid://816fjomi2guj" path="res://assets/platformerPack_industrial_tilesheet.png" id="5_tefeu"]
+[ext_resource type="PackedScene" uid="uid://cut6vt5d6b66t" path="res://scenes/enemies/asteroid.tscn" id="5_trceg"]
 [ext_resource type="PackedScene" uid="uid://bc707k062h4d2" path="res://scenes/Lever.tscn" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://m5670h8vjdwv" path="res://assets/0x72_16x16RobotTileset.v1.png" id="6_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bf37aval36plk" path="res://scenes/leverThrust.tscn" id="8_85g3d"]
@@ -673,6 +675,10 @@ position = Vector2(696.4999, 252.50003)
 scale = Vector2(19.018381, 23.33125)
 texture = SubResource("CompressedTexture2D_choun")
 metadata/_edit_lock_ = true
+
+[node name="AsteroidSpawner" type="Node2D" parent="." unique_id=347591073]
+script = ExtResource("4_trceg")
+asteroid_scene = ExtResource("5_trceg")
 
 [node name="Ship" type="Node2D" parent="." unique_id=625195637]
 metadata/_edit_lock_ = true
