@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dkkvj0iyib860"]
+
+[ext_resource type="Script" uid="uid://bneat0pvi7pge" path="res://scripts/score_tracker.gd" id="1_a7scx"]
+
+[node name="Label" type="Label" unique_id=359397464]
+offset_right = 40.0
+offset_bottom = 83.0
+text = "SCORE: "
+script = ExtResource("1_a7scx")
+
+[node name="Timer" type="Timer" parent="." unique_id=1573582085]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
