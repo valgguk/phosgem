@@ -11,8 +11,6 @@ func _ready() -> void:
 func play_game_over() -> void:
 	visible = true
 	game_over_sound.play(17.75)
-	get_tree().paused = true
-	await get_tree().create_timer(3.0, true).timeout
-	get_tree().paused = false
-	get_tree().change_scene_to_file("res://ui/main_menu.tscn")
+	await get_tree().create_timer(7.0, true).timeout
+	get_tree().change_scene_to_file("res://lobby/waiting_screen.tscn") # ver después
 	
