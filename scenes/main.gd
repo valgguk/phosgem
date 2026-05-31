@@ -7,7 +7,7 @@ extends Node2D
 @onready var ship: Node2D = $Ship
 @onready var spawn_points: Node2D = $Ship/SpawnPoints
 @onready var camera: Camera2D=$Camera2D
-@onready var space_background: Sprite2D = $Parallax2D2/spaceBackground
+@onready var space_background: Sprite2D = $BackGroundParallax/Parallax2D2/spaceBackground
 @onready var label = $Ship/CanvasLayer/Label
 @onready var asteroid_spawner: AsteroidSpawner= $AsteroidSpawner
 

@@ -6,8 +6,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ai7d"]
 size = Vector2(42, 43)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8hlu6"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hlu6"]
 bg_color = Color(0.86467505, 0.86467516, 0.864675, 1)
 border_width_left = 2
@@ -47,9 +45,6 @@ debug_color = Color(0.78417087, 0.11045133, 0.99999994, 0.41960785)
 [node name="OxigenGenerator" type="Node2D" parent="." unique_id=1868010012]
 
 [node name="Timer" type="Timer" parent="." unique_id=1801401802]
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=270763262]
-replication_config = SubResource("SceneReplicationConfig_8hlu6")
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1916701322]
 offset_left = 21.369192
