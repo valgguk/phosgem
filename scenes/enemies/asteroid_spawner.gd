@@ -1,6 +1,10 @@
 extends Node2D
 class_name AsteroidSpawner
 
+@export_category("health & damage")
+@export var damage_per_hit: int =  20
+
+@export_category("Spawn rules")
 @export var asteroid_scene: PackedScene
 @export var spawn_interval_min: float = 6.0
 @export var spawn_interval_max: float = 10.0
@@ -10,6 +14,7 @@ class_name AsteroidSpawner
 @export var size_max: float = 150.0
 @export var spawn_radius: float = 1200.0
 @export var despawn_radius: float = 1600.0
+
 
 var _timer: float = 0.0
 var _next_spawn: float = 3.0
@@ -91,7 +96,7 @@ func _on_asteroid_hit_ship(asteroid: Asteroid) -> void:
 	if _active_asteroids.has(id):
 		_active_asteroids.erase(id)
 		asteroid.destroy()
-	trigger_game_over.rpc()
+	trigger_ship_damage.rpc()
 
 #futura para torreta
 func destroy_asteroid_by_id(id: int) -> void:
@@ -112,10 +117,6 @@ func notify_asteroid_destroyed(id: int) -> void:
 			ast.destroy()
 
 @rpc("authority", "call_local", "reliable")
-func trigger_game_over() -> void:
-	print("ASTEROIDE IMPACTO - buscando score_label")
-	var score_label = get_tree().get_first_node_in_group("score_label")
-	print("score_label encontrado: ", score_label)
-	if score_label and score_label.has_method("take_damage"):
-		print("llamando take_damage")
-		score_label.take_damage(50)
+func trigger_ship_damage() -> void:
+	%HealthManager.take_damage(damage_per_hit)
+	

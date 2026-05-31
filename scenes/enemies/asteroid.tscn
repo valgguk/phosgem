@@ -9,11 +9,11 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_prswt"]
 shader = ExtResource("3_j2n00")
 shader_parameter/time_offset = 0.0
-shader_parameter/base_color = Color(0.35, 0.3, 0.25, 1)
-shader_parameter/dark_color = Color(0.15, 0.12, 0.1, 1)
+shader_parameter/base_color = Color(0.34129986, 0.29431516, 0.24738786, 1)
+shader_parameter/dark_color = Color(1, 1, 1, 1)
 shader_parameter/highlight_color = Color(0.55, 0.5, 0.45, 1)
-shader_parameter/crack_intensity = 0.6
-shader_parameter/roughness = 4.0
+shader_parameter/crack_intensity = 0.2150000102125
+shader_parameter/roughness = 5.1830001986925
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2h6hj"]
 blend_mode = 1
@@ -27,7 +27,8 @@ offsets = PackedFloat32Array(0, 0.13671875, 0.48046875, 0.73828125, 0.98828125)
 colors = PackedColorArray(0, 0, 0, 1, 0.84705883, 0.14509805, 0.043137256, 1, 0.9882353, 0.5137255, 0.15686275, 1, 0.7043509, 0.789928, 0.23901337, 1, 18.892157, 18.892157, 18.892157, 1)
 
 [node name="Asteroid" type="Area2D" unique_id=682462807]
-collision_layer = 2
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_jrb2b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1223345958]
@@ -35,13 +36,21 @@ shape = SubResource("CircleShape2D_w7b4c")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1259757140]
 material = SubResource("ShaderMaterial_prswt")
-offset_left = -33.0
-offset_top = -68.0
-offset_right = 7.0
-offset_bottom = -28.0
-rotation = 0.45875612
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=976564498]
+visible = false
 material = SubResource("CanvasItemMaterial_2h6hj")
 position = Vector2(-22, 21)
 amount = 30
