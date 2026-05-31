@@ -25,7 +25,7 @@ func _update_health(amount: int) -> void:
 func take_damage(amount:int= 1)-> void:
 	_update_health(-amount)
 	
-func heal_ship(amount:int= 1)-> void:
+func heal_damage(amount:int= 1)-> void:
 	_update_health(amount)
 	
 
