@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @onready var health_component: HealthComponent = $Pivote/HurtboxComponent/HealthComponent
-@onready var sync_timer: Timer = $SyncTimer
 @onready var pivote: Node2D = $Pivote
 
 @onready var ray_cast_2d: RayCast2D = $Pivote/RayCast2D
@@ -21,10 +20,10 @@ var target: Node2D = null
 func _ready() -> void:
 	# add_to_group("affected_by_ship")
 	health_component.health_changed.connect(_on_health_changed)
-	sync_timer.timeout.connect(_on_sync_timeout)
+	# sync_timer.timeout.connect(_on_sync_timeout)
 
 func _physics_process(delta: float) -> void:
-	if multiplayer.is_server(): # clientes no ejecutan physics_process
+	if is_multiplayer_authority(): # clientes no ejecutan physics_process
 		# === GRAVEDAD (igual que player) ===
 		var vertical_direction = get_gravity().normalized()
 		var vertical_speed = velocity.dot(vertical_direction)
@@ -55,7 +54,7 @@ func _physics_process(delta: float) -> void:
 		# pivote.rotation = angle
 		
 		move_and_slide()
-		send_position.rpc(global_position)
+		send_position.rpc(position)
 		sync_direction.rpc(move_dir)
 	# ESTO corre en TODOS (server + clientes)
 	if move_direction != 0:
@@ -123,7 +122,7 @@ func _should_jump() -> bool:
 
 @rpc("authority", "call_remote", "unreliable_ordered")
 func send_position(pos: Vector2):
-	if multiplayer.is_server():
+	if is_multiplayer_authority():
 		return
 	position = position.lerp(pos, 0.2)
 	
@@ -131,8 +130,8 @@ func _on_sync_timeout() -> void:
 	if is_multiplayer_authority():
 		send_position.rpc(position)
 	
-#func apply_ship_motion(vel: Vector2, delta: float) -> void:
-#	ship_velocity = vel
+func apply_ship_motion(vel: Vector2, delta: float) -> void:
+	ship_velocity = vel
 
 @rpc("authority", "call_remote", "unreliable")
 func sync_direction(dir: float):

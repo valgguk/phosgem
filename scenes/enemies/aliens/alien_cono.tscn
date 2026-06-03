@@ -71,6 +71,3 @@ debug_color = Color(0.078431375, 0.7647059, 0, 0.40392157)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=68708998]
 replication_config = SubResource("SceneReplicationConfig_07eov")
-
-[node name="SyncTimer" type="Timer" parent="." unique_id=1392481535]
-wait_time = 0.1
