@@ -20,6 +20,8 @@ const Gravity_factor=2 #1 is like a super jump
 @export var walking = false
 
 func _ready() -> void:
+	add_to_group("players_instances")
+	add_to_group("affected_by_ship")
 	sync_timer.timeout.connect(_on_sync_timeout)
 	animated_sprite.frame= color
 	health_component.health_changed.connect(_on_health_changed)
