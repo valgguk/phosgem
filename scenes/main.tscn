@@ -492,6 +492,9 @@ gradient = SubResource("Gradient_muem4")
 properties/0/path = NodePath("Ship:rotation")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("HealthManager:ShipHealth")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="Main" type="Node2D" unique_id=862381458]
 script = ExtResource("1_o5qli")

@@ -30,6 +30,10 @@ var is_rotating:=false
 var ship_velocity: Vector2 = Vector2.ZERO
 var ship_thrust: int = 0 
 
+func _input(event):
+	if event.is_action_pressed("test"):
+		#%HealthManager.take_damage(20)
+		%EventManager.game_over.rpc()
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta: float) -> void:

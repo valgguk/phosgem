@@ -2,7 +2,7 @@ extends Node
 class_name HealthManager
 
 @export var MAX_HEALTH: int = 100
-var ShipHealth
+@export var ShipHealth: int
 @export var UI_health: TextureProgressBar
 signal game_over
 
@@ -14,7 +14,7 @@ func _ready():
 func _process(delta):
 	UI_health.value = ShipHealth
 	
-	
+
 func _update_health(amount: int) -> void:
 	Debug.log("DAMAGE" + str(amount))
 	ShipHealth = clampi(ShipHealth+ amount,0,MAX_HEALTH)
