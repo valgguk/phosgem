@@ -74,6 +74,12 @@ reverse={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="enemies"
+2d_physics/layer_3="player"
+
 [physics]
 
 2d/default_gravity_vector=Vector2(1.016, 0)
