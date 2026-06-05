@@ -30,8 +30,14 @@ func _on_game_over(LoseCondition: Node):
 		#ZOOM into the oxigen tank
 		Debug.log("Oxigen Ran OUT!")
 	
-	game_over()
-	
+	if LoseCondition is HealthManager: 
+		Debug.log("Health ran OUT!")
+		
+
+	game_over.rpc()
+
+
+@rpc("authority","call_local","reliable")
 func game_over():
 	if _is_game_over:
 		return

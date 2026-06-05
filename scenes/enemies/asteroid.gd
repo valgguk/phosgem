@@ -8,6 +8,7 @@ signal asteroid_hit_ship(asteroid: Asteroid)
 @onready var shader_material_ref: ShaderMaterial = $ColorRect.material
 @onready var trail: CPUParticles2D = $CPUParticles2D
 
+
 var velocity: Vector2 = Vector2.ZERO
 var rotation_speed: float = 0.0
 var asteroid_id: int = -1
