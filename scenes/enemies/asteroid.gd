@@ -3,9 +3,9 @@ class_name Asteroid
 
 signal asteroid_hit_ship(asteroid: Asteroid)
 
-@onready var sprite: ColorRect = $ColorRect
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
-@onready var shader_material_ref: ShaderMaterial = $ColorRect.material
+@onready var shader_material_ref: ShaderMaterial = sprite.material
 @onready var trail: CPUParticles2D = $CPUParticles2D
 
 
@@ -27,8 +27,8 @@ func setup(id: int, pos: Vector2, vel: Vector2, rot_spd: float, size: float) -> 
 func _apply_size(size: float) -> void:
 	radius = size
 	var diameter = size * 2.0
-	$ColorRect.size = Vector2(diameter, diameter)
-	$ColorRect.position = Vector2(-size, -size)
+	sprite.scale = Vector2(diameter, diameter)/32.0
+	sprite.position = Vector2(-size, -size)
 	var circle = CircleShape2D.new()
 	circle.radius = size * 0.85
 	collision.shape = circle
@@ -40,7 +40,7 @@ func _apply_size(size: float) -> void:
 func _physics_process(delta: float) -> void:
 	_time += delta
 	global_position += velocity * delta
-	rotation += rotation_speed * delta
+	#rotation += rotation_speed * delta
 	shader_material_ref.set_shader_parameter("time_offset",
 		float(asteroid_id) * 13.7 + _time * 0.3)
 	if velocity.length() > 1.0:

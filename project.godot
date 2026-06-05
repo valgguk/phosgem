@@ -12,17 +12,11 @@ config_version=5
 
 compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
-[animation]
-
-compatibility/default_parent_skeleton_in_mesh_instance_3d=true
-
 [application]
 
 config/name="Crashtronauts"
 config/version="0.2"
 run/main_scene="res://ui/main_menu.tscn"
-config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="uid://bmwe72vajm67v"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -100,5 +94,4 @@ reverse={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.278431, 0.54902, 0.74902, 1)
 environment/defaults/default_clear_color=Color(0.1287, 0.24612503, 0.33, 1)
