@@ -1,11 +1,19 @@
 [gd_resource type="Theme" format=3 uid="uid://bgvflwj8dsfhy"]
 
-[ext_resource type="FontFile" uid="uid://d1wecpwity8jb" path="res://assets/ThaleahFat.ttf" id="1_w7en7"]
 [ext_resource type="StyleBox" uid="uid://im75ywarpixx" path="res://ui/buttonMenuStyleBox.tres" id="2_lt0oc"]
+[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/fonts/monogram-extended.ttf" id="3_54tkr"]
+[ext_resource type="FontFile" uid="uid://d1wecpwity8jb" path="res://assets/fonts/ThaleahFat.ttf" id="3_air3u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lt0oc"]
+bg_color = Color(0.09411765, 0.09411765, 0.09411765, 0.5803922)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.12026625, 0.4508466, 0.45095646, 0.3647059)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54tkr"]
 bg_color = Color(0.09239706, 0.09239707, 0.092397, 1)
-skew = Vector2(0.47, 0)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
@@ -14,15 +22,14 @@ border_color = Color(0.32156864, 0.77254903, 0.77254903, 1)
 
 [resource]
 Button/colors/font_color = Color(0.54509807, 0.95686275, 0.9607843, 1)
-Button/fonts/font = ExtResource("1_w7en7")
+Button/colors/font_disabled_color = Color(0.49411765, 0.8745098, 0.8745098, 0.5019608)
+Button/fonts/font = ExtResource("3_air3u")
+Button/styles/disabled = SubResource("StyleBoxFlat_lt0oc")
 Button/styles/hover = ExtResource("2_lt0oc")
 Button/styles/normal = SubResource("StyleBoxFlat_54tkr")
 Button/styles/pressed = ExtResource("2_lt0oc")
-Label/colors/font_color = Color(0.7858845, 0.83929694, 1, 1)
-Label/colors/font_outline_color = Color(0.33935335, 0.000112024325, 0.35700202, 1)
-Label/colors/font_shadow_color = Color(9.62615e-07, 0.47843158, 0.6000265, 1)
 Label/constants/outline_size = 13
 Label/constants/shadow_offset_x = 0
 Label/constants/shadow_offset_y = -7
 Label/constants/shadow_outline_size = 5
-Label/fonts/font = ExtResource("1_w7en7")
+Label/fonts/font = ExtResource("3_54tkr")

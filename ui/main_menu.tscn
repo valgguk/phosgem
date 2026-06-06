@@ -5,6 +5,31 @@
 [ext_resource type="Texture2D" uid="uid://c1rokltx4w7kt" path="res://assets/AstronautSprites.png" id="3_rmr83"]
 [ext_resource type="Texture2D" uid="uid://cenralcgdy82r" path="res://assets/blue-stars.png" id="4_8uxxo"]
 [ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="4_ei257"]
+[ext_resource type="FontFile" uid="uid://d1wecpwity8jb" path="res://assets/fonts/ThaleahFat.ttf" id="6_p8ri8"]
+[ext_resource type="StyleBox" uid="uid://im75ywarpixx" path="res://ui/buttonMenuStyleBox.tres" id="7_ubpvv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54tkr"]
+bg_color = Color(0.09239706, 0.09239707, 0.092397, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.32156864, 0.77254903, 0.77254903, 1)
+
+[sub_resource type="Theme" id="Theme_arv2f"]
+Button/colors/font_color = Color(0.54509807, 0.95686275, 0.9607843, 1)
+Button/fonts/font = ExtResource("6_p8ri8")
+Button/styles/hover = ExtResource("7_ubpvv")
+Button/styles/normal = SubResource("StyleBoxFlat_54tkr")
+Button/styles/pressed = ExtResource("7_ubpvv")
+Label/colors/font_color = Color(0.7858845, 0.83929694, 1, 1)
+Label/colors/font_outline_color = Color(0.33935335, 0.000112024325, 0.35700202, 1)
+Label/colors/font_shadow_color = Color(9.62615e-07, 0.47843158, 0.6000265, 1)
+Label/constants/outline_size = 13
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = -7
+Label/constants/shadow_outline_size = 5
+Label/fonts/font = ExtResource("6_p8ri8")
 
 [node name="MainMenu" type="Control" unique_id=681432760]
 layout_mode = 3
@@ -115,7 +140,7 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="MarginContainer3" unique_id=2006436213]
 texture_filter = 1
 layout_mode = 2
-theme = ExtResource("4_ei257")
+theme = SubResource("Theme_arv2f")
 theme_type_variation = &"Title"
 theme_override_font_sizes/font_size = 117
 text = "Crashtronauts"
