@@ -33,6 +33,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
+[editor]
+
+movie_writer/movie_file="F:/Videos/GameDevClips/test1.avi"
+
 [gui]
 
 theme/custom="uid://bqhw2jx5t7nvm"

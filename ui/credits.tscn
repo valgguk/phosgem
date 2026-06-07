@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dj66nte78u87x"]
+[gd_scene format=3 uid="uid://dj66nte78u87x"]
 
 [ext_resource type="PackedScene" uid="uid://cgsspji18smle" path="res://lobby/lobby_screen.tscn" id="1_m3vk0"]
+[ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="2_42u7w"]
 [ext_resource type="Script" uid="uid://cuqvj8grm28qy" path="res://ui/credits.gd" id="2_hvxmk"]
+[ext_resource type="PackedScene" uid="uid://bie7rfxp7er7u" path="res://lobby/MenuBackground.tscn" id="4_d0gn6"]
+[ext_resource type="FontFile" uid="uid://bwwa8tn5q1gq0" path="res://assets/fonts/80s-retro-future.ttf" id="5_dyfqb"]
+[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/fonts/monogram-extended.ttf" id="6_swjq5"]
 
-[node name="CreditsScreen" instance=ExtResource("1_m3vk0")]
+[node name="CreditsScreen" unique_id=1070636177 instance=ExtResource("1_m3vk0")]
+theme = ExtResource("2_42u7w")
 script = ExtResource("2_hvxmk")
+
+[node name="MenuBackground" parent="." index="0" unique_id=960420792 instance=ExtResource("4_d0gn6")]
+layout_mode = 1
 
 [node name="Label" parent="MarginContainer2/VBoxContainer/Panel" index="0"]
 text = "Credits"
@@ -12,10 +20,16 @@ text = "Credits"
 [node name="MarginContainer2_VBoxContainer_MarginContainer_Panel#PanelContainer" parent="MarginContainer2/VBoxContainer/MarginContainer/Control" index="0"]
 theme_type_variation = &"Zero"
 
-[node name="MarginContainer2_VBoxContainer_MarginContainer_Panel#PanelContainer" type="RichTextLabel" parent="MarginContainer2/VBoxContainer/MarginContainer/Control/MarginContainer2_VBoxContainer_MarginContainer_Panel#PanelContainer" index="0"]
+[node name="MarginContainer2_VBoxContainer_MarginContainer_Panel#PanelContainer" type="RichTextLabel" parent="MarginContainer2/VBoxContainer/MarginContainer/Control/MarginContainer2_VBoxContainer_MarginContainer_Panel#PanelContainer" index="0" unique_id=1477131395]
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("5_dyfqb")
+theme_override_fonts/bold_font = ExtResource("6_swjq5")
+theme_override_font_sizes/normal_font_size = 46
+theme_override_font_sizes/bold_font_size = 35
 bbcode_enabled = true
 text = "[center]
 [b]Lobby[/b]
 Elías Zelada
+[b]Background stars[/b]
+ansimuz - itchio
 [/center]"

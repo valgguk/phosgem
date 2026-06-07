@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="2_122yc"]
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="4_q5f0x"]
 [ext_resource type="PackedScene" uid="uid://bie7rfxp7er7u" path="res://lobby/MenuBackground.tscn" id="4_ylfc3"]
+[ext_resource type="Texture2D" uid="uid://c1rokltx4w7kt" path="res://assets/sprites/AstronautSprites.png" id="6_r5vx3"]
 
 [sub_resource type="Animation" id="Animation_c2ij0"]
 length = 0.001
@@ -141,7 +142,6 @@ layer = 64
 
 [node name="MessageContainer" type="Panel" parent="CanvasLayer" index="0" unique_id=529851581]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -175,10 +175,18 @@ text = "Joinning server"
 horizontal_alignment = 1
 
 [node name="LoadingIcon" type="TextureRect" parent="CanvasLayer/MessageContainer/JoiningServer/VBoxContainer" index="1" unique_id=1073324405]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("4_q5f0x")
 stretch_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/MessageContainer/JoiningServer/VBoxContainer/LoadingIcon" index="0" unique_id=96491104]
+position = Vector2(62.500004, 52.50001)
+scale = Vector2(0.33244687, 0.3324468)
+texture = ExtResource("6_r5vx3")
+region_enabled = true
+region_rect = Rect2(0, 0, 376, 384)
 
 [node name="CancelButton" type="Button" parent="CanvasLayer/MessageContainer/JoiningServer/VBoxContainer" index="2" unique_id=1223635957]
 unique_name_in_owner = true

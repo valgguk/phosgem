@@ -586,6 +586,7 @@ tile_set = SubResource("TileSet_trceg")
 
 [node name="OxigenGenerator" parent="Ship" unique_id=432383899 instance=ExtResource("10_choun")]
 position = Vector2(169, 668)
+OXIGEN_MAX = 270
 
 [node name="Buttons" type="Node2D" parent="Ship" unique_id=742220550]
 
@@ -611,18 +612,16 @@ polygon = PackedVector2Array(-570, 736, -538, 735, -546, 728, -532, 697, -537, 6
 [node name="SpawnPoints" type="Node2D" parent="Ship" unique_id=2098974630]
 
 [node name="Marker2D" type="Marker2D" parent="Ship/SpawnPoints" unique_id=1559991356]
-position = Vector2(-143, 587)
+position = Vector2(573, 336)
 gizmo_extents = 100.0
 
 [node name="Marker2D2" type="Marker2D" parent="Ship/SpawnPoints" unique_id=920830935]
-position = Vector2(1260, 348)
+position = Vector2(457, 348)
 gizmo_extents = 100.0
-metadata/_edit_lock_ = true
 
 [node name="Marker2D3" type="Marker2D" parent="Ship/SpawnPoints" unique_id=1001443462]
-position = Vector2(-44, 1)
+position = Vector2(343, 343)
 gizmo_extents = 100.0
-metadata/_edit_lock_ = true
 
 [node name="Alien_Arbol" parent="Ship" unique_id=1641389146 instance=ExtResource("13_jbj1t")]
 position = Vector2(1787, -33.000004)
@@ -640,16 +639,46 @@ theme_override_colors/font_shadow_color = Color(0, 0.47843137, 0.6, 0)
 text = "SCORE:"
 metadata/_edit_use_anchors_ = true
 
+[node name="ColorRect" type="ColorRect" parent="Ship/CanvasLayer" unique_id=837835658]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -280.0
+offset_right = 291.0
+offset_bottom = 50.0
+grow_horizontal = 2
+color = Color(0.18381132, 0.23515481, 0.30703562, 1)
+
+[node name="Label" type="Label" parent="Ship/CanvasLayer/ColorRect" unique_id=359784816]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -165.5
+offset_top = 24.0
+offset_right = 168.5
+offset_bottom = 107.0
+grow_horizontal = 2
+theme = ExtResource("13_trceg")
+theme_override_font_sizes/font_size = 53
+text = "Ship Health"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Ship/CanvasLayer" unique_id=1094680437]
-offset_left = 7.0
-offset_top = 50.0
-offset_right = 367.0
-offset_bottom = 87.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -274.0
+offset_top = 6.0
+offset_right = 286.0
+offset_bottom = 43.0
+grow_horizontal = 2
 value = 80.0
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture1D_0ld40")
 texture_progress = SubResource("GradientTexture2D_dp3eg")
-tint_under = Color(0, 0, 0, 1)
+tint_under = Color(0.14509805, 0, 0.18431373, 1)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1117597723]
 replication_config = SubResource("SceneReplicationConfig_85g3d")

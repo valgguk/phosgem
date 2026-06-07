@@ -12,8 +12,7 @@ theme = ExtResource("2_ssaso")
 script = ExtResource("2_a2sqk")
 
 [node name="MenuBackground" parent="." index="0" unique_id=960420792 instance=ExtResource("4_iaq1a")]
-layout_mode = 0
-anchors_preset = 0
+layout_mode = 1
 
 [node name="Label" parent="MarginContainer2/VBoxContainer/Panel" index="0"]
 text = "Lobby"

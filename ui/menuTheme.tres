@@ -10,7 +10,7 @@ border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0.12026625, 0.4508466, 0.45095646, 0.3647059)
+border_color = Color(0.63529414, 0.65882355, 0.98039216, 0.45882353)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54tkr"]
 bg_color = Color(0.09239706, 0.09239707, 0.092397, 1)
@@ -18,11 +18,12 @@ border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0.32156864, 0.77254903, 0.77254903, 1)
+border_color = Color(0.5032723, 0.5109011, 0.9657863, 1)
 
 [resource]
-Button/colors/font_color = Color(0.54509807, 0.95686275, 0.9607843, 1)
-Button/colors/font_disabled_color = Color(0.49411765, 0.8745098, 0.8745098, 0.5019608)
+Button/colors/font_color = Color(0.3019608, 0.72156864, 1, 1)
+Button/colors/font_disabled_color = Color(0.49980974, 0.7890905, 0.99999994, 0.4745098)
+Button/colors/font_focus_color = Color(0.3019608, 0.72156864, 1, 1)
 Button/fonts/font = ExtResource("3_air3u")
 Button/styles/disabled = SubResource("StyleBoxFlat_lt0oc")
 Button/styles/hover = ExtResource("2_lt0oc")
@@ -33,3 +34,4 @@ Label/constants/shadow_offset_x = 0
 Label/constants/shadow_offset_y = -7
 Label/constants/shadow_outline_size = 5
 Label/fonts/font = ExtResource("3_54tkr")
+Panel/styles/panel = null
