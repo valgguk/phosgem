@@ -1,15 +1,20 @@
 [gd_scene format=3 uid="uid://bio3yxjk43fbs"]
 
+[ext_resource type="Script" uid="uid://b0dgmbodt2bmo" path="res://scripts/energy_generator.gd" id="1_lgtf1"]
 [ext_resource type="Texture2D" uid="uid://b3ga3aisd83rj" path="res://assets/New Piskel-1.png (1).png" id="1_sccxe"]
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="2_7r6ir"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_anwxr"]
-size = Vector2(21, 20)
+size = Vector2(37.5, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lgtf1"]
+size = Vector2(40, 6)
 
 [node name="EnergyGenerator" type="Area2D" unique_id=247079671]
+script = ExtResource("1_lgtf1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=874020645]
-position = Vector2(0.5, 0)
+position = Vector2(9.75, 6.5)
 shape = SubResource("RectangleShape2D_anwxr")
 
 [node name="NewPiskel1_png(1)" type="Sprite2D" parent="." unique_id=1698959427]
@@ -19,6 +24,23 @@ scale = Vector2(0.625, 0.625)
 texture = ExtResource("1_sccxe")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1016268903]
-position = Vector2(21, 1)
-scale = Vector2(0.14508314, 0.14508314)
+position = Vector2(27, 1)
+scale = Vector2(0.041620284, 0.14508314)
 texture = ExtResource("2_7r6ir")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=842705733]
+position = Vector2(10, 10.963207)
+scale = Vector2(0.328125, 0.047449887)
+texture = ExtResource("2_7r6ir")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=502489544]
+constant_linear_velocity = Vector2(-380, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=259522936]
+position = Vector2(9, 11)
+shape = SubResource("RectangleShape2D_lgtf1")
+
+[node name="Timer" type="Timer" parent="." unique_id=51169151]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

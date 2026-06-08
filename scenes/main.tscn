@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://m5670h8vjdwv" path="res://assets/0x72_16x16RobotTileset.v1.png" id="6_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bf37aval36plk" path="res://scenes/leverThrust.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://nkscoxvh6eys" path="res://scenes/LeverAnti.tscn" id="8_choun"]
+[ext_resource type="PackedScene" uid="uid://bio3yxjk43fbs" path="res://resources/energy_generator.tscn" id="9_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://b5nbnoh566dn2" path="res://scenes/oxigen_generator.tscn" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/scoreTracker.tscn" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://b18b6wkeb7aya" path="res://scenes/enemies/alien_cono.tscn" id="13_jbj1t"]
@@ -547,7 +548,7 @@ metadata/_edit_lock_ = true
 
 [node name="AsteroidSpawner" type="Node2D" parent="." unique_id=347591073]
 script = ExtResource("4_trceg")
-damage_per_hit = 50
+damage_per_hit = 1
 asteroid_scene = ExtResource("5_trceg")
 
 [node name="Ship" type="Node2D" parent="." unique_id=625195637]
@@ -586,7 +587,11 @@ tile_set = SubResource("TileSet_trceg")
 
 [node name="OxigenGenerator" parent="Ship" unique_id=432383899 instance=ExtResource("10_choun")]
 position = Vector2(169, 668)
-OXIGEN_MAX = 270
+OXIGEN_MAX = 300
+
+[node name="EnergyGenerator" parent="Ship" unique_id=247079671 instance=ExtResource("9_jbj1t")]
+position = Vector2(2151.0002, 698)
+scale = Vector2(5, 5)
 
 [node name="Buttons" type="Node2D" parent="Ship" unique_id=742220550]
 
