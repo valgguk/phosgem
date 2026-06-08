@@ -1,5 +1,4 @@
 [gd_scene format=3 uid="uid://b6cfq0qe7ynw6"]
-[gd_scene format=3 uid="uid://b6cfq0qe7ynw6"]
 
 [ext_resource type="Script" uid="uid://c8lsyb801m532" path="res://autoloads/game.gd" id="1_fmbhi"]
 [ext_resource type="Script" uid="uid://bnqpng0o60r43" path="res://scripts/player_data_resource.gd" id="2_xaonh"]

@@ -7,18 +7,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w7b4c"]
 
-<<<<<<< Updated upstream
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_prswt"]
-shader = ExtResource("3_j2n00")
-shader_parameter/time_offset = 0.0
-shader_parameter/base_color = Color(0.34129986, 0.29431516, 0.24738786, 1)
-shader_parameter/dark_color = Color(1, 1, 1, 1)
-shader_parameter/highlight_color = Color(0.55, 0.5, 0.45, 1)
-shader_parameter/crack_intensity = 0.2150000102125
-shader_parameter/roughness = 5.1830001986925
-
-=======
->>>>>>> Stashed changes
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2h6hj"]
 blend_mode = 1
 
@@ -47,26 +35,7 @@ script = ExtResource("1_jrb2b")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1223345958]
 shape = SubResource("CircleShape2D_w7b4c")
 
-<<<<<<< Updated upstream
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1259757140]
-material = SubResource("ShaderMaterial_prswt")
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-
-=======
->>>>>>> Stashed changes
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=976564498]
-visible = false
 material = SubResource("CanvasItemMaterial_2h6hj")
 position = Vector2(-4, 3)
 amount = 30
