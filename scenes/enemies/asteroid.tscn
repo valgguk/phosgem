@@ -38,7 +38,7 @@ shape = SubResource("CircleShape2D_w7b4c")
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=976564498]
 material = SubResource("CanvasItemMaterial_2h6hj")
 position = Vector2(-4, 3)
-amount = 30
+amount = 2
 texture = ExtResource("3_08eb2")
 direction = Vector2(-1, -1)
 spread = 5.0
@@ -54,3 +54,5 @@ color_initial_ramp = SubResource("Gradient_w7b4c")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1096229680]
 material = SubResource("ShaderMaterial_prswt")
 texture = ExtResource("4_2h6hj")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=621246028]
