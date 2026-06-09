@@ -36,21 +36,12 @@ func _apply_size(size: float) -> void:
 	collision.shape = circle
 	shader_material_ref.set_shader_parameter("time_offset", float(asteroid_id) * 13.7)
 	shader_material_ref.set_shader_parameter("roughness", randf_range(3.0, 6.0))
-	
-	
-	#var scale_factor=size/80.0
-	#trail.lifetime=size / 100.0
-	#trail.scale_amount_max= 0.2*scale_factor
-	#trail.scale_amount_min=0.8*scale_factor
+
 
 func _physics_process(delta: float) -> void:
 	_time += delta * 1000
 	global_position += velocity * delta
-	
-	#rotation += rotation_speed * delta
 	shader_material_ref.set_shader_parameter("time_offset", float(asteroid_id) * 13.7 + _time * 0.3)
-	#if velocity.length() > 1.0:
-		#trail.rotation = velocity.angle()
 
 
 func destroy() -> void:
