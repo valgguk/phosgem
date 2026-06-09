@@ -7,6 +7,15 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w7b4c"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prswt"]
+shader = ExtResource("3_j2n00")
+shader_parameter/time_offset = 0.0
+shader_parameter/base_color = Color(0.35, 0.3, 0.25, 1)
+shader_parameter/dark_color = Color(0.90273863, 0.87151945, 0.849727, 1)
+shader_parameter/highlight_color = Color(0.55, 0.5, 0.45, 1)
+shader_parameter/crack_intensity = 0.6
+shader_parameter/roughness = 4.0
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2h6hj"]
 blend_mode = 1
 
@@ -18,41 +27,50 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.13671875, 0.48046875, 0.73828125, 0.98828125)
 colors = PackedColorArray(0, 0, 0, 1, 0.84705883, 0.14509805, 0.043137256, 1, 0.9882353, 0.5137255, 0.15686275, 1, 0.7043509, 0.789928, 0.23901337, 1, 18.892157, 18.892157, 18.892157, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_prswt"]
-shader = ExtResource("3_j2n00")
-shader_parameter/time_offset = 0.0
-shader_parameter/base_color = Color(0.35, 0.3, 0.25, 1)
-shader_parameter/dark_color = Color(0.90273863, 0.87151945, 0.849727, 1)
-shader_parameter/highlight_color = Color(0.55, 0.5, 0.45, 1)
-shader_parameter/crack_intensity = 0.6
-shader_parameter/roughness = 4.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_2h6hj"]
+radius = 38.209946
 
 [node name="Asteroid" type="Area2D" unique_id=682462807]
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_jrb2b")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1223345958]
 shape = SubResource("CircleShape2D_w7b4c")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=976564498]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1096229680]
+material = SubResource("ShaderMaterial_prswt")
+rotation = -0.7853982
+scale = Vector2(2, 2)
+texture = ExtResource("4_2h6hj")
+metadata/_edit_group_ = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite2D" unique_id=976564498]
+show_behind_parent = true
 material = SubResource("CanvasItemMaterial_2h6hj")
-position = Vector2(-4, 3)
-amount = 2
+rotation = 0.7853982
+scale = Vector2(0.99999994, 0.99999994)
+amount = 10
 texture = ExtResource("3_08eb2")
-direction = Vector2(-1, -1)
+local_coords = true
+direction = Vector2(-1, 0)
 spread = 5.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 30.0
-scale_amount_min = 0.1
-scale_amount_max = 0.3
+initial_velocity_min = 80.0
+initial_velocity_max = 100.0
+damping_min = 60.0
+damping_max = 60.0
+scale_amount_min = 0.08
+scale_amount_max = 0.2
 scale_amount_curve = SubResource("Curve_j2n00")
 color = Color(1, 0.4, 0, 1)
 color_initial_ramp = SubResource("Gradient_w7b4c")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1096229680]
-material = SubResource("ShaderMaterial_prswt")
-texture = ExtResource("4_2h6hj")
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=621246028]
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1491072004]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=86366609]
+shape = SubResource("CircleShape2D_2h6hj")

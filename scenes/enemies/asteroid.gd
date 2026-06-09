@@ -6,8 +6,8 @@ signal asteroid_hit_ship(asteroid: Asteroid)
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var shader_material_ref: ShaderMaterial = sprite.material
-@onready var trail: CPUParticles2D = $CPUParticles2D
-
+@onready var trail: CPUParticles2D = $Sprite2D/CPUParticles2D
+@onready var detection_area_2d:Area2D=$DetectionArea
 
 var velocity: Vector2 = Vector2.ZERO
 var rotation_speed: float = 0.0
@@ -21,6 +21,7 @@ var _ship_ref: Node2D = null
 func setup(id: int, pos: Vector2, vel: Vector2, rot_spd: float, size: float) -> void:
 	asteroid_id = id
 	global_position = pos
+	global_rotation = vel.angle()
 	velocity = vel
 	rotation_speed = rot_spd
 	_apply_size(size)
@@ -36,22 +37,20 @@ func _apply_size(size: float) -> void:
 	shader_material_ref.set_shader_parameter("time_offset", float(asteroid_id) * 13.7)
 	shader_material_ref.set_shader_parameter("roughness", randf_range(3.0, 6.0))
 	
-	var scale_factor=size/80.0
-	trail.scale=Vector2(scale_factor,scale_factor)
-	trail.lifetime=size / 100.0
-	trail.initial_velocity_min = 30.0 * scale_factor
-	trail.initial_velocity_max = 80.0 * scale_factor
-	trail.scale_amount_max= 0.2*scale_factor
-	trail.scale_amount_min=0.8*scale_factor
+	
+	#var scale_factor=size/80.0
+	#trail.lifetime=size / 100.0
+	#trail.scale_amount_max= 0.2*scale_factor
+	#trail.scale_amount_min=0.8*scale_factor
 
 func _physics_process(delta: float) -> void:
-	_time += delta
+	_time += delta * 1000
 	global_position += velocity * delta
+	
 	#rotation += rotation_speed * delta
-	shader_material_ref.set_shader_parameter("time_offset",
-		float(asteroid_id) * 13.7 + _time * 0.3)
-	if velocity.length() > 1.0:
-		trail.rotation = velocity.angle()
+	shader_material_ref.set_shader_parameter("time_offset", float(asteroid_id) * 13.7 + _time * 0.3)
+	#if velocity.length() > 1.0:
+		#trail.rotation = velocity.angle()
 
 
 func destroy() -> void:
@@ -59,11 +58,11 @@ func destroy() -> void:
 	await get_tree().create_timer(trail.lifetime).timeout
 	queue_free()
 	
-func on_area_entered(area:Area2D)->void:
+func _on_detection_area_entered(area: Area2D) -> void:
 	if area.name=="asteroidColision":
 		asteroid_hit_ship.emit(self)
-		
+
 func _ready() -> void:
 	add_to_group("asteroids")
-	area_entered.connect(on_area_entered)
+	detection_area_2d.area_entered.connect(_on_detection_area_entered)
 	
