@@ -17,6 +17,7 @@ var _time: float = 0.0
 var _hit: bool = false
 var _ship_ref: Node2D = null
 
+
 func setup(id: int, pos: Vector2, vel: Vector2, rot_spd: float, size: float) -> void:
 	asteroid_id = id
 	global_position = pos
@@ -51,20 +52,18 @@ func _physics_process(delta: float) -> void:
 		float(asteroid_id) * 13.7 + _time * 0.3)
 	if velocity.length() > 1.0:
 		trail.rotation = velocity.angle()
-	_check_ship_collision()
 
-func _check_ship_collision() -> void:
-	if _hit or _ship_ref == null:
-		return
-	var dist = global_position.distance_to(_ship_ref.global_position)
-	if dist < radius + 300.0:
-		_hit = true
-		asteroid_hit_ship.emit(self)
 
 func destroy() -> void:
 	trail.emitting = false
 	await get_tree().create_timer(trail.lifetime).timeout
 	queue_free()
-
+	
+func on_area_entered(area:Area2D)->void:
+	if area.name=="asteroidColision":
+		asteroid_hit_ship.emit(self)
+		
 func _ready() -> void:
 	add_to_group("asteroids")
+	area_entered.connect(on_area_entered)
+	
