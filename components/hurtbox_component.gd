@@ -12,7 +12,7 @@ func _on_area_entered(area: Area2D) -> void:
 	var hitbox: HitboxComponent = area as HitboxComponent
 	if hitbox and health_component:
 		health_component.take_damage(hitbox.damage)
-		hitbox.damage_dealt.emit()
+		hitbox.damage_dealt.emit() # <-- avisamos que hicimos daño
 		
 
 
