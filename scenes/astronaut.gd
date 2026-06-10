@@ -19,6 +19,9 @@ const Gravity_factor=2 #1 is like a super jump
 
 @export var walking = false
 
+@export var stunned = false
+var jump_damage = false
+
 func _ready() -> void:
 	add_to_group("players_instances")
 	add_to_group("affected_by_ship")
@@ -30,27 +33,36 @@ func _ready() -> void:
 func _physics_process(delta):
 	if not is_multiplayer_authority():
 		return
-	var move_input = input_synchronizer.move_input
-	var vertical_direction = get_gravity().normalized()
-	var vertical_speed = velocity.dot(vertical_direction)
-	  
-	var vertical_velocity = vertical_direction * vertical_speed
-	if not is_on_floor():
-		vertical_velocity += get_gravity() * delta * Gravity_factor
-	# Handle jump.
-	elif input_synchronizer.jump:
-		vertical_velocity = vertical_direction * JUMP_VELOCITY
-	input_synchronizer.jump = false
-	var horizontal_direction = vertical_direction.rotated(-PI/2)
-	var horizontal_speed = velocity.dot(horizontal_direction)
 	
+	var g = get_gravity()
+	if g.length() == 0:
+		g = Vector2.DOWN * 980
+	var vertical_direction = g.normalized()
+	
+	var horizontal_direction = vertical_direction.rotated(-PI/2)
+	var move_input = input_synchronizer.move_input
+	
+	#var vertical_velocity = Vector2.ZERO
+	var vertical_velocity = vertical_direction * velocity.dot(vertical_direction)
+	
+	var horizontal_speed = velocity.dot(horizontal_direction)
 	if move_input:
 		horizontal_speed = move_input * SPEED
 	else:
 		horizontal_speed = move_toward(horizontal_speed, 0, SPEED)
-	
+	#var horizontal_velocity = horizontal_direction * horizontal_speed
 	var horizontal_velocity = horizontal_direction * horizontal_speed
-	velocity = horizontal_velocity + vertical_velocity
+	
+	if not is_on_floor():
+		vertical_velocity += g * delta * Gravity_factor
+	elif input_synchronizer.jump:
+		vertical_velocity = vertical_direction * JUMP_VELOCITY
+		jump_damage = true
+		input_synchronizer.jump = false
+	
+	velocity = horizontal_velocity + vertical_velocity + ship_velocity
+	print("ship_velocity astronaut: ", ship_velocity)
+	print("velocity final astronaut: ", velocity)
 	if move_input:
 		change_sprite_direction(move_input)
 		manage_animations(move_input)
@@ -82,7 +94,6 @@ func change_sprite_direction(direction:int)-> void:
 
 
 func manage_animations(direction):
-	
 	if direction:  #and is_on_floor():
 		walking_wobble.rpc(direction)
 	else: return
@@ -133,8 +144,22 @@ func apply_ship_motion(vel: Vector2, delta: float) -> void:
 	
 	
 func take_damage(damage: int) -> void:
-	Debug.log("damage: %d" % damage)
+	Debug.log("Stun: %d, , alien->player" % damage)
 	
 
 func _on_health_changed(value: int) -> void:
-	Debug.log(value)
+	take_damage(value)
+	
+# verificar !!!
+#func _on_hitbox_body_entered(body): #el hitbox_player (foot) tocan al alien
+	#if not is_multiplayer_authority(): #el cliente no
+		#return
+	#
+	#if body.is_in_group("aliens_instances"):
+		#if jump_damage: # cambiar esto -> detecta que PLAYER esta saltando
+			#body.die()
+			#jump_damage = false
+			
+@rpc("authority")
+func apply_stun():
+	stunned = true

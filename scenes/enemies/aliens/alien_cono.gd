@@ -3,10 +3,12 @@ extends CharacterBody2D
 @onready var health_component: HealthComponent = $Pivote/HurtboxComponent/HealthComponent
 @onready var pivote: Node2D = $Pivote
 
+@onready var hitbox_component: HitboxComponent = $Pivote/HitboxComponent
+
 @onready var ray_cast_2d: RayCast2D = $Pivote/RayCast2D
 
 const SPEED = 200.0
-const JUMP_VELOCITY = -1500.0 
+const JUMP_VELOCITY = -900.0 
 const Gravity_factor = 2 #1 is like a super jump
 
 var move_direction := 1.0 # <- (-1)  (+1) ->
@@ -17,36 +19,42 @@ var ship_velocity: Vector2 = Vector2.ZERO
 # tipo : sigue a un player 
 var target: Node2D = null
 
+var already_hit := {}
+
 func _ready() -> void:
-	# add_to_group("affected_by_ship")
+	add_to_group("aliens_instances")
+	add_to_group("affected_by_ship")
 	health_component.health_changed.connect(_on_health_changed)
 	# sync_timer.timeout.connect(_on_sync_timeout)
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority(): # clientes no ejecutan physics_process
-		# === GRAVEDAD (igual que player) ===
-		var vertical_direction = get_gravity().normalized()
-		var vertical_speed = velocity.dot(vertical_direction)
-		var vertical_velocity = vertical_direction * vertical_speed
 		
-		# === DIRECCIÓN HORIZONTAL ===
+		var g = get_gravity()
+		if g.length() == 0:
+			g = Vector2.DOWN * 980
+		var vertical_direction = g.normalized()
+		
 		var horizontal_direction = vertical_direction.rotated(-PI/2)
-		var horizontal_speed = velocity.dot(horizontal_direction)
-		
-		# === SIMPLE ===
 		var move_dir = _get_move_direction()
-		horizontal_speed = move_dir * SPEED
+		
+		#var horizontal_speed = velocity.dot(horizontal_direction) !!
+		#horizontal_speed = move_dir * SPEED !!
+		# var horizontal_velocity = horizontal_direction * horizontal_speed
+		var horizontal_velocity = horizontal_direction * (move_dir * SPEED)
+		
+		#var vertical_velocity = Vector2.ZERO
+		var vertical_velocity = vertical_direction * velocity.dot(vertical_direction)
 		
 		if not is_on_floor():
-			vertical_velocity += get_gravity() * delta * Gravity_factor
+			vertical_velocity += g * delta * Gravity_factor
 		elif _should_jump():
 			move_direction *= -1
 			vertical_velocity = vertical_direction * JUMP_VELOCITY
 
-		var horizontal_velocity = horizontal_direction * horizontal_speed
-		
-		velocity = horizontal_velocity + vertical_velocity
-		
+		velocity = horizontal_velocity + vertical_velocity + ship_velocity 
+		print("ship_velocity alien: ", ship_velocity)
+		print("velocity final alien: ", velocity)
 		# MUY IMPORTANTE
 		up_direction = -vertical_direction
 		
@@ -62,11 +70,11 @@ func _physics_process(delta: float) -> void:
 	
 	
 func take_damage(damage: int) -> void:
-	Debug.log("damage: %d" % damage)
+	Debug.log("Mario damage: %d, player->alien" % damage)
 	
 
 func _on_health_changed(value: int) -> void:
-	Debug.log(value)
+	take_damage(value)
 
 	
 func _get_move_direction() -> float:
@@ -136,4 +144,17 @@ func apply_ship_motion(vel: Vector2, delta: float) -> void:
 @rpc("authority", "call_remote", "unreliable")
 func sync_direction(dir: float):
 	move_direction = dir
+	
+# verificar !!!! ===========
+#func _on_hitbox_body_entered(body): #el hitbox_alien toca al player
+	#if not is_multiplayer_authority(): #el cliente no
+		#return
+		#
+	#if body.is_in_group("players_instances"):
+		#if already_hit.has(body):
+			#return
+		#already_hit[body] = true
+		#body.rpc_id(body.get_multiplayer_authority(), "apply_stun")
+		#await get_tree().create_timer(0.5).timeout
+		#already_hit.erase(body)
 	

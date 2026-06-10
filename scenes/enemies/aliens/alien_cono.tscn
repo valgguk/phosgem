@@ -11,16 +11,18 @@ radius = 9.0
 height = 22.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bduiy"]
-radius = 19.0
-height = 38.0
+radius = 17.295113
+height = 42.23369
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kswie"]
-radius = 15.0
+radius = 9.787805
 height = 32.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_07eov"]
 
 [node name="Alien_Arbol" type="CharacterBody2D" unique_id=1641389146]
+collision_layer = 5
+floor_snap_length = 20.0
 script = ExtResource("1_07eov")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1920325956]
@@ -44,28 +46,36 @@ region_enabled = true
 region_rect = Rect2(0, 0, 928, 16)
 
 [node name="HurtboxComponent" type="Area2D" parent="Pivote" unique_id=1461966723 node_paths=PackedStringArray("health_component")]
-process_mode = 4
-visible = false
-monitoring = false
-monitorable = false
+position = Vector2(0, -8.999999)
+scale = Vector2(1.2954133, 0.9576611)
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("4_bmiy7")
 health_component = NodePath("HealthComponent")
 metadata/_custom_type_script = "uid://b7owxkq83i2m2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivote/HurtboxComponent" unique_id=1682298012]
+position = Vector2(0, 0.99999994)
+scale = Vector2(0.9251168, 0.75768894)
 shape = SubResource("CapsuleShape2D_bduiy")
 debug_color = Color(1, 0, 0.13725491, 0.24313726)
 
 [node name="HealthComponent" type="Node" parent="Pivote/HurtboxComponent" unique_id=888197935]
 script = ExtResource("2_hspi4")
+health = 10
+max_health = 10
 metadata/_custom_type_script = "uid://dnu0ib00h5rhg"
 
 [node name="HitboxComponent" type="Area2D" parent="Pivote" unique_id=1214464490]
-visible = false
+position = Vector2(0, 8)
+scale = Vector2(1.5016146, 0.62693673)
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("5_3bcy3")
 metadata/_custom_type_script = "uid://b4jdacy8shnmu"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivote/HitboxComponent" unique_id=1966575059]
+scale = Vector2(1.2932374, 0.7653262)
 shape = SubResource("CapsuleShape2D_kswie")
 debug_color = Color(0.078431375, 0.7647059, 0, 0.40392157)
 
