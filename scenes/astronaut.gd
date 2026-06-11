@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var input_synchronizer: InputSynchronizer = $InputSynchronizer
 @onready var sync_timer: Timer = $SyncTimer
 @onready var interact_area = $InteractArea
+
 var ship_velocity: Vector2 = Vector2.ZERO
 
 @onready var health_component: HealthComponent = $HurtboxComponent/HealthComponent
@@ -18,8 +19,7 @@ const JUMP_VELOCITY = -900.0
 const Gravity_factor=2 #1 is like a super jump
 
 @export var walking = false
-
-@export var stunned = false
+var stunned = false
 var jump_damage = false
 
 func _ready() -> void:
@@ -32,6 +32,9 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	if not is_multiplayer_authority():
+		return
+	
+	if stunned:
 		return
 	
 	var g = get_gravity()
@@ -60,9 +63,7 @@ func _physics_process(delta):
 		jump_damage = true
 		input_synchronizer.jump = false
 	
-	velocity = horizontal_velocity + vertical_velocity + ship_velocity
-	print("ship_velocity astronaut: ", ship_velocity)
-	print("velocity final astronaut: ", velocity)
+	velocity = horizontal_velocity + vertical_velocity
 	if move_input:
 		change_sprite_direction(move_input)
 		manage_animations(move_input)
@@ -70,6 +71,12 @@ func _physics_process(delta):
 	# cambiar si se rota demasiado, para que el player detecte bien lo que es suelo
 	up_direction = -vertical_direction 
 	move_and_slide()
+	var collision = get_last_slide_collision()
+	if collision:
+		var collider = collision.get_collider()
+		if collider is CharacterBody2D:
+			# evita que se empujen horizontalmente infinito
+			velocity = velocity.slide(collision.get_normal())
 	# rpc manual de movimiento o multiplayer_synchronizer
 	# con position tirita -> ver como mandar la position de los players
 	send_position.rpc(position) 
@@ -139,27 +146,33 @@ func _on_sync_timeout() -> void:
 	if is_multiplayer_authority():
 		send_position.rpc(position)
 	
-func apply_ship_motion(vel: Vector2, delta: float) -> void:
-	ship_velocity = vel
 	
-	
-func take_damage(damage: int) -> void:
-	Debug.log("Stun: %d, , alien->player" % damage)
+#func take_damage(damage: int) -> void:
+	#Debug.log("Stun: %d, , alien->player" % damage)
 	
 
 func _on_health_changed(value: int) -> void:
-	take_damage(value)
-	
-# verificar !!!
-#func _on_hitbox_body_entered(body): #el hitbox_player (foot) tocan al alien
-	#if not is_multiplayer_authority(): #el cliente no
-		#return
-	#
-	#if body.is_in_group("aliens_instances"):
-		#if jump_damage: # cambiar esto -> detecta que PLAYER esta saltando
-			#body.die()
-			#jump_damage = false
-			
-@rpc("authority")
+	Debug.log("Stun %d" % value)
+	apply_stun.rpc()
+
+@rpc("authority", "call_local", "reliable")			
 func apply_stun():
+	if stunned:
+		return
 	stunned = true
+	
+	# cancelar movimiento
+	velocity = Vector2.ZERO
+	animated_sprite.modulate = Color(2,2,2) # blanco brillante
+	
+	var tween = get_tree().create_tween()
+	tween.set_loops()
+	tween.tween_property(animated_sprite, "rotation", 0.3, 0.1)
+	tween.tween_property(animated_sprite, "rotation", -0.3, 0.1)
+	await get_tree().create_timer(3).timeout
+	
+	# reset visual
+	tween.kill()
+	animated_sprite.rotation = 0
+	animated_sprite.modulate = Color(1,1,1)
+	stunned = false

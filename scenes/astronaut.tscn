@@ -67,6 +67,7 @@ size = Vector2(56.351692, 17.60281)
 scale = Vector2(1.1, 1.1)
 collision_layer = 3
 floor_snap_length = 20.0
+safe_margin = 0.01
 script = ExtResource("1_dmfei")
 metadata/_edit_lock_ = true
 
