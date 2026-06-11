@@ -52,9 +52,8 @@ func _physics_process(delta: float) -> void:
 		ship_velocity = ship_velocity.limit_length(max_vel)
 	else:
 		ship_velocity = ship_velocity.move_toward(Vector2.ZERO, acceleration * delta)
-
+	
 	ship.position += ship_velocity * delta
-	_apply_ship_motion_to_ship_members(delta)
 	_update_camera()
 	space_background.global_position = camera.global_position
 	
@@ -91,7 +90,6 @@ func _ready() -> void:
 
 
 
-
 # mandarle rotacion al server 
 # se llama cuando se aprieta el boton
 # unreliable garantiza inputs continuos	
@@ -104,13 +102,12 @@ func input_rotation(direction: int)->void:
 @rpc("any_peer", "call_local", "unreliable")
 func input_thrust(direction: int) -> void:
 	ship_thrust = direction
-	
-func _apply_ship_motion_to_ship_members(delta: float) -> void:
-	for body in get_tree().get_nodes_in_group("affected_by_ship"):
-		if body.has_method("apply_ship_motion"):
-			body.apply_ship_motion(ship_velocity, delta)
 
 @rpc("authority", "call_remote", "unreliable")
 func sync_ship(pos: Vector2, rot: float):
 	ship.position = ship.position.lerp(pos, 0.2)
 	ship.rotation = lerp_angle(ship.rotation, rot, 0.2)
+
+func _apply_ship_velocity():
+	for body in get_tree().get_nodes_in_group("affected_by_ship"):
+		body.ship_velocity = ship_velocity
