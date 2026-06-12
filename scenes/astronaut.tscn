@@ -97,7 +97,7 @@ vertical_alignment = 1
 [node name="InputSynchronizer" parent="." unique_id=794443324 instance=ExtResource("3_lk35g")]
 
 [node name="SyncTimer" type="Timer" parent="." unique_id=1718755475]
-wait_time = 0.1
+wait_time = 0.05
 
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=897963965 node_paths=PackedStringArray("health_component")]
 collision_layer = 2

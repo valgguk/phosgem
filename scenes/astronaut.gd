@@ -25,7 +25,7 @@ var jump_damage = false
 func _ready() -> void:
 	add_to_group("players_instances")
 	add_to_group("affected_by_ship")
-	sync_timer.timeout.connect(_on_sync_timeout)
+	#sync_timer.timeout.connect(_on_sync_timeout)
 	animated_sprite.frame= color
 	health_component.health_changed.connect(_on_health_changed)
 
@@ -52,7 +52,7 @@ func _physics_process(delta):
 	if move_input:
 		horizontal_speed = move_input * SPEED
 	else:
-		horizontal_speed = move_toward(horizontal_speed, 0, SPEED)
+		horizontal_speed = move_toward(horizontal_speed, 0, SPEED * delta * 5)
 	#var horizontal_velocity = horizontal_direction * horizontal_speed
 	var horizontal_velocity = horizontal_direction * horizontal_speed
 	
@@ -138,9 +138,9 @@ func test() -> void:
 
 @rpc("authority", "call_remote", "unreliable_ordered")
 func send_position(pos: Vector2) -> void:
-	if is_multiplayer_authority() :
+	if is_multiplayer_authority():
 		return
-	position = lerp(position, pos, 0.2)
+	position = position.lerp(pos, 0.2)
 
 func _on_sync_timeout() -> void:
 	if is_multiplayer_authority():
@@ -153,25 +153,25 @@ func _on_sync_timeout() -> void:
 
 func _on_health_changed(value: int) -> void:
 	Debug.log("Stun %d" % value)
-	apply_stun.rpc()
 
-@rpc("authority", "call_local", "reliable")			
+@rpc("any_peer", "call_local", "reliable")
 func apply_stun():
 	if stunned:
 		return
-	stunned = true
 	
-	# cancelar movimiento
+	stunned = true
 	velocity = Vector2.ZERO
-	animated_sprite.modulate = Color(2,2,2) # blanco brillante
+	
+	# visual
+	animated_sprite.modulate = Color(2,2,2)
 	
 	var tween = get_tree().create_tween()
 	tween.set_loops()
 	tween.tween_property(animated_sprite, "rotation", 0.3, 0.1)
 	tween.tween_property(animated_sprite, "rotation", -0.3, 0.1)
+	
 	await get_tree().create_timer(3).timeout
 	
-	# reset visual
 	tween.kill()
 	animated_sprite.rotation = 0
 	animated_sprite.modulate = Color(1,1,1)

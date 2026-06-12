@@ -31,6 +31,13 @@ position = Vector2(0, -2)
 shape = SubResource("CapsuleShape2D_u8rjw")
 debug_color = Color(0.68413234, 0.2954554, 1, 0.41960785)
 
+[node name="SyncTimer" type="Timer" parent="." unique_id=431483782]
+wait_time = 0.05
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=1806573610]
+wait_time = 1.5
+one_shot = true
+
 [node name="Pivote" type="Node2D" parent="." unique_id=675790636]
 
 [node name="RayCast2D" type="RayCast2D" parent="Pivote" unique_id=1348547659]
