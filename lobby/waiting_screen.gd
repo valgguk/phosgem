@@ -153,7 +153,7 @@ func _are_all_roles_selected() -> bool:
 
 
 func _are_all_roles_unique() -> bool:
-	var roles: Array[Statics.Role] = Statics.Role.values()
+	var roles = Statics.Role.values()
 	# remove NONE
 	roles.pop_front()
 	for player: Statics.PlayerData in Game.players:

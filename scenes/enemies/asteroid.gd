@@ -44,15 +44,17 @@ func _physics_process(delta: float) -> void:
 	global_position += velocity * delta
 	shader_material_ref.set_shader_parameter("time_offset", float(asteroid_id) * 13.7 + _time * 0.3)
 
-
+@rpc("authority", "call_local", "reliable")
 func destroy() -> void:
 	trail.emitting = false
-	await get_tree().create_timer(trail.lifetime).timeout
+	get_tree().create_timer(trail.lifetime).timeout
 	queue_free()
 	
 func _on_detection_area_entered(area: Area2D) -> void:
-	if area.name=="asteroidColision":
+	if area.name=="asteroidColision": #de la nave
 		asteroid_hit_ship.emit(self)
+		
+		
 
 func _ready() -> void:
 	add_to_group("asteroids")
