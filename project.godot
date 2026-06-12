@@ -18,7 +18,7 @@ config/name="Crashtronauts"
 config/version="0.2"
 run/main_scene="res://ui/main_menu.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="uid://bmwe72vajm67v"
+config/icon="res://icon.svg"
 
 [autoload]
 
@@ -26,6 +26,13 @@ Debug="*res://autoloads/debug.gd"
 Game="*res://autoloads/game.tscn"
 Lobby="*res://autoloads/lobby.tscn"
 ResourceManager="*uid://si6dvj04yl43"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/inferred_declaration=1
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
 
 [display]
 
@@ -74,6 +81,12 @@ reverse={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="enemies"
+2d_physics/layer_3="player"
+
 [physics]
 
 2d/default_gravity_vector=Vector2(1.016, 0)
@@ -81,4 +94,4 @@ reverse={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.278431, 0.54902, 0.74902, 1)
+environment/defaults/default_clear_color=Color(0.1287, 0.24612503, 0.33, 1)

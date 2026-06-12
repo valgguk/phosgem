@@ -10,8 +10,8 @@ class_name AsteroidSpawner
 @export var spawn_interval_max: float = 10.0
 @export var speed_min: float = 30.0
 @export var speed_max: float = 120.0
-@export var size_min: float = 100.0
-@export var size_max: float = 150.0
+@export var size_min: float = 80.0
+@export var size_max: float = 120.0
 @export var spawn_radius: float = 1200.0
 @export var despawn_radius: float = 1600.0
 
