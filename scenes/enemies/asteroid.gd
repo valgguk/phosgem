@@ -36,6 +36,7 @@ func _apply_size(size: float) -> void:
 	collision.shape = circle
 	shader_material_ref.set_shader_parameter("time_offset", float(asteroid_id) * 13.7)
 	shader_material_ref.set_shader_parameter("roughness", randf_range(3.0, 6.0))
+	shader_material_ref.set_shader_parameter("pixel_size", (size * 2.0) / 16.0)
 
 
 func _physics_process(delta: float) -> void:

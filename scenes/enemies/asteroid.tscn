@@ -10,11 +10,19 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_prswt"]
 shader = ExtResource("3_j2n00")
 shader_parameter/time_offset = 0.0
+shader_parameter/pixel_size = 4.0
 shader_parameter/base_color = Color(0.35, 0.3, 0.25, 1)
 shader_parameter/dark_color = Color(0.90273863, 0.87151945, 0.849727, 1)
 shader_parameter/highlight_color = Color(0.55, 0.5, 0.45, 1)
 shader_parameter/crack_intensity = 0.6
 shader_parameter/roughness = 4.0
+shader_parameter/ambient_light = Color(0.35, 0.3, 0.25, 1)
+shader_parameter/diffuse_light_color = Color(1, 0.88, 0.7, 1)
+shader_parameter/light_dir = Vector2(-0.6, -0.8)
+shader_parameter/diffuse_strength = 1.2
+shader_parameter/rim_light_color = Color(0.4, 0.55, 0.9, 1)
+shader_parameter/rim_strength = 0.6
+shader_parameter/crater_count = 5
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2h6hj"]
 blend_mode = 1
