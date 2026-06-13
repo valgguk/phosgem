@@ -53,13 +53,14 @@ frame = 7
 region_enabled = true
 region_rect = Rect2(0, 0, 928, 16)
 
-[node name="HurtboxComponent" type="Area2D" parent="Pivote" unique_id=1461966723 node_paths=PackedStringArray("health_component")]
+[node name="HurtboxComponent" type="Area2D" parent="Pivote" unique_id=1461966723 node_paths=PackedStringArray("health_component", "owner_body")]
 position = Vector2(0, -8.999999)
 scale = Vector2(1.2954133, 0.9576611)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("3_fjroi")
 health_component = NodePath("HealthComponent")
+owner_body = NodePath("../..")
 metadata/_custom_type_script = "uid://b7owxkq83i2m2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivote/HurtboxComponent" unique_id=1682298012]
