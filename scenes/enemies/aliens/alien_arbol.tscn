@@ -21,7 +21,7 @@ height = 32.0
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_07eov"]
 
 [node name="Alien_Arbol" type="CharacterBody2D" unique_id=1641389146]
-collision_layer = 5
+collision_layer = 3
 floor_snap_length = 20.0
 safe_margin = 0.01
 script = ExtResource("1_o540p")
@@ -56,8 +56,8 @@ region_rect = Rect2(0, 0, 928, 16)
 [node name="HurtboxComponent" type="Area2D" parent="Pivote" unique_id=1461966723 node_paths=PackedStringArray("health_component", "owner_body")]
 position = Vector2(0, -8.999999)
 scale = Vector2(1.2954133, 0.9576611)
-collision_layer = 4
-collision_mask = 2
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("3_fjroi")
 health_component = NodePath("HealthComponent")
 owner_body = NodePath("../..")
@@ -78,8 +78,8 @@ metadata/_custom_type_script = "uid://dnu0ib00h5rhg"
 [node name="HitboxComponent" type="Area2D" parent="Pivote" unique_id=1214464490]
 position = Vector2(0, 8)
 scale = Vector2(1.5016146, 0.62693673)
-collision_layer = 4
-collision_mask = 2
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("5_e123m")
 metadata/_custom_type_script = "uid://b4jdacy8shnmu"
 
