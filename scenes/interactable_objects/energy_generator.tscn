@@ -6,27 +6,32 @@
 [ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/fonts/monogram-extended.ttf" id="4_lpff5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_anwxr"]
-size = Vector2(37.5, 5)
+size = Vector2(37.5, 7.1666665)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljf2j"]
+size = Vector2(9.833336, 31.833334)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ljf2j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgtf1"]
-size = Vector2(40, 6)
+size = Vector2(50.166668, 6.333333)
 
 [node name="EnergyGenerator" type="Area2D" unique_id=247079671]
 scale = Vector2(6, 6)
 script = ExtResource("1_lgtf1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=874020645]
-position = Vector2(9.75, 6.5)
+position = Vector2(11.333333, 4.3333335)
 shape = SubResource("RectangleShape2D_anwxr")
 
 [node name="NewPiskel1_png(1)" type="Sprite2D" parent="." unique_id=1698959427]
 self_modulate = Color(0.30692267, 0.3069227, 0.3069227, 1)
-position = Vector2(0, -2.842171e-14)
-scale = Vector2(0.625, 0.625)
+position = Vector2(11.166667, -7.666666)
+scale = Vector2(1.0729167, 1.03125)
 texture = ExtResource("1_sccxe")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1016268903]
-position = Vector2(27, 1)
+position = Vector2(31, 0.8333334)
 scale = Vector2(0.041620284, 0.14508314)
 texture = ExtResource("2_7r6ir")
 
@@ -35,11 +40,18 @@ position = Vector2(10, 10.963207)
 scale = Vector2(0.328125, 0.047449887)
 texture = ExtResource("2_7r6ir")
 
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1838752682]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=144304474]
+position = Vector2(34.250008, -4.25)
+shape = SubResource("RectangleShape2D_ljf2j")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=502489544]
-constant_linear_velocity = Vector2(-380, 0)
+physics_material_override = SubResource("PhysicsMaterial_ljf2j")
+constant_linear_velocity = Vector2(-700, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=259522936]
-position = Vector2(9, 11)
+position = Vector2(13.833333, 10.833334)
 shape = SubResource("RectangleShape2D_lgtf1")
 
 [node name="Timer" type="Timer" parent="." unique_id=51169151]

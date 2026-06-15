@@ -18,7 +18,7 @@ config/name="Crashtronauts"
 config/version="0.2"
 run/main_scene="res://ui/main_menu.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://bmwe72vajm67v"
 
 [autoload]
 

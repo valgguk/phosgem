@@ -14,7 +14,7 @@ var ship_velocity: Vector2 = Vector2.ZERO
 
 var _data: Statics.PlayerData
 
-const SPEED = 400.0
+const SPEED = 500.0
 const JUMP_VELOCITY = -900.0 
 const Gravity_factor=2 #1 is like a super jump
 
