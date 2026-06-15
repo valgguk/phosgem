@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var input_synchronizer: InputSynchronizer = $InputSynchronizer
 @onready var sync_timer: Timer = $SyncTimer
 @onready var interact_area = $InteractArea
+
 var ship_velocity: Vector2 = Vector2.ZERO
 
 @onready var health_component: HealthComponent = $HurtboxComponent/HealthComponent
@@ -18,9 +19,13 @@ const JUMP_VELOCITY = -900.0
 const Gravity_factor=2 #1 is like a super jump
 
 @export var walking = false
+var stunned = false
+var jump_damage = false
 
 func _ready() -> void:
-	sync_timer.timeout.connect(_on_sync_timeout)
+	add_to_group("players_instances")
+	add_to_group("affected_by_ship")
+	#sync_timer.timeout.connect(_on_sync_timeout)
 	animated_sprite.frame= color
 	health_component.health_changed.connect(_on_health_changed)
 
@@ -28,26 +33,36 @@ func _ready() -> void:
 func _physics_process(delta):
 	if not is_multiplayer_authority():
 		return
-	var move_input = input_synchronizer.move_input
-	var vertical_direction = get_gravity().normalized()
-	var vertical_speed = velocity.dot(vertical_direction)
-	  
-	var vertical_velocity = vertical_direction * vertical_speed
-	if not is_on_floor():
-		vertical_velocity += get_gravity() * delta * Gravity_factor
-	# Handle jump.
-	elif input_synchronizer.jump:
-		vertical_velocity = vertical_direction * JUMP_VELOCITY
-	input_synchronizer.jump = false
-	var horizontal_direction = vertical_direction.rotated(-PI/2)
-	var horizontal_speed = velocity.dot(horizontal_direction)
 	
+	if stunned:
+		return
+	
+	var g = get_gravity()
+	if g.length() == 0:
+		g = Vector2.DOWN * 980
+	var vertical_direction = g.normalized()
+	
+	var horizontal_direction = vertical_direction.rotated(-PI/2)
+	var move_input = input_synchronizer.move_input
+	
+	#var vertical_velocity = Vector2.ZERO
+	var vertical_velocity = vertical_direction * velocity.dot(vertical_direction)
+	
+	var horizontal_speed = velocity.dot(horizontal_direction)
 	if move_input:
 		horizontal_speed = move_input * SPEED
 	else:
-		horizontal_speed = move_toward(horizontal_speed, 0, SPEED)
-	
+		horizontal_speed = move_toward(horizontal_speed, 0, SPEED * delta * 5)
+	#var horizontal_velocity = horizontal_direction * horizontal_speed
 	var horizontal_velocity = horizontal_direction * horizontal_speed
+	
+	if not is_on_floor():
+		vertical_velocity += g * delta * Gravity_factor
+	elif input_synchronizer.jump:
+		vertical_velocity = vertical_direction * JUMP_VELOCITY
+		jump_damage = true
+		input_synchronizer.jump = false
+	
 	velocity = horizontal_velocity + vertical_velocity
 	if move_input:
 		change_sprite_direction(move_input)
@@ -56,6 +71,12 @@ func _physics_process(delta):
 	# cambiar si se rota demasiado, para que el player detecte bien lo que es suelo
 	up_direction = -vertical_direction 
 	move_and_slide()
+	var collision = get_last_slide_collision()
+	if collision:
+		var collider = collision.get_collider()
+		if collider is CharacterBody2D:
+			# evita que se empujen horizontalmente infinito
+			velocity = velocity.slide(collision.get_normal())
 	# rpc manual de movimiento o multiplayer_synchronizer
 	# con position tirita -> ver como mandar la position de los players
 	send_position.rpc(position) 
@@ -80,7 +101,6 @@ func change_sprite_direction(direction:int)-> void:
 
 
 func manage_animations(direction):
-	
 	if direction:  #and is_on_floor():
 		walking_wobble.rpc(direction)
 	else: return
@@ -118,21 +138,41 @@ func test() -> void:
 
 @rpc("authority", "call_remote", "unreliable_ordered")
 func send_position(pos: Vector2) -> void:
-	if is_multiplayer_authority() :
+	if is_multiplayer_authority():
 		return
-	position = lerp(position, pos, 0.2)
+	position = position.lerp(pos, 0.2)
 
 func _on_sync_timeout() -> void:
 	if is_multiplayer_authority():
 		send_position.rpc(position)
 	
-func apply_ship_motion(vel: Vector2, delta: float) -> void:
-	ship_velocity = vel
 	
-	
-func take_damage(damage: int) -> void:
-	Debug.log("damage: %d" % damage)
+#func take_damage(damage: int) -> void:
+	#Debug.log("Stun: %d, , alien->player" % damage)
 	
 
 func _on_health_changed(value: int) -> void:
-	Debug.log(value)
+	Debug.log("Stun %d" % value)
+
+@rpc("any_peer", "call_local", "reliable")
+func apply_stun():
+	if stunned:
+		return
+	
+	stunned = true
+	velocity = Vector2.ZERO
+	
+	# visual
+	animated_sprite.modulate = Color(2,2,2)
+	
+	var tween = get_tree().create_tween()
+	tween.set_loops()
+	tween.tween_property(animated_sprite, "rotation", 0.3, 0.1)
+	tween.tween_property(animated_sprite, "rotation", -0.3, 0.1)
+	
+	await get_tree().create_timer(3).timeout
+	
+	tween.kill()
+	animated_sprite.rotation = 0
+	animated_sprite.modulate = Color(1,1,1)
+	stunned = false

@@ -1,7 +1,7 @@
 class_name HitboxComponent
 extends Area2D
 
-signal damage_dealt
+signal damage_dealt(body: CharacterBody2D)
 
 @export var damage : int = 10
 
