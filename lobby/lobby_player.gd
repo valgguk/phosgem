@@ -1,4 +1,3 @@
-class_name LobbyPlayer
 extends HBoxContainer
 
 

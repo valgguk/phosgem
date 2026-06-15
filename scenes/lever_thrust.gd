@@ -1,7 +1,7 @@
 extends Area2D
 
 @onready var sprite: Sprite2D = $Sprite2D
-var _direction: int = 1
+
 var _state: int = 0
 var _player_inside: bool = false
 
@@ -13,18 +13,19 @@ func _process(_delta: float) -> void:
 	if not _player_inside:
 		return
 	if Input.is_action_just_pressed("area_interact"):
-		if _state == 1 or _state == -1:
-			_direction = -(_state)
-			_set_state.rpc(0)
-			
+		if _state == 1:
+			_set_state(0)
 		elif _state == 0:
-				_set_state.rpc(_direction)
-			
-			
-@rpc("any_peer","call_local","reliable")
+			_set_state(1)
+	if Input.is_action_just_pressed("reverse"):
+		if _state == -1:
+			_set_state(0)
+		elif _state == 0:
+			_set_state(-1)
+
 func _set_state(new_state: int) -> void:
 	_state = new_state
-	get_tree().get_root().get_node("Main").input_thrust(_state)
+	get_tree().get_root().get_node("Main").input_thrust.rpc(_state)
 	_animate()
 
 func _animate() -> void:

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://d36l2oum63asr"]
+
+[ext_resource type="Texture2D" uid="uid://816fjomi2guj" path="res://assets/platformerPack_industrial_tilesheet.png" id="2_dkkf6"]
+
+[sub_resource type="GDScript" id="GDScript_jrb26"]
+script/source = "extends Area2D
+
+@onready var sprite: Sprite2D = $Sprite2D
+
+func area_interact() -> void:
+	get_tree().get_root().get_node(\"Main\").input_thrust.rpc(0)
+	_animate()
+
+func _animate() -> void:
+	var tween = get_tree().create_tween()
+	tween.tween_property(sprite, \"rotation\", -0.3, 0.1)
+	tween.tween_property(sprite, \"rotation\", 0.0, 0.15)
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jiqtk"]
+size = Vector2(49, 134)
+
+[node name="LeverStop" type="Area2D" unique_id=1688908973]
+script = SubResource("GDScript_jrb26")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=63858593]
+shape = SubResource("RectangleShape2D_jiqtk")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1845198891]
+texture = ExtResource("2_dkkf6")
+region_enabled = true
+region_rect = Rect2(81, 424.94598, 49, 134)
