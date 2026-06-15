@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b0dgmbodt2bmo" path="res://scripts/energy_generator.gd" id="1_lgtf1"]
 [ext_resource type="Texture2D" uid="uid://b3ga3aisd83rj" path="res://assets/New Piskel-1.png (1).png" id="1_sccxe"]
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="2_7r6ir"]
+[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/fonts/monogram-extended.ttf" id="4_lpff5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_anwxr"]
 size = Vector2(37.5, 5)
@@ -11,6 +12,7 @@ size = Vector2(37.5, 5)
 size = Vector2(40, 6)
 
 [node name="EnergyGenerator" type="Area2D" unique_id=247079671]
+scale = Vector2(6, 6)
 script = ExtResource("1_lgtf1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=874020645]
@@ -42,5 +44,16 @@ shape = SubResource("RectangleShape2D_lgtf1")
 
 [node name="Timer" type="Timer" parent="." unique_id=51169151]
 autostart = true
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=674484339]
+texture_filter = 1
+offset_left = 33.5
+offset_top = -51.333332
+offset_right = 54.166668
+offset_bottom = 14.166676
+theme_override_fonts/font = ExtResource("4_lpff5")
+theme_override_font_sizes/font_size = 13
+value = 50.0
+fill_mode = 3
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

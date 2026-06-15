@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://k0rn1h3ux3do"]
 
-[ext_resource type="Script" uid="uid://diagk2n6a6d8b" path="res://scenes/astronaut.gd" id="1_dmfei"]
+[ext_resource type="Script" uid="uid://diagk2n6a6d8b" path="res://scripts/astronaut.gd" id="1_dmfei"]
 [ext_resource type="Texture2D" uid="uid://c1rokltx4w7kt" path="res://assets/sprites/AstronautSprites.png" id="1_v06w7"]
 [ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/fonts/monogram-extended.ttf" id="3_a75ng"]
 [ext_resource type="PackedScene" uid="uid://rf1sn4byj10t" path="res://scenes/input_synchronizer.tscn" id="3_lk35g"]

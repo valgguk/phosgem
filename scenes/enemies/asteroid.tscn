@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cq7bfrdvbx30q" path="res://scenes/enemies/asteroid.gd" id="1_jrb2b"]
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="3_08eb2"]
-[ext_resource type="Shader" uid="uid://cbhvhx2kybskc" path="res://scenes/asteroid_shader.gdshader" id="3_j2n00"]
+[ext_resource type="Shader" uid="uid://cbhvhx2kybskc" path="res://resources/asteroid_shader.gdshader" id="3_j2n00"]
 [ext_resource type="Texture2D" uid="uid://d0uy3irx00cqs" path="res://assets/white32.png" id="4_2h6hj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w7b4c"]

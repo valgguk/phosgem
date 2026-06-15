@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://nk7xa2xtpiwx"]
-
-[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_6e84v"]
-
-[node name="OxigenGenerator" type="Node2D" unique_id=1868010012]
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1483646165]
-scale = Vector2(0.32264197, 0.32264197)
-texture = ExtResource("1_6e84v")
