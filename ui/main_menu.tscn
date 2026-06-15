@@ -2,11 +2,36 @@
 
 [ext_resource type="Theme" uid="uid://bwgdrcgopd0s1" path="res://lobby/lobby_theme.tres" id="1_3qnx1"]
 [ext_resource type="Script" uid="uid://cnbk17iq1x68f" path="res://ui/main_menu.gd" id="2_p6ygj"]
-[ext_resource type="Texture2D" uid="uid://c1rokltx4w7kt" path="res://assets/AstronautSprites.png" id="3_rmr83"]
-[ext_resource type="Texture2D" uid="uid://cenralcgdy82r" path="res://assets/blue-stars.png" id="4_8uxxo"]
+[ext_resource type="PackedScene" uid="uid://bie7rfxp7er7u" path="res://lobby/MenuBackground.tscn" id="3_p8ri8"]
+[ext_resource type="Texture2D" uid="uid://c1rokltx4w7kt" path="res://assets/sprites/AstronautSprites.png" id="3_rmr83"]
 [ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="4_ei257"]
+[ext_resource type="FontFile" uid="uid://d1wecpwity8jb" path="res://assets/fonts/ThaleahFat.ttf" id="6_p8ri8"]
+[ext_resource type="StyleBox" uid="uid://im75ywarpixx" path="res://ui/buttonMenuStyleBox.tres" id="7_ubpvv"]
 
-[node name="MainMenu" type="Control" unique_id=90432305]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54tkr"]
+bg_color = Color(0.09239706, 0.09239707, 0.092397, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.32156864, 0.77254903, 0.77254903, 1)
+
+[sub_resource type="Theme" id="Theme_arv2f"]
+Button/colors/font_color = Color(0.54509807, 0.95686275, 0.9607843, 1)
+Button/fonts/font = ExtResource("6_p8ri8")
+Button/styles/hover = ExtResource("7_ubpvv")
+Button/styles/normal = SubResource("StyleBoxFlat_54tkr")
+Button/styles/pressed = ExtResource("7_ubpvv")
+Label/colors/font_color = Color(0.7858845, 0.83929694, 1, 1)
+Label/colors/font_outline_color = Color(0.33935335, 0.000112024325, 0.35700202, 1)
+Label/colors/font_shadow_color = Color(9.62615e-07, 0.47843158, 0.6000265, 1)
+Label/constants/outline_size = 13
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = -7
+Label/constants/shadow_outline_size = 5
+Label/fonts/font = ExtResource("6_p8ri8")
+
+[node name="MainMenu" type="Control" unique_id=681432760]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +41,12 @@ grow_vertical = 2
 theme = ExtResource("1_3qnx1")
 script = ExtResource("2_p6ygj")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=953531144]
+[node name="MenuBackground" parent="." unique_id=960420792 instance=ExtResource("3_p8ri8")]
+layout_mode = 1
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=606290116]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -30,36 +60,36 @@ offset_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer" unique_id=929965828]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer" unique_id=817355322]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Host" type="Button" parent="MarginContainer/VBoxContainer2" unique_id=923655091]
+[node name="Host" type="Button" parent="MarginContainer/VBoxContainer2" unique_id=68009056]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4_ei257")
 text = "Host"
 
-[node name="Join" type="Button" parent="MarginContainer/VBoxContainer2" unique_id=771461010]
+[node name="Join" type="Button" parent="MarginContainer/VBoxContainer2" unique_id=1765359716]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4_ei257")
 text = "Join"
 
-[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer2" unique_id=1427127326]
+[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer2" unique_id=1240069221]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4_ei257")
 text = "Credits"
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer2" unique_id=1446357876]
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer2" unique_id=1109942201]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4_ei257")
 text = "Quit"
 
-[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=95552055]
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1005569078]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -73,14 +103,14 @@ offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer2" unique_id=389958185]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2" unique_id=1188154326]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 texture = ExtResource("3_rmr83")
-expand_mode = 4
-stretch_mode = 1
+expand_mode = 1
+stretch_mode = 6
 
-[node name="MarginContainer3" type="MarginContainer" parent="." unique_id=658664263]
+[node name="MarginContainer3" type="MarginContainer" parent="." unique_id=759575185]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -94,9 +124,10 @@ offset_bottom = -112.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MarginContainer3" unique_id=1435848050]
+[node name="Label" type="Label" parent="MarginContainer3" unique_id=2006436213]
+texture_filter = 1
 layout_mode = 2
-theme = ExtResource("4_ei257")
+theme = SubResource("Theme_arv2f")
 theme_type_variation = &"Title"
 theme_override_font_sizes/font_size = 117
 text = "Crashtronauts"

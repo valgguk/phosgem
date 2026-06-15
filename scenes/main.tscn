@@ -1,20 +1,21 @@
 [gd_scene format=4 uid="uid://typlo81ajup2"]
 
-[ext_resource type="Script" uid="uid://da8se6ko85ouh" path="res://scenes/main.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://da8se6ko85ouh" path="res://scripts/main.gd" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://k0rn1h3ux3do" path="res://scenes/astronaut.tscn" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://dyi3a3b3mkxo7" path="res://scripts/event_manager.gd" id="3_choun"]
 [ext_resource type="PackedScene" uid="uid://b1bpe256ypmj1" path="res://ui/gam_over.tscn" id="3_ya4ey"]
 [ext_resource type="Script" uid="uid://dw23i0wo1e6fl" path="res://scripts/health_manager.gd" id="4_jkv2x"]
 [ext_resource type="Script" uid="uid://bl0dwog53qpuk" path="res://scenes/enemies/asteroid_spawner.gd" id="4_trceg"]
 [ext_resource type="PackedScene" uid="uid://cut6vt5d6b66t" path="res://scenes/enemies/asteroid.tscn" id="5_trceg"]
-[ext_resource type="PackedScene" uid="uid://bc707k062h4d2" path="res://scenes/Lever.tscn" id="6_tipki"]
+[ext_resource type="PackedScene" uid="uid://bc707k062h4d2" path="res://scenes/interactable_objects/Lever.tscn" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://m5670h8vjdwv" path="res://assets/0x72_16x16RobotTileset.v1.png" id="6_ya4ey"]
-[ext_resource type="PackedScene" uid="uid://bf37aval36plk" path="res://scenes/leverThrust.tscn" id="8_85g3d"]
-[ext_resource type="PackedScene" uid="uid://nkscoxvh6eys" path="res://scenes/LeverAnti.tscn" id="8_choun"]
-[ext_resource type="PackedScene" uid="uid://b5nbnoh566dn2" path="res://scenes/oxigen_generator.tscn" id="10_choun"]
-[ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/scoreTracker.tscn" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://bf37aval36plk" path="res://scenes/interactable_objects/leverThrust.tscn" id="8_85g3d"]
+[ext_resource type="PackedScene" uid="uid://nkscoxvh6eys" path="res://scenes/interactable_objects/LeverAnti.tscn" id="8_choun"]
+[ext_resource type="PackedScene" uid="uid://b5nbnoh566dn2" path="res://scenes/interactable_objects/oxigen_generator.tscn" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/UI/scoreTracker.tscn" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://b18b6wkeb7aya" path="res://scenes/enemies/aliens/alien_arbol.tscn" id="13_jbj1t"]
 [ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="13_trceg"]
+[ext_resource type="PackedScene" uid="uid://bio3yxjk43fbs" path="res://scenes/interactable_objects/energy_generator.tscn" id="16_jbj1t"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o6xl0"]
 
@@ -1074,9 +1075,8 @@ metadata/_edit_lock_ = true
 [node name="Aliens" type="Node2D" parent="Ship" unique_id=1794615966]
 
 [node name="Alien_Arbol" parent="Ship/Aliens" unique_id=1641389146 instance=ExtResource("13_jbj1t")]
-position = Vector2(612, 340)
+position = Vector2(572.00006, -526.99994)
 scale = Vector2(5, 5)
-metadata/_edit_lock_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Ship" unique_id=1321271366]
 process_mode = 3
@@ -1104,3 +1104,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1117597723]
 replication_config = SubResource("SceneReplicationConfig_85g3d")
+
+[node name="EnergyGenerator" parent="." unique_id=247079671 instance=ExtResource("16_jbj1t")]
+position = Vector2(2111, 681)
+scale = Vector2(6.4173546, 6.4173546)

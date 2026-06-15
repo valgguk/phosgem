@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1rokltx4w7kt"
-path="res://.godot/imported/AstronautSprites.png-5a10b7849a05c3e0a3ea3ff89be525c6.ctex"
+uid="uid://j8sw26dsrvt6"
+path="res://.godot/imported/New Piskel-1.png.png-17c8f2de147b048af02c1d17f056acee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/AstronautSprites.png"
-dest_files=["res://.godot/imported/AstronautSprites.png-5a10b7849a05c3e0a3ea3ff89be525c6.ctex"]
+source_file="res://assets/New Piskel-1.png.png"
+dest_files=["res://.godot/imported/New Piskel-1.png.png-17c8f2de147b048af02c1d17f056acee.ctex"]
 
 [params]
 

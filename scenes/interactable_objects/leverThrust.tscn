@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bf37aval36plk"]
 
 [ext_resource type="Texture2D" uid="uid://816fjomi2guj" path="res://assets/platformerPack_industrial_tilesheet.png" id="1_43ltf"]
-[ext_resource type="Script" uid="uid://b3mpmu4twac7o" path="res://scenes/lever_thrust.gd" id="1_ws7rw"]
+[ext_resource type="Script" uid="uid://b3mpmu4twac7o" path="res://scripts/lever_thrust.gd" id="1_ws7rw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ws7rw"]
 size = Vector2(123, 130)

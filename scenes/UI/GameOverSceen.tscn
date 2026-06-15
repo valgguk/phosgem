@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cexe47xg318do"]
 
 [ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="1_q036t"]
-[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/monogram-extended.ttf" id="2_uv2ba"]
+[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/fonts/monogram-extended.ttf" id="2_uv2ba"]
 
 [node name="GamOver" type="Node2D" unique_id=1794529264]
 

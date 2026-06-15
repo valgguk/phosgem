@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="1_i6eii"]
 [ext_resource type="Script" uid="uid://btvsl532boew8" path="res://ui/gam_over.gd" id="1_ymx6i"]
-[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/monogram-extended.ttf" id="2_iyd6r"]
+[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/fonts/monogram-extended.ttf" id="2_iyd6r"]
 [ext_resource type="AudioStream" uid="uid://infuq5a506q2" path="res://assets/audio/alienVersionGameover.wav" id="3_iyd6r"]
 
 [node name="GameOver" type="Control" unique_id=2037970509]

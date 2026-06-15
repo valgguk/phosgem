@@ -27,18 +27,15 @@ Game="*res://autoloads/game.tscn"
 Lobby="*res://autoloads/lobby.tscn"
 ResourceManager="*uid://si6dvj04yl43"
 
-[debug]
-
-gdscript/warnings/untyped_declaration=1
-gdscript/warnings/inferred_declaration=1
-gdscript/warnings/unsafe_property_access=1
-gdscript/warnings/unsafe_method_access=1
-
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
+
+[editor]
+
+movie_writer/movie_file="F:/Videos/GameDevClips/test1.avi"
 
 [gui]
 
