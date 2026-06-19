@@ -1,13 +1,15 @@
 extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
-@export var color: int = 0
+@export var default_color: int = 0
 @onready var label: Label = $Label
 # @onready var multiplayer_synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var input_synchronizer: InputSynchronizer = $InputSynchronizer
 @onready var sync_timer: Timer = $SyncTimer
 @onready var interact_area = $InteractArea
 
+var role: Statics.Role
+var role_name: String 
 var ship_velocity: Vector2 = Vector2.ZERO
 
 @onready var health_component: HealthComponent = $HurtboxComponent/HealthComponent
@@ -26,7 +28,7 @@ func _ready() -> void:
 	add_to_group("players_instances")
 	add_to_group("affected_by_ship")
 	#sync_timer.timeout.connect(_on_sync_timeout)
-	animated_sprite.frame= color
+	animated_sprite.frame= default_color
 	health_component.health_changed.connect(_on_health_changed)
 
 
@@ -125,16 +127,34 @@ func setup(data: Statics.PlayerData) -> void:
 	_data = data
 	name = str(data.id)
 	label.text = data.name
+	role= data.role
+	define_role(role)
+	
 	set_multiplayer_authority(data.id, false)
 	input_synchronizer.set_multiplayer_authority(data.id, false)
 	if is_multiplayer_authority():
 		sync_timer.start()
-		
+	
+	
+func define_role(Role: Statics.Role):
+	role_name = Statics.get_role_name(role)
+	animated_sprite.frame= clampi(role-1,0,Statics.Role.size())
+	match Role:
+		Statics.Role.NONE:
+			return "None"
+		Statics.Role.ROLE_A:
+			return "Redie"
+	return "Unknown"
+
 	
 # defecto : ("authority", "call_remote", "reliable")
 @rpc("authority", "call_local", "reliable")
 func test() -> void:
 	Debug.log("test %s" % _data.name)
+	Debug.log("role: %s " % role_name)
+	
+
+
 
 @rpc("authority", "call_remote", "unreliable_ordered")
 func send_position(pos: Vector2) -> void:
