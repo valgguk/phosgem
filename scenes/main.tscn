@@ -1033,7 +1033,8 @@ OXIGEN_MAX = 400
 [node name="EnergyGenerator" parent="Ship" unique_id=247079671 instance=ExtResource("16_jbj1t")]
 position = Vector2(2111, 681)
 scale = Vector2(6.4173546, 6.4173546)
-MAX_ENERGY = 5
+energy_generation_per_second = 5
+MAX_ENERGY = 50
 walk_velocity = 700.0
 
 [node name="Players" type="Node2D" parent="Ship" unique_id=2142308801]
