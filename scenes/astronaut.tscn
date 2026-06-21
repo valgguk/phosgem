@@ -99,11 +99,12 @@ vertical_alignment = 1
 [node name="SyncTimer" type="Timer" parent="." unique_id=1718755475]
 wait_time = 0.05
 
-[node name="HurtboxComponent" type="Area2D" parent="." unique_id=897963965 node_paths=PackedStringArray("health_component")]
+[node name="HurtboxComponent" type="Area2D" parent="." unique_id=897963965 node_paths=PackedStringArray("health_component", "owner_body")]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("5_2evn4")
 health_component = NodePath("HealthComponent")
+owner_body = NodePath("..")
 metadata/_custom_type_script = "uid://b7owxkq83i2m2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1255457474]
@@ -123,10 +124,11 @@ monitorable = false
 shape = SubResource("CircleShape2D_lk35g")
 debug_color = Color(0, 0.6, 0.69803923, 0.6)
 
-[node name="HitboxComponent" type="Area2D" parent="." unique_id=1624172905]
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=1624172905 node_paths=PackedStringArray("owner_body")]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("7_75ag2")
+owner_body = NodePath("..")
 metadata/_custom_type_script = "uid://b4jdacy8shnmu"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=221278949]

@@ -644,7 +644,7 @@ metadata/_edit_lock_ = true
 [node name="Aliens" type="Node2D" parent="Ship" unique_id=1794615966]
 
 [node name="Alien_Arbol" parent="Ship/Aliens" unique_id=1641389146 instance=ExtResource("13_jbj1t")]
-position = Vector2(714.00006, -537)
+position = Vector2(1630, -61.00009)
 scale = Vector2(5, 5)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Ship" unique_id=1321271366]
