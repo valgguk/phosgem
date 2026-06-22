@@ -80,7 +80,6 @@ func _ready() -> void:
 	for i in Game.players.size():
 		var player_data = Game.players[i]
 		var player_inst = player_scene.instantiate()
-		player_inst.color = i
 		players.add_child(player_inst, true)
 		var spawn_point = spawn_points.get_child(i)
 		player_inst.global_position = spawn_point.global_position

@@ -11,6 +11,8 @@ enum Role {
 	ROLE_A,
 	ROLE_B,
 	ROLE_C,
+	ROLE_D,
+	ROLE_E
 }
 
 
@@ -19,11 +21,16 @@ static func get_role_name(role: Role) -> String:
 		Role.NONE:
 			return "None"
 		Role.ROLE_A:
-			return "Role A"
+			return "Redie"
 		Role.ROLE_B:
-			return "Role B"
+			return "Bluebby"
 		Role.ROLE_C:
-			return "Role C"
+			return "Greenet"
+		Role.ROLE_D:
+			return "Whiteney"
+		Role.ROLE_E:
+			return "Yelly"
+		
 	return "Unknown"
 
 
