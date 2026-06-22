@@ -24,6 +24,8 @@ const Gravity_factor=2 #1 is like a super jump
 var stunned = false
 var jump_damage = false
 var stomped := false
+var bounce_velocity := Vector2.ZERO
+var bounce_timer := 0.0
 
 func _ready() -> void:
 	add_to_group("players_instances")
@@ -35,6 +37,12 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	if not is_multiplayer_authority():
+		return
+	
+	if bounce_timer > 0:
+		bounce_timer -= delta
+		velocity = bounce_velocity
+		move_and_slide()
 		return
 	
 	if stunned:
@@ -209,8 +217,12 @@ func notify_jump():
 	
 @rpc("authority", "call_remote", "unreliable")
 func sync_vertical_velocity(v: Vector2):
+	if bounce_timer > 0:
+		return
 	velocity = v
 	
-@rpc("authority", "call_local", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func apply_bounce(v: Vector2):
-	velocity = v
+	print("BOUNCE RECIBIDO:", v)
+	bounce_velocity = v
+	bounce_timer = 0.2  # duración del rebote 0.15

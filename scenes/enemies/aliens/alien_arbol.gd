@@ -295,4 +295,4 @@ func _on_died():
 @rpc("authority", "call_local", "reliable")
 func die():
 	print("Alien murió")
-	queue_free()
+	call_deferred("queue_free")
