@@ -20,13 +20,9 @@ func _on_area_entered(area: Area2D) -> void:
 	var attacker = hitbox.owner_body
 	if not attacker:
 		return
-
 	# ------
 	if attacker.is_in_group("players_instances") and owner_body.is_in_group("aliens_instances"):
 		if not owner_body.is_multiplayer_authority():
-			return
-		# EVITA DAÑO EXTRA
-		if attacker.stomped:
 			return
 			
 		if attacker.jump_damage and not attacker.stomped:
@@ -42,14 +38,14 @@ func _on_area_entered(area: Area2D) -> void:
 				print("STOMP DETECTADO")
 				health_component.take_damage(50)
 				print("Alien HP:", health_component.health)
-				attacker.apply_bounce.rpc_id(attacker.get_multiplayer_authority(), -vertical * 400)
-				#attacker.apply_bounce.rpc(-vertical * 400) # REBOTE
+				attacker.apply_bounce.rpc(-vertical * 400) # REBOTE
 				attacker.stomped = true
 				attacker.jump_damage = false
 				return
 	# ------
 	if hitbox and health_component:
-		health_component.take_damage(hitbox.damage)
+		if owner_body.is_multiplayer_authority():
+			health_component.take_damage(hitbox.damage)
 		hitbox.damage_dealt.emit(owner_body) # <-- avisamos que hicimos daño
 		
 
