@@ -70,5 +70,5 @@ func update_oxigen_sync(new_level):
 @rpc("any_peer", "call_local", "reliable")
 func move_lever():
 	var tween = get_tree().create_tween()
-	tween.tween_property(lever,"position:y",10* polarity,0.1).as_relative()
+	tween.tween_property(lever,"position:y",7* polarity,0.1).as_relative()
 	polarity *= -1
