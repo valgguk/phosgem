@@ -2,9 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_3ai7d"]
 [ext_resource type="Script" uid="uid://cm04cy5xmh8le" path="res://scripts/oxigen_generator.gd" id="1_8hlu6"]
+[ext_resource type="Texture2D" uid="uid://c3vnuu1eddha7" path="res://assets/sprites/oxygenSprite.png" id="3_pbd6d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ai7d"]
-size = Vector2(42, 43)
+size = Vector2(61.0413, 49.300697)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hlu6"]
 bg_color = Color(0.86467505, 0.86467516, 0.864675, 1)
@@ -32,13 +33,34 @@ position = Vector2(0, 10.373396)
 scale = Vector2(0.16381957, 0.16381957)
 texture = ExtResource("1_3ai7d")
 
+[node name="OxygenSprite" type="Sprite2D" parent="." unique_id=541555714]
+position = Vector2(-7.4688444, -0.20746803)
+scale = Vector2(1.3789809, 1.3789809)
+texture = ExtResource("3_pbd6d")
+flip_h = true
+hframes = 3
+
+[node name="color" type="Sprite2D" parent="." unique_id=988458722]
+modulate = Color(0.6378432, 0.6378432, 0.63784313, 1)
+position = Vector2(-28.838032, 14.107817)
+rotation = -1.5707964
+scale = Vector2(-1.2378875, 0.63885695)
+texture = ExtResource("3_pbd6d")
+region_enabled = true
+region_rect = Rect2(7, 4, 11, 2)
+
 [node name="lever" type="Sprite2D" parent="." unique_id=1070947161]
-position = Vector2(0.6224036, -4.356826)
-scale = Vector2(0.22136442, 0.035540268)
-texture = ExtResource("1_3ai7d")
+modulate = Color(0.43134022, 0.43134025, 0.43134025, 1)
+position = Vector2(-28.838032, 8.713652)
+rotation = 3.1415927
+scale = Vector2(2.1376452, -1.7029626)
+texture = ExtResource("3_pbd6d")
+region_enabled = true
+region_rect = Rect2(7, 4, 11, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=73368794]
-position = Vector2(0, -0.5)
+visible = false
+position = Vector2(-12.263477, -3.5652833)
 shape = SubResource("RectangleShape2D_3ai7d")
 debug_color = Color(0.78417087, 0.11045133, 0.99999994, 0.41960785)
 

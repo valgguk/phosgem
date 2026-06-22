@@ -2,48 +2,58 @@
 
 [ext_resource type="Script" uid="uid://b0dgmbodt2bmo" path="res://scripts/energy_generator.gd" id="1_lgtf1"]
 [ext_resource type="Texture2D" uid="uid://b3ga3aisd83rj" path="res://assets/New Piskel-1.png (1).png" id="1_sccxe"]
-[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="2_7r6ir"]
+[ext_resource type="Texture2D" uid="uid://bo33qa3pmgv22" path="res://assets/sprites/EnergySprite.png" id="2_ljf2j"]
 [ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/fonts/monogram-extended.ttf" id="4_lpff5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_anwxr"]
-size = Vector2(37.5, 7.1666665)
+size = Vector2(43.208336, 8.125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljf2j"]
-size = Vector2(9.833336, 31.833334)
+size = Vector2(7.6666756, 31.833334)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ljf2j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgtf1"]
-size = Vector2(50.166668, 6.333333)
+size = Vector2(48.916668, 6.333333)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3wno8"]
+bg_color = Color(0.27058825, 0.27058825, 0.27058825, 1)
+border_color = Color(0.27058825, 0.27058825, 0.27058825, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3m56"]
+bg_color = Color(0.9843137, 0.78431374, 0, 1)
 
 [node name="EnergyGenerator" type="Area2D" unique_id=247079671]
 scale = Vector2(6, 6)
 script = ExtResource("1_lgtf1")
+energy_generation_per_second = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=874020645]
-position = Vector2(11.333333, 4.3333335)
-shape = SubResource("RectangleShape2D_anwxr")
+[node name="EnergySprite" type="Sprite2D" parent="." unique_id=236193740]
+position = Vector2(15.833334, -13)
+scale = Vector2(0.9244792, 0.9244792)
+texture = ExtResource("2_ljf2j")
+hframes = 3
 
 [node name="NewPiskel1_png(1)" type="Sprite2D" parent="." unique_id=1698959427]
+visible = false
 self_modulate = Color(0.30692267, 0.3069227, 0.3069227, 1)
 position = Vector2(11.166667, -7.666666)
 scale = Vector2(1.0729167, 1.03125)
 texture = ExtResource("1_sccxe")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1016268903]
-position = Vector2(31, 0.8333334)
-scale = Vector2(0.041620284, 0.14508314)
-texture = ExtResource("2_7r6ir")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=842705733]
-position = Vector2(10, 10.963207)
-scale = Vector2(0.328125, 0.047449887)
-texture = ExtResource("2_7r6ir")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=874020645]
+position = Vector2(11.333334, 3.3958335)
+shape = SubResource("RectangleShape2D_anwxr")
+debug_color = Color(0.6603027, 0.50206214, 0.32366645, 0.41960785)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1838752682]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=144304474]
-position = Vector2(34.250008, -4.25)
+position = Vector2(35.33334, -4.25)
 shape = SubResource("RectangleShape2D_ljf2j")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=502489544]
@@ -51,7 +61,7 @@ physics_material_override = SubResource("PhysicsMaterial_ljf2j")
 constant_linear_velocity = Vector2(-700, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=259522936]
-position = Vector2(13.833333, 10.833334)
+position = Vector2(14.458334, 10.833334)
 shape = SubResource("RectangleShape2D_lgtf1")
 
 [node name="Timer" type="Timer" parent="." unique_id=51169151]
@@ -59,13 +69,16 @@ autostart = true
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=674484339]
 texture_filter = 1
-offset_left = 33.5
-offset_top = -51.333332
-offset_right = 54.166668
-offset_bottom = 14.166676
+offset_left = 41.166668
+offset_top = -25.333334
+offset_right = 47.833336
+offset_bottom = 12.500006
 theme_override_fonts/font = ExtResource("4_lpff5")
 theme_override_font_sizes/font_size = 13
+theme_override_styles/background = SubResource("StyleBoxFlat_3wno8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y3m56")
 value = 50.0
 fill_mode = 3
+show_percentage = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
