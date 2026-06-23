@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var sync_timer: Timer = $SyncTimer
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var ray_cast_2d: RayCast2D = $Pivote/RayCast2D
+@onready var animation_tree: AnimationTree = $AnimationTree
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -900.0 
