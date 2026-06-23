@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var ray_cast_2d: RayCast2D = $Pivote/RayCast2D
 @onready var animation_tree: AnimationTree = $AnimationTree
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -900.0 
@@ -296,4 +297,6 @@ func _on_died():
 @rpc("authority", "call_local", "reliable")
 func die():
 	print("Alien murió")
+	playback.travel("die")
+	await get_tree().create_timer(1).timeout
 	call_deferred("queue_free")

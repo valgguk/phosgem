@@ -38,7 +38,7 @@ func _on_area_entered(area: Area2D) -> void:
 				print("STOMP DETECTADO")
 				health_component.take_damage(50)
 				print("Alien HP:", health_component.health)
-				attacker.apply_bounce.rpc(-vertical * 400) # REBOTE
+				attacker.apply_bounce.rpc(-vertical * 500) # REBOTE
 				attacker.stomped = true
 				attacker.jump_damage = false
 				return

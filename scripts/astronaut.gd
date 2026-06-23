@@ -225,4 +225,4 @@ func sync_vertical_velocity(v: Vector2):
 func apply_bounce(v: Vector2):
 	print("BOUNCE RECIBIDO:", v)
 	bounce_velocity = v
-	bounce_timer = 0.2  # duración del rebote 0.15
+	bounce_timer = 0.3  # duración del rebote 0.15

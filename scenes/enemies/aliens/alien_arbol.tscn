@@ -170,7 +170,7 @@ states/die/position = Vector2(629.3334, 100.13169)
 states/idle/node = SubResource("AnimationNodeAnimation_mhf8a")
 states/idle/position = Vector2(349.33334, 99.18519)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_fjroi"), "idle", "die", SubResource("AnimationNodeStateMachineTransition_usysr"), "die", "End", SubResource("AnimationNodeStateMachineTransition_e123m")]
-graph_offset = Vector2(77.62087, 0)
+graph_offset = Vector2(64.684105, 0)
 
 [node name="Alien_Arbol" type="CharacterBody2D" unique_id=1641389146]
 collision_layer = 3
