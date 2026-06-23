@@ -23,6 +23,9 @@ const Gravity_factor=2 #1 is like a super jump
 @export var walking = false
 var stunned = false
 var jump_damage = false
+var stomped := false
+var bounce_velocity := Vector2.ZERO
+var bounce_timer := 0.0
 
 func _ready() -> void:
 	add_to_group("players_instances")
@@ -34,6 +37,12 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	if not is_multiplayer_authority():
+		return
+	
+	if bounce_timer > 0:
+		bounce_timer -= delta
+		velocity = bounce_velocity
+		move_and_slide()
 		return
 	
 	if stunned:
@@ -63,6 +72,8 @@ func _physics_process(delta):
 	elif input_synchronizer.jump:
 		vertical_velocity = vertical_direction * JUMP_VELOCITY
 		jump_damage = true
+		stomped = false
+		notify_jump.rpc()
 		input_synchronizer.jump = false
 	
 	velocity = horizontal_velocity + vertical_velocity
@@ -82,10 +93,13 @@ func _physics_process(delta):
 	# rpc manual de movimiento o multiplayer_synchronizer
 	# con position tirita -> ver como mandar la position de los players
 	send_position.rpc(position) 
+	sync_vertical_velocity.rpc(velocity)
 	if Input.is_action_just_pressed("test") and is_multiplayer_authority():
 		test.rpc()
 	if Input.is_action_just_pressed("area_interact"):
 		_check_interact()
+	if is_on_floor():
+		jump_damage = false	
 		
 	
 func _check_interact() -> void:
@@ -196,3 +210,19 @@ func apply_stun():
 	animated_sprite.rotation = 0
 	animated_sprite.modulate = Color(1,1,1)
 	stunned = false
+	
+@rpc("authority", "call_remote", "reliable")
+func notify_jump():
+	jump_damage = true
+	
+@rpc("authority", "call_remote", "unreliable")
+func sync_vertical_velocity(v: Vector2):
+	if bounce_timer > 0:
+		return
+	velocity = v
+	
+@rpc("any_peer", "call_local", "reliable")
+func apply_bounce(v: Vector2):
+	print("BOUNCE RECIBIDO:", v)
+	bounce_velocity = v
+	bounce_timer = 0.3  # duración del rebote 0.15

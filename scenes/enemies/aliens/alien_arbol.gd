@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var sync_timer: Timer = $SyncTimer
 @onready var cooldown_timer: Timer = $CooldownTimer
 @onready var ray_cast_2d: RayCast2D = $Pivote/RayCast2D
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -900.0 
@@ -36,6 +38,7 @@ func _ready() -> void:
 	add_to_group("aliens_instances")
 	add_to_group("affected_by_ship")
 	health_component.health_changed.connect(_on_health_changed)
+	health_component.died.connect(_on_died)
 	hitbox_component.damage_dealt.connect(_on_damage_dealt)
 	#sync_timer.timeout.connect(_on_sync_timeout)
 	cooldown_timer.timeout.connect(_on_cooldown_timeout)
@@ -285,3 +288,15 @@ func _update_target():
 	# solo cambia si realmente es mejor
 	if new_dist + target_switch_threshold < current_dist:
 		target = new_target
+		
+func _on_died():
+	if not is_multiplayer_authority():
+		return
+	die.rpc()
+	
+@rpc("authority", "call_local", "reliable")
+func die():
+	print("Alien murió")
+	playback.travel("die")
+	await get_tree().create_timer(1).timeout
+	call_deferred("queue_free")

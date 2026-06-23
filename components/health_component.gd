@@ -3,12 +3,14 @@ extends Node
 
 signal died
 signal health_changed(value: int)
+var dead := false
 
 @export var health: int = 50:
 	set(value):
 		health = clamp(value, 0, max_health)
 		health_changed.emit(health)
-		if health == 0:
+		if health == 0 and not dead:
+			dead = true
 			died.emit()
 			
 @export var max_health: int = 50
@@ -23,4 +25,6 @@ func _process(delta: float) -> void:
 	pass
 
 func take_damage(damage: int) -> void:
+	if dead:
+		return
 	health -= damage
