@@ -45,6 +45,8 @@ func _ready() -> void:
 	_update_target()
 	multiplayer.peer_connected.connect(_on_peer_changed)
 	multiplayer.peer_disconnected.connect(_on_peer_changed)
+	animation_tree.active = true
+	playback.travel("idle")
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority(): # clientes no ejecutan physics_process
