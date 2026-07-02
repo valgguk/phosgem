@@ -26,6 +26,7 @@ var jump_damage = false
 var stomped := false
 var bounce_velocity := Vector2.ZERO
 var bounce_timer := 0.0
+var active_role_special: Statics.Role
 
 func _ready() -> void:
 	add_to_group("players_instances")
@@ -75,6 +76,11 @@ func _physics_process(delta):
 		stomped = false
 		notify_jump.rpc()
 		input_synchronizer.jump = false
+		
+	if input_synchronizer.special:
+		#Debug.log("EFECTO ESPECIAL")
+		special_move()
+		input_synchronizer.special= false
 	
 	velocity = horizontal_velocity + vertical_velocity
 	if move_input:
@@ -114,6 +120,12 @@ func change_sprite_direction(direction:int)-> void:
 	elif direction >0:
 		animated_sprite.flip_h=false
 	else: return
+
+func special_move():
+	match active_role_special:
+		0: Debug.log("no power")
+		1: Debug.log("red power")
+		2: Debug.log("blue power")
 
 
 func manage_animations(direction):
@@ -155,9 +167,16 @@ func define_role(Role: Statics.Role):
 	animated_sprite.frame= clampi(role-1,0,Statics.Role.size())
 	match Role:
 		Statics.Role.NONE:
+			active_role_special= Statics.Role.NONE
 			return "None"
 		Statics.Role.ROLE_A:
+			active_role_special= Statics.Role.ROLE_A
 			return "Redie"
+		Statics.Role.ROLE_B:
+			active_role_special= Statics.Role.ROLE_B
+			return ""
+			
+			
 	return "Unknown"
 
 	

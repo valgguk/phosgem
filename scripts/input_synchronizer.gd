@@ -3,6 +3,7 @@ extends MultiplayerSynchronizer
 
 @export var move_input: float
 var jump
+var special
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,7 +21,13 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		set_jump.rpc(true)
 		
+	if Input.is_action_just_pressed("special_move"):
+		set_special.rpc(true)
 		
 @rpc("reliable", "call_local")
 func set_jump(value: bool) -> void:
 	jump = value
+
+@rpc("reliable", "call_local")
+func set_special(value: bool) -> void:
+	special = value
