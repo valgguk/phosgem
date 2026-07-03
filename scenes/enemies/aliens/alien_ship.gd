@@ -8,6 +8,8 @@ extends CharacterBody2D
 @onready var bullet_spawn: Marker2D = $BulletSpawn
 #@export var munition_max = 5
 #var munition_now = munition_max
+var shoot_timer := 0.0
+@export var shoot_interval := 0.8
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -19,17 +21,13 @@ func _ready() -> void:
 	playback.travel("idle")
 
 func _physics_process(delta: float) -> void:
-	#if munition_now == 0:
-		##recarga
-		#munition_now = munition_max
-		#await get_tree().create_timer(5).timeout
-		#return
-		#
-	#while munition_now > 0:
-		#fire()
-		#await get_tree().create_timer(3).timeout
-		#munition_now -= 1
-	pass
+	if not is_multiplayer_authority():
+		return
+		
+	shoot_timer += delta
+	if shoot_timer >= shoot_interval:
+		shoot_timer = 0
+		fire.rpc()
 	
 	
 	
@@ -51,9 +49,11 @@ func die():
 	playback.travel("die")
 	await get_tree().create_timer(0.4).timeout
 	call_deferred("queue_free")
-	
+
+@rpc("authority", "call_local", "reliable")
 func fire() -> void:
 	var bullet_inst = bullet_scene.instantiate()
 	add_child(bullet_inst)
 	bullet_inst.global_position = bullet_spawn.global_position
 	bullet_inst.global_rotation = Vector2.LEFT.angle()
+	bullet_inst.set_multiplayer_authority(get_multiplayer_authority())
