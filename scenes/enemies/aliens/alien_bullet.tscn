@@ -84,7 +84,9 @@ radius = 3.0
 
 [node name="AlienBullet" type="Area2D" unique_id=2011549903]
 top_level = true
+collision_layer = 2
 script = ExtResource("1_d5hsl")
+damage = 2
 metadata/_custom_type_script = "uid://b4jdacy8shnmu"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2094920405]

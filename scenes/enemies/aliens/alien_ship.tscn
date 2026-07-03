@@ -95,20 +95,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 0, 1, 2, 3]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"fire"
-}]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4340r"]
 _data = {
@@ -147,6 +133,7 @@ radius = 17.725346
 height = 48.0
 
 [node name="AlienShip" type="CharacterBody2D" unique_id=23759853]
+collision_layer = 3
 script = ExtResource("1_43cjc")
 bullet_scene = ExtResource("2_fma5d")
 
@@ -166,11 +153,12 @@ metadata/_edit_lock_ = true
 libraries/ = SubResource("AnimationLibrary_4340r")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=2082976764]
-active = false
 tree_root = SubResource("AnimationNodeStateMachine_xjged")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="HurtboxComponent" type="Area2D" parent="." unique_id=2113121950 node_paths=PackedStringArray("health_component", "owner_body")]
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("3_hbhtw")
 health_component = NodePath("HealthComponent")
 owner_body = NodePath("..")
