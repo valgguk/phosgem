@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://q46xgdy7g4fg"]
 
 [ext_resource type="Script" uid="uid://c51rao6ifa4e3" path="res://scenes/enemies/aliens/alien_bullet.gd" id="1_d5hsl"]
-[ext_resource type="Texture2D" uid="uid://bt6y36wlsf4e3" path="res://assets/aliens/green fire.png" id="2_jihbw"]
+[ext_resource type="Texture2D" uid="uid://bvkskmvjwv67n" path="res://assets/aliens/Alien Arbol tira.png" id="2_d5hsl"]
 
 [sub_resource type="Animation" id="Animation_v5od1"]
 length = 0.001
@@ -15,7 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_jihbw")]
+"values": [ExtResource("2_d5hsl")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -27,12 +27,89 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Rect2(26, 1, 4, 6)]
+"values": [Rect2(232, 0, 16, 15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 10)]
+}
+
+[sub_resource type="Animation" id="Animation_d5hsl"]
+resource_name = "enter"
+length = 1.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_d5hsl")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(232, 0, 16, 15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(10, 10), Vector2(15, 10), Vector2(19, 10), Vector2(25, 10), Vector2(40, 2), Vector2(40, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_l8mmt"]
 resource_name = "idle"
-length = 0.5
+length = 2.0
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -45,7 +122,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_jihbw")]
+"values": [ExtResource("2_d5hsl")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -54,17 +131,45 @@ tracks/1/path = NodePath("Sprite2D:region_rect")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.10198506, 0.20614001, 0.30270034, 0.40143058),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(232, 0, 16, 15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [Rect2(26, 1, 4, 6), Rect2(33, 0, 6, 8), Rect2(41, 1, 6.400345, 7), Rect2(47.648125, 1, 8.351875, 7), Rect2(57, 0, 6, 8)]
+"update": 0,
+"values": [-1.5707964, 0.0, 1.5707964, 3.1415927, 4.712389]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 10)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6qraw"]
 _data = {
 &"RESET": SubResource("Animation_v5od1"),
+&"enter": SubResource("Animation_d5hsl"),
 &"idle": SubResource("Animation_l8mmt")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d5hsl"]
+animation = &"enter"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0nuig"]
 animation = &"idle"
@@ -72,11 +177,19 @@ animation = &"idle"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_isdhx"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jihbw"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v5od1"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_a548x"]
 states/End/position = Vector2(514, 100.22222)
+states/enter/node = SubResource("AnimationNodeAnimation_d5hsl")
+states/enter/position = Vector2(411.6703, 56)
 states/idle/node = SubResource("AnimationNodeAnimation_0nuig")
 states/idle/position = Vector2(308.66666, 101.333336)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_isdhx")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_isdhx"), "idle", "enter", SubResource("AnimationNodeStateMachineTransition_jihbw"), "enter", "End", SubResource("AnimationNodeStateMachineTransition_v5od1")]
 graph_offset = Vector2(-77.663055, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d5hsl"]
@@ -90,11 +203,10 @@ damage = 2
 metadata/_custom_type_script = "uid://b4jdacy8shnmu"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2094920405]
-rotation = -1.5707964
-scale = Vector2(8, 8)
-texture = ExtResource("2_jihbw")
+scale = Vector2(10, 10)
+texture = ExtResource("2_d5hsl")
 region_enabled = true
-region_rect = Rect2(26, 1, 4, 6)
+region_rect = Rect2(232, 0, 16, 15)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1287824909]
 libraries/ = SubResource("AnimationLibrary_6qraw")

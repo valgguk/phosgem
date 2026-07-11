@@ -657,6 +657,10 @@ metadata/_edit_lock_ = true
 position = Vector2(1630, -61.00009)
 scale = Vector2(5, 5)
 
+[node name="AlienShip" parent="Ship/Aliens" unique_id=23759853 instance=ExtResource("17_muem4")]
+position = Vector2(3333, 195)
+scale = Vector2(4, 4)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="Ship" unique_id=1321271366]
 process_mode = 3
 
@@ -689,7 +693,3 @@ metadata/_edit_lock_ = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1117597723]
 replication_config = SubResource("SceneReplicationConfig_85g3d")
-
-[node name="AlienShip" parent="." unique_id=23759853 instance=ExtResource("17_muem4")]
-position = Vector2(3333, 195)
-scale = Vector2(4, 4)
