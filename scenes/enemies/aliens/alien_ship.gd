@@ -57,5 +57,9 @@ func fire() -> void:
 	var bullet_inst = bullet_scene.instantiate()
 	get_parent().add_child(bullet_inst) # mejor que add_child local
 	bullet_inst.global_position = bullet_spawn.global_position
-	bullet_inst.global_rotation = Vector2.LEFT.angle()
+	#bullet_inst.global_rotation = Vector2.LEFT.angle()
+	if has_node("/root/Main/Ship/BulletColision2"):
+		var ship_area = get_node("/root/Main/Ship/BulletColision2")
+		bullet_inst.target = ship_area
+		bullet_inst.setup(ship_area)
 	bullet_inst.set_multiplayer_authority(get_multiplayer_authority())

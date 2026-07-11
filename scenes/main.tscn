@@ -653,7 +653,7 @@ metadata/_edit_lock_ = true
 [node name="Aliens" type="Node2D" parent="Ship" unique_id=1794615966]
 
 [node name="AlienShip" parent="Ship/Aliens" unique_id=23759853 instance=ExtResource("17_muem4")]
-position = Vector2(3333, 195)
+position = Vector2(722, 1312)
 scale = Vector2(4, 4)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Ship" unique_id=1321271366]
