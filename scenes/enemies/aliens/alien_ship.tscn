@@ -174,7 +174,7 @@ script = ExtResource("4_fma5d")
 metadata/_custom_type_script = "uid://dnu0ib00h5rhg"
 
 [node name="BulletSpawn" type="Marker2D" parent="." unique_id=1789387647]
-position = Vector2(-100, 0)
+position = Vector2(7.6293945e-06, -6.9999995)
 rotation = -1.5707964
 scale = Vector2(-4.5600047, 1.4800006)
 

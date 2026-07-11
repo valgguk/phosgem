@@ -1,10 +1,12 @@
 extends HitboxComponent
 
+var lifetime := 10.0
 @export var max_speed = 400
 var already_hit := false
 var health_manager
 var entering := false
-
+var target: Node2D = null
+var direction: Vector2
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
 
@@ -26,10 +28,17 @@ func _physics_process(delta: float) -> void:
 		
 	if entering:
 		return
+	
+	lifetime -= delta
+	if lifetime <= 0:
+		destroy_bullet.rpc()
+		return
 		
-	var velocity = transform.x * max_speed
-	position += velocity * delta
+	#var velocity = -transform.x * max_speed
+	#position += velocity * delta
+	position += direction * max_speed * delta
 	sync_position.rpc(global_position)
+	
 	
 func _on_area_entered(area: Area2D) -> void:
 	if already_hit:
@@ -62,3 +71,8 @@ func play_enter_animation():
 @rpc("authority", "unreliable")
 func sync_position(pos: Vector2):
 	global_position = pos
+	
+func setup(target_node: Node2D) -> void:
+	target = target_node
+	direction = (target.global_position - global_position).normalized()
+	rotation = direction.angle()
