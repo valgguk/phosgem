@@ -177,3 +177,5 @@ metadata/_custom_type_script = "uid://dnu0ib00h5rhg"
 position = Vector2(-100, 0)
 rotation = -1.5707964
 scale = Vector2(-4.5600047, 1.4800006)
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=1203173272]

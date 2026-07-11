@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://nkscoxvh6eys" path="res://scenes/interactable_objects/LeverAnti.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://b5nbnoh566dn2" path="res://scenes/interactable_objects/oxigen_generator.tscn" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/UI/scoreTracker.tscn" id="12_eb6dy"]
-[ext_resource type="PackedScene" uid="uid://b18b6wkeb7aya" path="res://scenes/enemies/aliens/alien_arbol.tscn" id="13_jbj1t"]
 [ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="13_trceg"]
 [ext_resource type="PackedScene" uid="uid://bio3yxjk43fbs" path="res://scenes/interactable_objects/energy_generator.tscn" id="16_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://bsbxha73bpp1w" path="res://scenes/enemies/aliens/alien_ship.tscn" id="17_muem4"]
@@ -652,10 +651,6 @@ debug_color = Color(0, 0.6, 0.69803923, 0.1254902)
 metadata/_edit_lock_ = true
 
 [node name="Aliens" type="Node2D" parent="Ship" unique_id=1794615966]
-
-[node name="Alien_Arbol" parent="Ship/Aliens" unique_id=1641389146 instance=ExtResource("13_jbj1t")]
-position = Vector2(1630, -61.00009)
-scale = Vector2(5, 5)
 
 [node name="AlienShip" parent="Ship/Aliens" unique_id=23759853 instance=ExtResource("17_muem4")]
 position = Vector2(3333, 195)

@@ -6,10 +6,11 @@ extends CharacterBody2D
 
 @export var bullet_scene : PackedScene
 @onready var bullet_spawn: Marker2D = $BulletSpawn
-#@export var munition_max = 5
-#var munition_now = munition_max
-var shoot_timer := 0.0
-@export var shoot_interval := 0.8
+
+@export var shoot_interval := 60.0 # 60 segundos / 120.0 para 2 min
+@export var min_interval := 60.0
+@export var max_interval := 120.0
+@onready var shoot_timer: Timer = $ShootTimer
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -19,16 +20,17 @@ func _ready() -> void:
 	health_component.died.connect(_on_died)
 	animation_tree.active = true
 	playback.travel("idle")
+	
+	if is_multiplayer_authority():
+		shoot_timer.wait_time = randf_range(5, 10)
+		shoot_timer.start()
+		shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 
 func _physics_process(delta: float) -> void:
-	if not is_multiplayer_authority():
-		return
-		
-	shoot_timer += delta
-	if shoot_timer >= shoot_interval:
-		shoot_timer = 0
-		fire.rpc()
-	
+	pass
+
+func _on_shoot_timer_timeout():
+	fire.rpc()
 	
 	
 func take_damage(damage: int) -> void:
@@ -53,7 +55,7 @@ func die():
 @rpc("authority", "call_local", "reliable")
 func fire() -> void:
 	var bullet_inst = bullet_scene.instantiate()
-	add_child(bullet_inst)
+	get_parent().add_child(bullet_inst) # mejor que add_child local
 	bullet_inst.global_position = bullet_spawn.global_position
 	bullet_inst.global_rotation = Vector2.LEFT.angle()
 	bullet_inst.set_multiplayer_authority(get_multiplayer_authority())
