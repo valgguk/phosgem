@@ -1,6 +1,5 @@
 extends Node2D
 
-
 @export var player_scene: PackedScene
 @onready var players: Node2D = $Ship/Players
 
@@ -18,7 +17,6 @@ extends Node2D
 @export var camera_zoom_factor: float=7000.0
 @onready var gravity_zone: Area2D = $Ship/GravityZone
 @onready var lever_thrust: Area2D = $Ship/Visuals/LeverThrust
-
 
 
 const rotation_vel=1.5

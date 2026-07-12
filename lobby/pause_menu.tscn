@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://q6xx3dwbl3en"]
+[gd_scene format=3 uid="uid://nb7xkk332d71"]
 
-[ext_resource type="Script" path="res://lobby/pause_menu.gd" id="1_ttaid"]
+[ext_resource type="Script" uid="uid://dxl5nqsutgqtb" path="res://lobby/pause_menu.gd" id="1_ttaid"]
 [ext_resource type="Texture2D" uid="uid://cenralcgdy82r" path="res://assets/blue-stars.png" id="2_t8hwn"]
 [ext_resource type="Texture2D" uid="uid://dnci3iv4u6jl7" path="res://assets/blue-back.png" id="3_laex3"]
 

@@ -36,13 +36,12 @@ offsets = PackedFloat32Array(0, 0.13671875, 0.48046875, 0.73828125, 0.98828125)
 colors = PackedColorArray(0, 0, 0, 1, 0.84705883, 0.14509805, 0.043137256, 1, 0.9882353, 0.5137255, 0.15686275, 1, 0.7043509, 0.789928, 0.23901337, 1, 18.892157, 18.892157, 18.892157, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2h6hj"]
-radius = 38.209946
+radius = 117.65203
 
 [node name="Asteroid" type="Area2D" unique_id=682462807]
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_jrb2b")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1223345958]
 shape = SubResource("CircleShape2D_w7b4c")
@@ -52,7 +51,6 @@ material = SubResource("ShaderMaterial_prswt")
 rotation = -0.7853982
 scale = Vector2(2, 2)
 texture = ExtResource("4_2h6hj")
-metadata/_edit_group_ = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Sprite2D" unique_id=976564498]
 show_behind_parent = true
@@ -78,7 +76,6 @@ color_initial_ramp = SubResource("Gradient_w7b4c")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=621246028]
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1491072004]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=86366609]
 shape = SubResource("CircleShape2D_2h6hj")
