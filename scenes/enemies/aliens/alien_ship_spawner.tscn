@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bf1ecwom4ufet"]
+
+[ext_resource type="Script" uid="uid://brigqeuhhmrig" path="res://scenes/enemies/aliens/alien_ship_spawner.gd" id="1_eu8bs"]
+[ext_resource type="PackedScene" uid="uid://bsbxha73bpp1w" path="res://scenes/enemies/aliens/alien_ship.tscn" id="2_ac01t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbj1t"]
+size = Vector2(3429, 362)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_muem4"]
+size = Vector2(3426, 366)
+
+[node name="AlienShipSpawner" type="Node2D" unique_id=838502585 node_paths=PackedStringArray("spawn_areas")]
+script = ExtResource("1_eu8bs")
+alien_scene = ExtResource("2_ac01t")
+spawn_areas = [NodePath("AlienSpawnZone1"), NodePath("AlienSpawnZone2")]
+
+[node name="AlienSpawnZone1" type="Area2D" parent="." unique_id=1866678201]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlienSpawnZone1" unique_id=825101822]
+position = Vector2(741, -747)
+shape = SubResource("RectangleShape2D_jbj1t")
+debug_color = Color(0.3254902, 0.92156863, 0.40392157, 0.24313726)
+metadata/_edit_lock_ = true
+
+[node name="AlienSpawnZone2" type="Area2D" parent="." unique_id=1883894419]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AlienSpawnZone2" unique_id=1160080215]
+position = Vector2(727, 1271)
+shape = SubResource("RectangleShape2D_muem4")
+debug_color = Color(0.3254902, 0.92156863, 0.40392157, 0.24313726)
+metadata/_edit_lock_ = true
