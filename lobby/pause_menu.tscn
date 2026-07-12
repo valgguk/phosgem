@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://nb7xkk332d71"]
+
+[ext_resource type="Script" uid="uid://dxl5nqsutgqtb" path="res://lobby/pause_menu.gd" id="1_ttaid"]
+[ext_resource type="Texture2D" uid="uid://cenralcgdy82r" path="res://assets/blue-stars.png" id="2_t8hwn"]
+[ext_resource type="Texture2D" uid="uid://dnci3iv4u6jl7" path="res://assets/blue-back.png" id="3_laex3"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1145273158]
+script = ExtResource("1_ttaid")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1886236896]
+modulate = Color(0.5211406, 0.5211406, 0.5211405, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 272.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_t8hwn")
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=906205550]
+modulate = Color(0.9607843, 0.9607843, 0.9607843, 0.42745098)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 272.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_laex3")
+
+[node name="Panel" type="Panel" parent="." unique_id=947351432]
+offset_left = 550.0
+offset_top = 168.0
+offset_right = 590.0
+offset_bottom = 208.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1045779983]
+layout_mode = 1
+offset_right = 240.0
+offset_bottom = 368.0
+offset_transform_enabled = true
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=816824929]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_type_variation = &"Title"
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="Panel/VBoxContainer" unique_id=398921581]
+layout_mode = 2
+text = "Resume"
+
+[node name="Menu" type="Button" parent="Panel/VBoxContainer" unique_id=485217587]
+layout_mode = 2
+text = "Menu"
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer" unique_id=626758216]
+layout_mode = 2
+text = "Quit
+"
