@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://nkscoxvh6eys" path="res://scenes/interactable_objects/LeverAnti.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://b5nbnoh566dn2" path="res://scenes/interactable_objects/oxigen_generator.tscn" id="10_choun"]
 [ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/UI/scoreTracker.tscn" id="12_eb6dy"]
-[ext_resource type="PackedScene" uid="uid://b18b6wkeb7aya" path="res://scenes/enemies/aliens/alien_arbol.tscn" id="13_jbj1t"]
+[ext_resource type="Script" uid="uid://brigqeuhhmrig" path="res://scenes/enemies/aliens/alien_ship_spawner.gd" id="13_muem4"]
 [ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="13_trceg"]
 [ext_resource type="PackedScene" uid="uid://bio3yxjk43fbs" path="res://scenes/interactable_objects/energy_generator.tscn" id="16_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://bsbxha73bpp1w" path="res://scenes/enemies/aliens/alien_ship.tscn" id="17_muem4"]
@@ -927,6 +927,12 @@ sources/0 = SubResource("TileSetAtlasSource_eb6dy")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
 size = Vector2(353.17792, 218.89767)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_muem4"]
+size = Vector2(3429, 362)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dp3eg"]
+size = Vector2(3426, 366)
+
 [sub_resource type="Gradient" id="Gradient_dp3eg"]
 offsets = PackedFloat32Array(0.98828125)
 colors = PackedColorArray(1, 1, 1, 1)
@@ -1107,11 +1113,34 @@ shape = SubResource("RectangleShape2D_85g3d")
 debug_color = Color(0, 0.6, 0.69803923, 0.1254902)
 metadata/_edit_lock_ = true
 
+[node name="AlienShipSpawner" type="Node2D" parent="Ship" unique_id=664725783 node_paths=PackedStringArray("spawn_areas")]
+script = ExtResource("13_muem4")
+alien_scene = ExtResource("17_muem4")
+spawn_areas = [NodePath("AlienSpawnZone1"), NodePath("AlienSpawnZone2")]
+metadata/_custom_type_script = "uid://brigqeuhhmrig"
+
+[node name="AlienSpawnZone1" type="Area2D" parent="Ship/AlienShipSpawner" unique_id=1167460422]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/AlienShipSpawner/AlienSpawnZone1" unique_id=1245552445]
+position = Vector2(741, -747)
+shape = SubResource("RectangleShape2D_muem4")
+debug_color = Color(0.3254902, 0.92156863, 0.40392157, 0.24313726)
+metadata/_edit_lock_ = true
+
+[node name="AlienSpawnZone2" type="Area2D" parent="Ship/AlienShipSpawner" unique_id=2142815026]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/AlienShipSpawner/AlienSpawnZone2" unique_id=920855299]
+position = Vector2(727, 1271)
+shape = SubResource("RectangleShape2D_dp3eg")
+debug_color = Color(0.3254902, 0.92156863, 0.40392157, 0.24313726)
+metadata/_edit_lock_ = true
+
 [node name="Aliens" type="Node2D" parent="Ship" unique_id=1794615966]
 
-[node name="Alien_Arbol" parent="Ship/Aliens" unique_id=1641389146 instance=ExtResource("13_jbj1t")]
-position = Vector2(1630, -61.00009)
-scale = Vector2(5, 5)
+[node name="AlienShip" parent="Ship/Aliens" unique_id=23759853 instance=ExtResource("17_muem4")]
+position = Vector2(722, 1312)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Ship" unique_id=1321271366]
 process_mode = 3
