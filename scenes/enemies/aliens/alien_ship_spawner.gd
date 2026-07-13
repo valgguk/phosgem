@@ -5,8 +5,12 @@ class_name AlienShipSpawner
 @export var wave_size_min := 1
 @export var wave_size_max := 3
 
-@export var time_between_waves_min := 10.0
-@export var time_between_waves_max := 20.0
+@export var time_between_waves_min := 30.0
+@export var time_between_waves_max := 60.0
+
+var _recent_spawns: Array[Vector2] = []
+@export var min_spawn_distance := 120.0
+@export var max_spawn_attempts := 10
 
 @export var spawn_areas: Array[Area2D]
 
@@ -42,7 +46,7 @@ func _spawn_alien():
 
 	# elegir área random
 	var area = spawn_areas.pick_random()
-	var spawn_pos = get_random_point_in_area(area)
+	var spawn_pos = _get_valid_spawn(area)
 	
 	spawn_alien_rpc.rpc(spawn_pos)
 
@@ -50,7 +54,6 @@ func _spawn_alien():
 @rpc("authority", "call_local", "reliable")
 func spawn_alien_rpc(pos: Vector2):
 	var alien = alien_scene.instantiate()
-	print("Spawner path:", get_path())
 	self.add_child(alien) # importante
 	alien.global_position = pos
 
@@ -74,3 +77,26 @@ func get_random_point_in_area(area: Area2D) -> Vector2:
 		return shape_node.to_global(local_point)
 
 	return shape_node.global_position
+	
+func _get_valid_spawn(area: Area2D) -> Vector2:
+	for i in max_spawn_attempts:
+		var pos = get_random_point_in_area(area)
+		
+		var valid = true
+		
+		for other in _recent_spawns:
+			if pos.distance_to(other) < min_spawn_distance:
+				valid = false
+				break
+		
+		if valid:
+			_recent_spawns.append(pos)
+			
+			# Limitar memoria (solo últimos 10)
+			if _recent_spawns.size() > 10:
+				_recent_spawns.pop_front()
+				
+			return pos
+	
+	# fallback si no encontró nada
+	return get_random_point_in_area(area)
