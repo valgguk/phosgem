@@ -4,6 +4,7 @@ extends Node
 @export var wait_time: float = 9
 var _is_game_over = false
 @onready var ship = $"../Ship"
+@onready var ship_visuals = $"../Ship/Visuals"
 
 
 ### ALL nodes with signal "game_over" can be put on LoseNodes for automatic conection
@@ -39,7 +40,7 @@ func _on_game_over(LoseCondition: Node):
 		
 	if LoseCondition is EnergyGenerator:
 		var tween = get_tree().create_tween()
-		tween.tween_property(ship,"modulate",Color(0.104, 0.104, 0.104, 1.0),1)
+		tween.tween_property(ship_visuals,"modulate",Color(0.104, 0.104, 0.104, 1.0),1)
 		return
 		
 
@@ -50,10 +51,10 @@ func on_ship_event(EventNode:Node):
 
 		var tween = get_tree().create_tween()
 		if EventNode.energy_empty:
-			tween.tween_property(ship,"modulate",Color(0.104, 0.104, 0.104, 1.0),1)
+			tween.tween_property(ship_visuals,"modulate",Color(0.104, 0.104, 0.104, 1.0),1)
 			return
 		else:
-			tween.tween_property(ship,"modulate",Color(1.0, 1.0, 1.0, 1.0),1)
+			tween.tween_property(ship_visuals,"modulate",Color(1.0, 1.0, 1.0, 1.0),1)
 			
 
 
