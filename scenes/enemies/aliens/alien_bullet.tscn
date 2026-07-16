@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c51rao6ifa4e3" path="res://scenes/enemies/aliens/alien_bullet.gd" id="1_d5hsl"]
 [ext_resource type="Texture2D" uid="uid://bvkskmvjwv67n" path="res://assets/aliens/Alien Arbol tira.png" id="2_d5hsl"]
+[ext_resource type="PackedScene" uid="uid://b18b6wkeb7aya" path="res://scenes/enemies/aliens/alien_arbol.tscn" id="2_jihbw"]
 
 [sub_resource type="Animation" id="Animation_v5od1"]
 length = 0.001
@@ -199,8 +200,10 @@ radius = 3.0
 top_level = true
 collision_layer = 2
 script = ExtResource("1_d5hsl")
+alien_scene = ExtResource("2_jihbw")
 damage = 2
 metadata/_custom_type_script = "uid://b4jdacy8shnmu"
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2094920405]
 scale = Vector2(10, 10)

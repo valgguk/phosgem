@@ -10,6 +10,7 @@ extends Node2D
 @onready var label = $Ship/CanvasLayer/Label
 @onready var asteroid_spawner: AsteroidSpawner= $AsteroidSpawner
 
+@onready var alien_spawn_points: Node2D = $Ship/AlienSpawnPoints
 @onready var aliens: Node2D = $Ship/Aliens
 
 @export var camera_max_zoom: float=1.5

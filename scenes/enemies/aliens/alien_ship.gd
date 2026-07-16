@@ -6,6 +6,7 @@ extends CharacterBody2D
 
 @export var bullet_scene : PackedScene
 @onready var bullet_spawn: Marker2D = $BulletSpawn
+@export var alien_to_spawn: PackedScene
 
 @export var shoot_interval := 60.0 # 60 segundos / 120.0 para 2 min
 @export var min_interval := 60.0
@@ -22,7 +23,7 @@ func _ready() -> void:
 	playback.travel("idle")
 	
 	if is_multiplayer_authority():
-		shoot_timer.wait_time = randf_range(5, 10)
+		shoot_timer.wait_time = randf_range(min_interval, max_interval)
 		shoot_timer.start()
 		shoot_timer.timeout.connect(_on_shoot_timer_timeout)
 
@@ -55,6 +56,7 @@ func die():
 @rpc("authority", "call_local", "reliable")
 func fire() -> void:
 	var bullet_inst = bullet_scene.instantiate()
+	bullet_inst.alien_scene = alien_to_spawn
 	get_parent().add_child(bullet_inst) # mejor que add_child local
 	bullet_inst.global_position = bullet_spawn.global_position
 	#bullet_inst.global_rotation = Vector2.LEFT.angle()

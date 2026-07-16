@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://uyyelelfo6rr" path="res://scenes/enemies/aliens/alien_ship.gd" id="1_43cjc"]
 [ext_resource type="Texture2D" uid="uid://de2todu6k4i0d" path="res://assets/aliens/enemy ship.png" id="2_3yiul"]
 [ext_resource type="PackedScene" uid="uid://q46xgdy7g4fg" path="res://scenes/enemies/aliens/alien_bullet.tscn" id="2_fma5d"]
+[ext_resource type="PackedScene" uid="uid://b18b6wkeb7aya" path="res://scenes/enemies/aliens/alien_arbol.tscn" id="3_24ha4"]
 [ext_resource type="Script" uid="uid://b7owxkq83i2m2" path="res://components/hurtbox_component.gd" id="3_hbhtw"]
 [ext_resource type="Script" uid="uid://dnu0ib00h5rhg" path="res://components/health_component.gd" id="4_fma5d"]
 
@@ -136,6 +137,8 @@ height = 48.0
 collision_layer = 3
 script = ExtResource("1_43cjc")
 bullet_scene = ExtResource("2_fma5d")
+alien_to_spawn = ExtResource("3_24ha4")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1923698190]
 rotation = -3.1415925
