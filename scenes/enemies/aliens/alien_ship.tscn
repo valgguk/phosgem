@@ -1,0 +1,181 @@
+[gd_scene format=3 uid="uid://bsbxha73bpp1w"]
+
+[ext_resource type="Script" uid="uid://uyyelelfo6rr" path="res://scenes/enemies/aliens/alien_ship.gd" id="1_43cjc"]
+[ext_resource type="Texture2D" uid="uid://de2todu6k4i0d" path="res://assets/aliens/enemy ship.png" id="2_3yiul"]
+[ext_resource type="PackedScene" uid="uid://q46xgdy7g4fg" path="res://scenes/enemies/aliens/alien_bullet.tscn" id="2_fma5d"]
+[ext_resource type="Script" uid="uid://b7owxkq83i2m2" path="res://components/hurtbox_component.gd" id="3_hbhtw"]
+[ext_resource type="Script" uid="uid://dnu0ib00h5rhg" path="res://components/health_component.gd" id="4_fma5d"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hbhtw"]
+radius = 13.070168
+height = 26.140335
+
+[sub_resource type="Animation" id="Animation_fma5d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_3yiul")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_24ha4"]
+resource_name = "die"
+length = 0.75
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_3yiul")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_f00yq"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_3yiul")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.39999998, 0.5, 0.59999996, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4340r"]
+_data = {
+&"RESET": SubResource("Animation_fma5d"),
+&"die": SubResource("Animation_24ha4"),
+&"idle": SubResource("Animation_f00yq")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_svnbp"]
+animation = &"die"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6v7l0"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g2rqb"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dy8ib"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pef8a"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xjged"]
+states/End/position = Vector2(805.3333, 100.44444)
+states/Start/position = Vector2(200, 100.666664)
+states/die/node = SubResource("AnimationNodeAnimation_svnbp")
+states/die/position = Vector2(615.4226, 99.18519)
+states/idle/node = SubResource("AnimationNodeAnimation_6v7l0")
+states/idle/position = Vector2(413.55258, 100.523476)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_g2rqb"), "idle", "die", SubResource("AnimationNodeStateMachineTransition_dy8ib"), "die", "End", SubResource("AnimationNodeStateMachineTransition_pef8a")]
+graph_offset = Vector2(93.552605, 5.318442)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_24ha4"]
+radius = 17.725346
+height = 48.0
+
+[node name="AlienShip" type="CharacterBody2D" unique_id=23759853]
+collision_layer = 3
+script = ExtResource("1_43cjc")
+bullet_scene = ExtResource("2_fma5d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1923698190]
+rotation = -3.1415925
+scale = Vector2(25.2, -6.116)
+shape = SubResource("CapsuleShape2D_hbhtw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=444588635]
+scale = Vector2(12, 12)
+texture = ExtResource("2_3yiul")
+hframes = 4
+vframes = 3
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=8263498]
+libraries/ = SubResource("AnimationLibrary_4340r")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2082976764]
+tree_root = SubResource("AnimationNodeStateMachine_xjged")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="HurtboxComponent" type="Area2D" parent="." unique_id=2113121950 node_paths=PackedStringArray("health_component", "owner_body")]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("3_hbhtw")
+health_component = NodePath("HealthComponent")
+owner_body = NodePath("..")
+metadata/_custom_type_script = "uid://b7owxkq83i2m2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=643751722]
+scale = Vector2(19.84, 3.996)
+shape = SubResource("CapsuleShape2D_24ha4")
+debug_color = Color(0.8879459, 0.325064, 0.13293323, 0.41960785)
+
+[node name="HealthComponent" type="Node" parent="HurtboxComponent" unique_id=655865158]
+script = ExtResource("4_fma5d")
+metadata/_custom_type_script = "uid://dnu0ib00h5rhg"
+
+[node name="BulletSpawn" type="Marker2D" parent="." unique_id=1789387647]
+position = Vector2(7.6293945e-06, -6.9999995)
+rotation = -1.5707964
+scale = Vector2(-4.5600047, 1.4800006)
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=1203173272]
