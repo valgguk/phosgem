@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cu1r6holfu027" path="res://scenes/turret.gd" id="1_76wwe"]
 [ext_resource type="Texture2D" uid="uid://bn68n2v83pqpo" path="res://assets/turrets/spr_simple_turret_shoot_white.png" id="2_75s58"]
+[ext_resource type="PackedScene" uid="uid://bulpk3f03uick" path="res://scenes/turret_bullet.tscn" id="2_tbwx1"]
 [ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/fonts/monogram-extended.ttf" id="3_4sggw"]
 
 [sub_resource type="Animation" id="Animation_75s58"]
@@ -90,6 +91,7 @@ transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransitio
 
 [node name="Turret" type="Node2D" unique_id=2007913444]
 script = ExtResource("1_76wwe")
+bullet_scene = ExtResource("2_tbwx1")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=174970656]

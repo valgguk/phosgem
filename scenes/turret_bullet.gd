@@ -18,7 +18,7 @@ func _physics_process(delta):
 		
 	lifetime -= delta
 	if lifetime <= 0:
-		queue_free()
+		destroy()
 		return
 		
 	position += direction * speed * delta
@@ -31,3 +31,13 @@ func sync_position(pos: Vector2):
 func setup(dir: Vector2):
 	direction = dir.normalized()
 	rotation = direction.angle()
+	
+func destroy():
+	queue_free()
+	destroy_rpc.rpc()
+
+@rpc("authority", "call_remote", "reliable")
+func destroy_rpc():
+	if is_multiplayer_authority():
+		return
+	queue_free()

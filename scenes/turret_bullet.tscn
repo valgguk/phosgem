@@ -10,10 +10,10 @@ script = ExtResource("1_pjilf")
 metadata/_custom_type_script = "uid://b4jdacy8shnmu"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1702648302]
-scale = Vector2(20, 20)
+scale = Vector2(10, 10)
 texture = ExtResource("2_1uoq5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1609024179]
-scale = Vector2(9, 9)
+scale = Vector2(4.5, 4.5)
 shape = SubResource("CircleShape2D_ev8wq")
 debug_color = Color(2.5990605e-06, 0.62462157, 0.5302403, 0.41960785)

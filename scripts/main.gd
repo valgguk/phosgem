@@ -122,3 +122,16 @@ func sync_ship(pos: Vector2, rot: float):
 func _apply_ship_velocity():
 	for body in get_tree().get_nodes_in_group("affected_by_ship"):
 		body.ship_velocity = ship_velocity
+
+@rpc("any_peer", "call_local", "reliable")
+func turret_rotate(turret_path: NodePath, dir: float):
+	var turret = get_node(turret_path)
+	turret.rotate_turret(dir)
+
+@rpc("any_peer", "call_local", "reliable")
+func turret_shoot(turret_path: NodePath):
+	if not has_node(turret_path):
+		print("❌ turret_path inválido:", turret_path)
+		return
+	var turret = get_node(turret_path)
+	turret.shoot()

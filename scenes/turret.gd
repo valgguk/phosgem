@@ -18,7 +18,7 @@ func rotate_turret(dir: float):
 	if not is_multiplayer_authority():
 		return
 		
-	rotation += dir * rotation_speed * get_process_delta_time()
+	rotation += dir * rotation_speed * 0.016
 	sync_rotation.rpc(rotation)
 
 @rpc("authority", "unreliable")
@@ -34,14 +34,11 @@ func shoot():
 	
 	var bullets_node = get_node("/root/Main/Ship/Bullets")
 	bullets_node.add_child(bullet)
-	
 	bullet.global_position = boca.global_position
 	
 	var dir = Vector2.RIGHT.rotated(global_rotation)
 	bullet.setup(dir)
-	
 	bullet.set_multiplayer_authority(1)
-
 	sync_shoot.rpc(boca.global_position, dir)
 
 

@@ -2,6 +2,7 @@ extends Area2D
 
 @export var direction: int = 1
 var player_inside := false
+@export var turret_path: NodePath
 	
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -12,9 +13,10 @@ func _process(_delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("area_interact"):
-		_get_main().input_rotation.rpc_id(1,direction)
-	elif Input.is_action_just_released("area_interact"):
-		_get_main().input_rotation.rpc_id(1,0)
+		if multiplayer.is_server():
+			_get_main().turret_shoot(turret_path)
+		else:
+			_get_main().turret_shoot.rpc_id(1, turret_path)
 
 func _on_body_entered(body: Node) -> void:
 	if body is CharacterBody2D and body.is_multiplayer_authority():
@@ -23,12 +25,6 @@ func _on_body_entered(body: Node) -> void:
 func _on_body_exited(body: Node) -> void:
 	if body is CharacterBody2D and body.is_multiplayer_authority():
 		player_inside = false
-		_get_main().input_rotation.rpc_id(1,0)
 
 func _get_main() -> Node:
 	return get_tree().get_root().get_node("Main")
-	
-func _on_interacted():
-	var turret = get_node("/root/Main/Ship/Turrets/Turret1")
-	#esta mal, debe ser del turret segun el numero del label
-	turret.shoot()
