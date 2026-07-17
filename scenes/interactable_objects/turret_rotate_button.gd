@@ -27,3 +27,8 @@ func _on_body_exited(body: Node) -> void:
 
 func _get_main() -> Node:
 	return get_tree().get_root().get_node("Main")
+	
+func _on_interacted():
+	var turret = get_node("/root/Main/Ship/Visuals/Turrets/Turret1") 
+	#esta mal, debe ser del turret segun el numero del label
+	turret.rotate_turret(1) # o -1

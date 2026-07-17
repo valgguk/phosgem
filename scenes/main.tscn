@@ -1106,10 +1106,10 @@ polygon = PackedVector2Array(-570, 736, -538, 735, -546, 728, -532, 697, -537, 6
 [node name="Turrets" type="Node2D" parent="Ship/Visuals" unique_id=957740163]
 
 [node name="Turret1" parent="Ship/Visuals/Turrets" unique_id=2007913444 instance=ExtResource("18_dp3eg")]
-position = Vector2(-558, -378)
+position = Vector2(-806, -408)
 
 [node name="Turret2" parent="Ship/Visuals/Turrets" unique_id=2080458840 instance=ExtResource("18_dp3eg")]
-position = Vector2(1305, 861)
+position = Vector2(1312, 902)
 
 [node name="TurretShootButton" parent="Ship/Visuals/Turrets" unique_id=126549046 instance=ExtResource("13_0ld40")]
 position = Vector2(523, 317)
@@ -1121,7 +1121,7 @@ position = Vector2(696, 315)
 position = Vector2(-739, -67)
 
 [node name="TurretRotateButton2" parent="Ship/Visuals/Turrets" unique_id=1942187135 instance=ExtResource("14_gqmmt")]
-position = Vector2(1227, 661)
+position = Vector2(1249, 639)
 
 [node name="EnergyGenerator" parent="Ship" unique_id=247079671 instance=ExtResource("16_jbj1t")]
 position = Vector2(2111, 681)
@@ -1189,8 +1189,7 @@ metadata/_edit_lock_ = true
 
 [node name="Aliens" type="Node2D" parent="Ship" unique_id=1794615966]
 
-[node name="AlienShip" parent="Ship/Aliens" unique_id=167436696 instance=ExtResource("17_muem4")]
-position = Vector2(722, 1312)
+[node name="Bullets" type="Node2D" parent="Ship" unique_id=265351821]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Ship" unique_id=1321271366]
 process_mode = 3
