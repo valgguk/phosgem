@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dxl5nqsutgqtb" path="res://lobby/pause_menu.gd" id="1_ttaid"]
 [ext_resource type="Texture2D" uid="uid://cenralcgdy82r" path="res://assets/blue-stars.png" id="2_t8hwn"]
 [ext_resource type="Texture2D" uid="uid://dnci3iv4u6jl7" path="res://assets/blue-back.png" id="3_laex3"]
+[ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="4_t8hwn"]
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1145273158]
 script = ExtResource("1_ttaid")
@@ -29,16 +30,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_laex3")
 
-[node name="Panel" type="Panel" parent="." unique_id=947351432]
-offset_left = 550.0
-offset_top = 168.0
-offset_right = 590.0
-offset_bottom = 208.0
+[node name="Panel" type="PanelContainer" parent="." unique_id=548969776]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.5
+offset_top = -200.0
+offset_right = 154.5
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1045779983]
-layout_mode = 1
-offset_right = 240.0
-offset_bottom = 368.0
+layout_mode = 2
 offset_transform_enabled = true
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=816824929]
@@ -51,13 +57,16 @@ horizontal_alignment = 1
 
 [node name="Resume" type="Button" parent="Panel/VBoxContainer" unique_id=398921581]
 layout_mode = 2
+theme = ExtResource("4_t8hwn")
 text = "Resume"
 
 [node name="Menu" type="Button" parent="Panel/VBoxContainer" unique_id=485217587]
 layout_mode = 2
+theme = ExtResource("4_t8hwn")
 text = "Menu"
 
 [node name="Quit" type="Button" parent="Panel/VBoxContainer" unique_id=626758216]
 layout_mode = 2
+theme = ExtResource("4_t8hwn")
 text = "Quit
 "

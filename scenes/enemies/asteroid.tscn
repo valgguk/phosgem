@@ -74,8 +74,12 @@ color = Color(1, 0.4, 0, 1)
 color_initial_ramp = SubResource("Gradient_w7b4c")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=621246028]
+debug_enabled = true
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1491072004]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=86366609]
 shape = SubResource("CircleShape2D_2h6hj")
+
+[node name="updateTimer" type="Timer" parent="." unique_id=1433989719]
+wait_time = 0.1

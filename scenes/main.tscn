@@ -5,8 +5,10 @@
 [ext_resource type="Script" uid="uid://dyi3a3b3mkxo7" path="res://scripts/event_manager.gd" id="3_choun"]
 [ext_resource type="PackedScene" uid="uid://nb7xkk332d71" path="res://lobby/pause_menu.tscn" id="3_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://b1bpe256ypmj1" path="res://ui/gam_over.tscn" id="3_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://c28kk2po2o2q" path="res://scenes/mini_map.tscn" id="4_0ld40"]
 [ext_resource type="Script" uid="uid://dw23i0wo1e6fl" path="res://scripts/health_manager.gd" id="4_jkv2x"]
 [ext_resource type="Script" uid="uid://bl0dwog53qpuk" path="res://scenes/enemies/asteroid_spawner.gd" id="4_trceg"]
+[ext_resource type="PackedScene" uid="uid://d1gp6u00l2ikb" path="res://scenes/planet.tscn" id="5_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://cut6vt5d6b66t" path="res://scenes/enemies/asteroid.tscn" id="5_trceg"]
 [ext_resource type="PackedScene" uid="uid://bc707k062h4d2" path="res://scenes/interactable_objects/Lever.tscn" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://m5670h8vjdwv" path="res://assets/0x72_16x16RobotTileset.v1.png" id="6_ya4ey"]
@@ -1014,6 +1016,11 @@ script = ExtResource("4_trceg")
 damage_per_hit = 10
 asteroid_scene = ExtResource("5_trceg")
 
+[node name="miniMap" parent="." unique_id=105114380 instance=ExtResource("4_0ld40")]
+
+[node name="Planet" parent="." unique_id=289692261 instance=ExtResource("5_gqmmt")]
+position = Vector2(7700, 3961)
+
 [node name="Ship" type="Node2D" parent="." unique_id=625195637]
 metadata/_edit_lock_ = true
 
@@ -1024,13 +1031,13 @@ scale = Vector2(4, 4)
 [node name="asteroidColision" type="Area2D" parent="Ship" unique_id=1296018100]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/asteroidColision" unique_id=1209477821]
-position = Vector2(725, 241.5)
+position = Vector2(738, 233)
 shape = SubResource("RectangleShape2D_jkv2x")
 
 [node name="BulletColision2" type="Area2D" parent="Ship" unique_id=350363016 groups=["bullet_area"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/BulletColision2" unique_id=1161224847]
-position = Vector2(725, 241.5)
+position = Vector2(725, 456)
 shape = SubResource("RectangleShape2D_jkv2x")
 
 [node name="GravityZone" type="Area2D" parent="Ship" unique_id=339119337]
@@ -1137,6 +1144,9 @@ debug_color = Color(0.3254902, 0.92156863, 0.40392157, 0.24313726)
 metadata/_edit_lock_ = true
 
 [node name="Aliens" type="Node2D" parent="Ship" unique_id=1794615966]
+
+[node name="AlienShip" parent="Ship/Aliens" unique_id=167436696 instance=ExtResource("17_muem4")]
+position = Vector2(722, 1312)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Ship" unique_id=1321271366]
 process_mode = 3

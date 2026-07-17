@@ -9,6 +9,7 @@ signal asteroid_hit_ship(asteroid: Asteroid)
 @onready var trail: CPUParticles2D = $Sprite2D/CPUParticles2D
 @onready var detection_area_2d: Area2D = $DetectionArea
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
+@onready var update_timer: Timer = $updateTimer
 
 
 var speed: int = 50
@@ -73,15 +74,24 @@ func _ready() -> void:
 	add_to_group("asteroids")
 	detection_area_2d.area_entered.connect(_on_detection_area_entered)
 	detection_area_2d.area_exited.connect(_on_detection_area_entered)
+	update_timer.timeout.connect(_update_target_position)
 	
 func _on_body_entered(body:Node)->void:
 	var ship = body as Node2D
 	if ship:
 		target_ship = ship
-		navigation_agent_2d.target_position = target_ship.global_position
+		_update_target_position()
+		update_timer.start()
+		
 		
 		
 func _on_body_exited(body:Node)->void:
 	var ship = body as Node2D
 	if ship and ship == target_ship:
 		target_ship = null
+		update_timer.stop()
+		
+
+func _update_target_position() -> void:
+	if target_ship:
+		navigation_agent_2d.target_position = target_ship.global_position

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c28kk2po2o2q"]
+
+[ext_resource type="Script" uid="uid://bnrugn1s0w1q5" path="res://scenes/mini_map.gd" id="1_l143l"]
+[ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="2_5uo74"]
+
+[node name="miniMap" type="CanvasLayer" unique_id=105114380]
+script = ExtResource("1_l143l")
+
+[node name="RootControl" type="Control" parent="." unique_id=760517627]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="RootControl" unique_id=2002358804]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 190.0
+offset_bottom = 190.0
+
+[node name="ColorRect" type="ColorRect" parent="RootControl/Control" unique_id=456315651]
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 180.0
+color = Color(0.043137256, 0.5764706, 1, 0.16470589)
+
+[node name="planet" type="ColorRect" parent="RootControl/Control" unique_id=1959887270]
+layout_mode = 0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(0.15686275, 1, 0.47843137, 1)
+
+[node name="asteroids" type="Control" parent="RootControl/Control" unique_id=915744099]
+anchors_preset = 0
+
+[node name="ship" type="ColorRect" parent="RootControl/Control" unique_id=1521846469]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 61.0
+offset_right = 61.0
+offset_bottom = 73.0
+color = Color(1, 0.3254902, 1, 1)
+
+[node name="expandButton" type="Button" parent="RootControl" unique_id=2060573450]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 10.0
+offset_right = 192.0
+offset_bottom = 54.0
+theme = ExtResource("2_5uo74")
+theme_override_font_sizes/font_size = 35
+text = "minimap"
