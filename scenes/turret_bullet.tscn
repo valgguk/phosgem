@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bulpk3f03uick"]
+
+[ext_resource type="Script" uid="uid://bi0jviiswlt12" path="res://scenes/turret_bullet.gd" id="1_pjilf"]
+[ext_resource type="Texture2D" uid="uid://bfg6v5cp5njbi" path="res://assets/turrets/spr_simple_bullet_val.png" id="2_1uoq5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ev8wq"]
+
+[node name="TurretBullet" type="Area2D" unique_id=13448830]
+script = ExtResource("1_pjilf")
+metadata/_custom_type_script = "uid://b4jdacy8shnmu"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1702648302]
+scale = Vector2(20, 20)
+texture = ExtResource("2_1uoq5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1609024179]
+scale = Vector2(9, 9)
+shape = SubResource("CircleShape2D_ev8wq")
+debug_color = Color(2.5990605e-06, 0.62462157, 0.5302403, 0.41960785)

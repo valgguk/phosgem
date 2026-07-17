@@ -15,11 +15,14 @@
 [ext_resource type="PackedScene" uid="uid://bf37aval36plk" path="res://scenes/interactable_objects/leverThrust.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://nkscoxvh6eys" path="res://scenes/interactable_objects/LeverAnti.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://b5nbnoh566dn2" path="res://scenes/interactable_objects/oxigen_generator.tscn" id="10_choun"]
-[ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/scoreTracker.tscn" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/UI/scoreTracker.tscn" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://coyeip22k6ylj" path="res://scenes/interactable_objects/TurretShootButton.tscn" id="13_0ld40"]
 [ext_resource type="Script" uid="uid://brigqeuhhmrig" path="res://scenes/enemies/aliens/alien_ship_spawner.gd" id="13_muem4"]
 [ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="13_trceg"]
+[ext_resource type="PackedScene" uid="uid://xbgtsptqyqu2" path="res://scenes/interactable_objects/TurretRotateButton.tscn" id="14_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://bio3yxjk43fbs" path="res://scenes/interactable_objects/energy_generator.tscn" id="16_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://bsbxha73bpp1w" path="res://scenes/enemies/aliens/alien_ship.tscn" id="17_muem4"]
+[ext_resource type="PackedScene" uid="uid://c7mpg3nfvbm65" path="res://scenes/Turret.tscn" id="18_dp3eg"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o6xl0"]
 
@@ -1099,6 +1102,26 @@ position = Vector2(600, 8)
 [node name="Polygon2D2" type="Polygon2D" parent="Ship/Visuals/LeverThrust" unique_id=1390815999]
 position = Vector2(-612, -12)
 polygon = PackedVector2Array(-570, 736, -538, 735, -546, 728, -532, 697, -537, 671, -564, 654, -578, 667, -551, 675, -548, 696, -560, 718, -573, 709)
+
+[node name="Turrets" type="Node2D" parent="Ship/Visuals" unique_id=957740163]
+
+[node name="Turret1" parent="Ship/Visuals/Turrets" unique_id=2007913444 instance=ExtResource("18_dp3eg")]
+position = Vector2(-558, -378)
+
+[node name="Turret2" parent="Ship/Visuals/Turrets" unique_id=2080458840 instance=ExtResource("18_dp3eg")]
+position = Vector2(1305, 861)
+
+[node name="TurretShootButton" parent="Ship/Visuals/Turrets" unique_id=126549046 instance=ExtResource("13_0ld40")]
+position = Vector2(523, 317)
+
+[node name="TurretShootButton2" parent="Ship/Visuals/Turrets" unique_id=39208067 instance=ExtResource("13_0ld40")]
+position = Vector2(696, 315)
+
+[node name="TurretRotateButton" parent="Ship/Visuals/Turrets" unique_id=790381026 instance=ExtResource("14_gqmmt")]
+position = Vector2(-739, -67)
+
+[node name="TurretRotateButton2" parent="Ship/Visuals/Turrets" unique_id=1942187135 instance=ExtResource("14_gqmmt")]
+position = Vector2(1227, 661)
 
 [node name="EnergyGenerator" parent="Ship" unique_id=247079671 instance=ExtResource("16_jbj1t")]
 position = Vector2(2111, 681)

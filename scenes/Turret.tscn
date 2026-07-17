@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://c7mpg3nfvbm65"]
+
+[ext_resource type="Script" uid="uid://cu1r6holfu027" path="res://scenes/turret.gd" id="1_76wwe"]
+[ext_resource type="Texture2D" uid="uid://bn68n2v83pqpo" path="res://assets/turrets/spr_simple_turret_shoot_white.png" id="2_75s58"]
+[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/fonts/monogram-extended.ttf" id="3_4sggw"]
+
+[sub_resource type="Animation" id="Animation_75s58"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_75s58")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4sggw"]
+resource_name = "fire"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_75s58")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tbwx1"]
+_data = {
+&"RESET": SubResource("Animation_75s58"),
+&"fire": SubResource("Animation_4sggw")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1l7md"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gia22"]
+animation = &"fire"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ys4c4"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n0vv0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fmt54"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_24ek7"]
+states/RESET/node = SubResource("AnimationNodeAnimation_1l7md")
+states/RESET/position = Vector2(355.33334, 101.33333)
+states/fire/node = SubResource("AnimationNodeAnimation_gia22")
+states/fire/position = Vector2(514, 44.666664)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_ys4c4"), "RESET", "fire", SubResource("AnimationNodeStateMachineTransition_n0vv0"), "fire", "RESET", SubResource("AnimationNodeStateMachineTransition_fmt54")]
+
+[node name="Turret" type="Node2D" unique_id=2007913444]
+script = ExtResource("1_76wwe")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=174970656]
+scale = Vector2(20, 20)
+texture = ExtResource("2_75s58")
+hframes = 4
+
+[node name="Boca" type="Marker2D" parent="." unique_id=1609948519]
+position = Vector2(150, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=329503812]
+libraries/ = SubResource("AnimationLibrary_tbwx1")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=456002439]
+tree_root = SubResource("AnimationNodeStateMachine_24ek7")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="Label" type="Label" parent="." unique_id=47014999]
+offset_left = -79.0
+offset_top = -49.0
+offset_right = 86.0
+offset_bottom = 34.0
+theme_override_fonts/font = ExtResource("3_4sggw")
+theme_override_font_sizes/font_size = 92
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
