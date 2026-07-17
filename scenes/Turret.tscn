@@ -88,6 +88,7 @@ states/RESET/position = Vector2(355.33334, 101.33333)
 states/fire/node = SubResource("AnimationNodeAnimation_gia22")
 states/fire/position = Vector2(514, 44.666664)
 transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_ys4c4"), "RESET", "fire", SubResource("AnimationNodeStateMachineTransition_n0vv0"), "fire", "RESET", SubResource("AnimationNodeStateMachineTransition_fmt54")]
+graph_offset = Vector2(0, 42.39106)
 
 [node name="Turret" type="Node2D" unique_id=2007913444]
 script = ExtResource("1_76wwe")
