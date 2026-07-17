@@ -2,24 +2,32 @@ extends Node2D
 
 @export var bullet_scene: PackedScene
 @onready var boca: Marker2D = $Boca
-
-var rotation_speed := 2.0
+var rotate_dir := 0.0
+var rotation_speed := 5.0
+@onready var label: Label = $Label
+@export var turret_id: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	label.text = str(turret_id)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+func _physics_process(delta):
+	if not is_multiplayer_authority():
+		return
+		
+	if rotate_dir != 0:
+		rotation += rotate_dir * rotation_speed * delta
+		sync_rotation.rpc(rotation)
 
 func rotate_turret(dir: float):
 	if not is_multiplayer_authority():
 		return
-		
-	rotation += dir * rotation_speed * 0.016
-	sync_rotation.rpc(rotation)
+	rotate_dir = dir
 
 @rpc("authority", "unreliable")
 func sync_rotation(rot: float):

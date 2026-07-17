@@ -13,20 +13,20 @@ script = ExtResource("1_dj4hh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=367217837]
 position = Vector2(-0.8471692, 0.6528307)
 rotation = 0.7853982
-scale = Vector2(1.902, 3.631)
+scale = Vector2(3.902, 7.449)
 shape = SubResource("RectangleShape2D_7u13s")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1833913899]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_6gciq")
 
 [node name="Label" type="Label" parent="." unique_id=2026555318]
-offset_left = -79.0
-offset_top = -49.0
-offset_right = 86.0
-offset_bottom = 34.0
+offset_left = -78.0
+offset_top = -69.0
+offset_right = 87.0
+offset_bottom = 43.0
 theme_override_fonts/font = ExtResource("3_6gciq")
-theme_override_font_sizes/font_size = 92
+theme_override_font_sizes/font_size = 141
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1

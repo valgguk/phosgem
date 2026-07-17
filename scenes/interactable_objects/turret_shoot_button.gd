@@ -3,11 +3,13 @@ extends Area2D
 @export var direction: int = 1
 var player_inside := false
 @export var turret_path: NodePath
-	
+@onready var label: Label = $Label
+@export var turret_id: int = 0
+
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
-
+	label.text = str(turret_id)
 func _process(_delta: float) -> void:
 	if not player_inside:
 		return

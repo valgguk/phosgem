@@ -131,7 +131,7 @@ func turret_rotate(turret_path: NodePath, dir: float):
 @rpc("any_peer", "call_local", "reliable")
 func turret_shoot(turret_path: NodePath):
 	if not has_node(turret_path):
-		print("❌ turret_path inválido:", turret_path)
+		print("✕ turret_path inválido:", turret_path)
 		return
 	var turret = get_node(turret_path)
 	turret.shoot()
