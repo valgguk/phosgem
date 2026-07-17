@@ -135,3 +135,8 @@ func turret_shoot(turret_path: NodePath):
 		return
 	var turret = get_node(turret_path)
 	turret.shoot()
+	
+@rpc("any_peer", "call_local", "reliable")
+func turret_set_shooting(turret_path: NodePath, state: bool):
+	var turret = get_node(turret_path)
+	turret.set_shooting(state)

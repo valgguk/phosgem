@@ -8,6 +8,9 @@ var rotation_speed := 5.0
 @export var turret_id: int = 0
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
+var shooting := false
+@export var fire_rate := 0.2 # segundos entre disparos
+var shoot_timer := 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,6 +28,12 @@ func _physics_process(delta):
 	if rotate_dir != 0:
 		rotation += rotate_dir * rotation_speed * delta
 		sync_rotation.rpc(rotation)
+		
+	if shooting:
+		shoot_timer -= delta
+		if shoot_timer <= 0:
+			shoot()
+			shoot_timer = fire_rate
 
 func rotate_turret(dir: float):
 	if not is_multiplayer_authority():
@@ -65,3 +74,11 @@ func sync_shoot(pos: Vector2, dir: Vector2):
 	
 func _play_fire_animation():
 	playback.travel("fire")
+	
+func set_shooting(state: bool):
+	if not is_multiplayer_authority():
+		return
+	shooting = state
+	# opcional: reset inmediato al empezar
+	if shooting:
+		shoot_timer = 0
