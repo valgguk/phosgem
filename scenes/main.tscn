@@ -982,6 +982,7 @@ GameOverLayer = NodePath("../Ship/CanvasLayer/GameOver")
 [node name="HealthManager" type="Node" parent="." unique_id=1246870109 node_paths=PackedStringArray("UI_health")]
 unique_name_in_owner = true
 script = ExtResource("4_jkv2x")
+MAX_HEALTH = 500
 UI_health = NodePath("../Ship/CanvasLayer/TextureProgressBar")
 
 [node name="BackGroundParallax" type="Node2D" parent="." unique_id=491027278]
@@ -1030,10 +1031,6 @@ position = Vector2(7700, 3961)
 [node name="Ship" type="Node2D" parent="." unique_id=625195637]
 metadata/_edit_lock_ = true
 
-[node name="AlienShip" parent="Ship" unique_id=23759853 instance=ExtResource("17_muem4")]
-position = Vector2(1217, 1230)
-scale = Vector2(4, 4)
-
 [node name="asteroidColision" type="Area2D" parent="Ship" unique_id=1296018100]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/asteroidColision" unique_id=1209477821]
@@ -1043,7 +1040,7 @@ shape = SubResource("RectangleShape2D_jkv2x")
 [node name="BulletColision2" type="Area2D" parent="Ship" unique_id=350363016 groups=["bullet_area"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/BulletColision2" unique_id=1161224847]
-position = Vector2(725, 456)
+position = Vector2(725, 240)
 shape = SubResource("RectangleShape2D_jkv2x")
 
 [node name="GravityZone" type="Area2D" parent="Ship" unique_id=339119337]
@@ -1201,20 +1198,17 @@ metadata/_edit_lock_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Ship" unique_id=1321271366]
 process_mode = 3
-visible = false
 
 [node name="GameOver" parent="Ship/CanvasLayer" unique_id=1794529264 instance=ExtResource("3_ya4ey")]
 visible = false
 metadata/_edit_lock_ = true
 
 [node name="Label" parent="Ship/CanvasLayer" unique_id=359397464 instance=ExtResource("12_eb6dy")]
-visible = false
 theme = ExtResource("13_trceg")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Ship/CanvasLayer" unique_id=1094680437]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

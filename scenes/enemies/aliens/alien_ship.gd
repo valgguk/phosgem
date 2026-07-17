@@ -9,8 +9,8 @@ extends CharacterBody2D
 @export var alien_to_spawn: PackedScene
 
 @export var shoot_interval := 60.0 # 60 segundos / 120.0 para 2 min
-@export var min_interval := 20.0
-@export var max_interval := 30.0
+@export var min_interval := 10.0
+@export var max_interval := 15.0
 @onready var shoot_timer: Timer = $ShootTimer
 
 const SPEED = 300.0
