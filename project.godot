@@ -27,10 +27,6 @@ Game="*res://autoloads/game.tscn"
 Lobby="*res://autoloads/lobby.tscn"
 ResourceManager="*uid://si6dvj04yl43"
 
-[debug]
-
-gdscript/warnings/enable=false
-
 [display]
 
 window/size/viewport_width=1280

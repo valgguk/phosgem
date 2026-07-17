@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Astronaut
 
 @onready var animated_sprite = $AnimatedSprite2D
 @export var default_color: int = 0
@@ -16,9 +17,9 @@ var ship_velocity: Vector2 = Vector2.ZERO
 
 var _data: Statics.PlayerData
 
-const SPEED = 500.0
-const JUMP_VELOCITY = -900.0 
-const Gravity_factor=2 #1 is like a super jump
+var SPEED = 500.0
+var JUMP_VELOCITY = -900.0 
+var Gravity_factor=2 #1 is like a super jump
 
 @export var walking = false
 var stunned = false
@@ -27,6 +28,9 @@ var stomped := false
 var bounce_velocity := Vector2.ZERO
 var bounce_timer := 0.0
 var active_role_special: Statics.Role
+var buff_time = 3
+var cooldown = 5 #time defore using ability again
+var particles = preload("res://scenes/buff_particles.tscn")
 
 func _ready() -> void:
 	add_to_group("players_instances")
@@ -122,9 +126,15 @@ func change_sprite_direction(direction:int)-> void:
 	else: return
 
 func special_move():
+	var players
 	match active_role_special:
 		0: Debug.log("no power")
-		1: Debug.log("red power")
+		1: 
+			players = get_tree().get_nodes_in_group("players_instances") as Array[Astronaut]
+			for player in players:
+				buff_player.rpc(player)
+				
+			Debug.log("red power")
 		2: Debug.log("blue power")
 
 
@@ -161,7 +171,8 @@ func setup(data: Statics.PlayerData) -> void:
 	if is_multiplayer_authority():
 		sync_timer.start()
 	
-	
+
+
 func define_role(Role: Statics.Role):
 	role_name = Statics.get_role_name(role)
 	animated_sprite.frame= clampi(role-1,0,Statics.Role.size())
@@ -198,10 +209,23 @@ func send_position(pos: Vector2) -> void:
 func _on_sync_timeout() -> void:
 	if is_multiplayer_authority():
 		send_position.rpc(position)
+
+@rpc("any_peer", "call_local","reliable")
+func buff_player(astronaut:Astronaut):
+	var old_stats = [SPEED,JUMP_VELOCITY,Gravity_factor]
+	astronaut.SPEED *= 1.75
+	astronaut.JUMP_VELOCITY *= 1.5
+	astronaut.Gravity_factor *= 2
+	var particle_inst = particles.instantiate()
+	astronaut.add_child(particle_inst)
+	await get_tree().create_timer(buff_time).timeout
+	astronaut.SPEED = old_stats[0]
+	astronaut.JUMP_VELOCITY= old_stats[1]
+	astronaut.Gravity_factor = old_stats[2]
+	astronaut.remove_child(particle_inst)
+
 	
-	
-#func take_damage(damage: int) -> void:
-	#Debug.log("Stun: %d, , alien->player" % damage)
+
 	
 
 func _on_health_changed(value: int) -> void:
