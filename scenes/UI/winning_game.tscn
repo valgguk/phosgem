@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bhgfoxiqpcik6"]
+
+[ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="1_4euia"]
+[ext_resource type="FontFile" uid="uid://bhjv4mvyr5rfa" path="res://assets/fonts/monogram-extended.ttf" id="2_4frbg"]
+
+[node name="winning_game" type="Control" unique_id=1311418160]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1167272488]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1860293338]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1056681120]
+layout_mode = 2
+theme = ExtResource("1_4euia")
+theme_override_colors/font_color = Color(0, 0.5176685, 0.29611856, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
+theme_override_colors/font_outline_color = Color(0.011016143, 0.2552032, 0.13030395, 1)
+theme_override_font_sizes/font_size = 139
+text = "Victory!!"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=311580638]
+visible = false
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.41146058, 0.51871574, 1)
+theme_override_fonts/normal_font = ExtResource("2_4frbg")
+text = "you let oxygen run out..."
+horizontal_alignment = 1
