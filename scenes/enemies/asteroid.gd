@@ -49,14 +49,7 @@ func _physics_process(delta: float) -> void:
 	global_position += velocity * delta
 	shader_material_ref.set_shader_parameter("time_offset", float(asteroid_id) * 13.7 + _time * 0.3)
 	
-	
-	if navigation_agent_2d.is_navigation_finished():
-		velocity = Vector2.ZERO
-		return 
-	var next_position: Vector2 = navigation_agent_2d.get_next_path_position()
-	var direction: Vector2 = global_position.direction_to(next_position)
-	
-	velocity = direction * speed
+
 	
 @rpc("authority", "call_local", "reliable")
 func destroy() -> void:

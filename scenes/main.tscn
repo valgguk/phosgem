@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bf37aval36plk" path="res://scenes/interactable_objects/leverThrust.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://nkscoxvh6eys" path="res://scenes/interactable_objects/LeverAnti.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://b5nbnoh566dn2" path="res://scenes/interactable_objects/oxigen_generator.tscn" id="10_choun"]
-[ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/UI/scoreTracker.tscn" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/scoreTracker.tscn" id="12_eb6dy"]
 [ext_resource type="Script" uid="uid://brigqeuhhmrig" path="res://scenes/enemies/aliens/alien_ship_spawner.gd" id="13_muem4"]
 [ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="13_trceg"]
 [ext_resource type="PackedScene" uid="uid://bio3yxjk43fbs" path="res://scenes/interactable_objects/energy_generator.tscn" id="16_jbj1t"]
@@ -28,6 +28,9 @@ load_path = "res://.godot/imported/blue-stars.png-4d7c3755342a09b1574b016d0eeb2d
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jkv2x"]
 size = Vector2(3346, 1141)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_54tkr"]
+size = Vector2(352.01263, 212.79532)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_muem4"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -1046,9 +1049,9 @@ gravity_space_override = 3
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/GravityZone" unique_id=71736829]
-position = Vector2(79.131325, 238.00002)
+position = Vector2(79.60803, 232.50002)
 scale = Vector2(1, 5.0799994)
-shape = SubResource("RectangleShape2D_85g3d")
+shape = SubResource("RectangleShape2D_54tkr")
 debug_color = Color(0, 0.6, 0.69803923, 0.1254902)
 metadata/_edit_lock_ = true
 
@@ -1159,8 +1162,6 @@ metadata/_edit_lock_ = true
 [node name="Label" parent="Ship/CanvasLayer" unique_id=359397464 instance=ExtResource("12_eb6dy")]
 visible = false
 theme = ExtResource("13_trceg")
-theme_override_colors/font_shadow_color = Color(0, 0.47843137, 0.6, 0)
-text = "SCORE:"
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
