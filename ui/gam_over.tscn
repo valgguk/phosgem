@@ -65,3 +65,4 @@ horizontal_alignment = 1
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="." unique_id=25985416]
 stream = ExtResource("3_iyd6r")
+volume_db = -45.0
