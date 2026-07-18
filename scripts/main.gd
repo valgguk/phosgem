@@ -4,11 +4,13 @@ extends Node2D
 @onready var players: Node2D = $Ship/Players
 
 @onready var ship: Node2D = $Ship
+@onready var shield = $Ship/Visuals/TileMapLayerShield
 @onready var spawn_points: Node2D = $Ship/SpawnPoints
 @onready var camera: Camera2D=$Camera2D
 @onready var space_background: Sprite2D = $BackGroundParallax/Parallax2D2/spaceBackground
 @onready var label = $Ship/CanvasLayer/Label
 @onready var asteroid_spawner: AsteroidSpawner= $AsteroidSpawner
+
 
 @onready var alien_spawn_points: Node2D = $Ship/AlienSpawnPoints
 @onready var aliens: Node2D = $Ship/Aliens
@@ -78,6 +80,7 @@ func _update_camera() -> void:
 	
 func _ready() -> void:
 	players.add_to_group("players_node")
+	self.add_to_group("main")
 	ship.add_to_group("ship")
 	for i in Game.players.size():
 		var player_data = Game.players[i]
@@ -100,6 +103,17 @@ func _on_planet_reached() -> void:
 @rpc("authority", "call_local", "reliable")
 func _trigger_victory() -> void:
 	get_tree().change_scene_to_file("res://scenes/UI/winning_game.tscn")
+	
+@rpc("any_peer", "call_local", "reliable")
+func shield_ship(duration: int,):
+	Debug.log("shield active")
+	shield.visible= true
+	%HealthManager.invulnerable = true
+	await get_tree().create_timer(duration).timeout
+	shield.visible = false
+	%HealthManager.invulnerable = false
+	Debug.log("shield off")
+	
 
 # mandarle rotacion al server 
 # se llama cuando se aprieta el boton

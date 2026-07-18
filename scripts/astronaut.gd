@@ -149,8 +149,15 @@ func special_move():
 			for alien in aliens:
 				pass
 			Debug.log("blue power")
-
-
+		3:
+			Debug.log("green power")
+		
+		4:
+			Debug.log("yellow power")
+			var main = get_tree().get_nodes_in_group("main")[0]
+			main.shield_ship(10)
+			
+#shield #heal #kill enemies #freeze enemies
 func manage_animations(direction):
 	if direction:  #and is_on_floor():
 		walking_wobble.rpc(direction)
@@ -189,6 +196,8 @@ func setup(data: Statics.PlayerData) -> void:
 func define_role(Role: Statics.Role):
 	role_name = Statics.get_role_name(role)
 	animated_sprite.frame= clampi(role-1,0,Statics.Role.size())
+	if role == 4:
+		animated_sprite.frame = 4
 	match Role:
 		Statics.Role.NONE:
 			active_role_special= Statics.Role.NONE
@@ -198,8 +207,13 @@ func define_role(Role: Statics.Role):
 			return "Redie"
 		Statics.Role.ROLE_B:
 			active_role_special= Statics.Role.ROLE_B
-			return ""
-			
+			return "Bluey"
+		Statics.Role.ROLE_C:
+			active_role_special = Statics.Role.ROLE_C
+			return "Greenet"
+		Statics.Role.ROLE_D:
+			active_role_special = Statics.Role.ROLE_D
+			return "Yelly"
 			
 	return "Unknown"
 
