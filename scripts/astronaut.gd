@@ -29,13 +29,12 @@ var bounce_velocity := Vector2.ZERO
 var bounce_timer := 0.0
 var active_role_special: Statics.Role
 
-
 #Special move related
-var buff_time = 3
-var cooldown = 5 #time defore using ability again
+var buff_time = 10
+var cooldown = 30 #time defore using ability again
 var particles = preload("res://scenes/buff_particles.tscn")
 @onready var cooldown_timer = $CooldownTimer
-
+signal freeze
 
 func _ready() -> void:
 	add_to_group("players_instances")
@@ -81,6 +80,7 @@ func _physics_process(delta):
 		vertical_velocity += g * delta * Gravity_factor
 	elif input_synchronizer.jump:
 		vertical_velocity = vertical_direction * JUMP_VELOCITY
+		$AudioStreamPlayer.play()
 		jump_damage = true
 		stomped = false
 		notify_jump.rpc()
@@ -109,8 +109,7 @@ func _physics_process(delta):
 	# con position tirita -> ver como mandar la position de los players
 	send_position.rpc(position) 
 	sync_vertical_velocity.rpc(velocity)
-	if Input.is_action_just_pressed("test") and is_multiplayer_authority():
-		test.rpc()
+
 	if Input.is_action_just_pressed("area_interact"):
 		_check_interact()
 	if is_on_floor():
@@ -131,6 +130,9 @@ func change_sprite_direction(direction:int)-> void:
 	else: return
 
 func special_move():
+	$AudioStreamPlayer2.play()
+	var class_color = Color.WHITE
+	var main = get_tree().get_nodes_in_group("main")[0]
 	var players
 	if cooldown_timer.time_left> 0:
 		return
@@ -143,20 +145,21 @@ func special_move():
 			for player in players:
 				player.buff_player.rpc()
 				
-			Debug.log("red power")
+			class_color = Color.RED
 		2: 
-			var aliens= get_tree().get_nodes_in_group("alien_instances")
-			for alien in aliens:
-				pass
-			Debug.log("blue power")
+
+			main.freeze_aliens(15)
+			class_color = Color.BLUE
 		3:
-			Debug.log("green power")
-		
+			main.heal(30)
+			class_color = Color.GREEN
 		4:
-			Debug.log("yellow power")
-			var main = get_tree().get_nodes_in_group("main")[0]
 			main.shield_ship(10)
-			
+			class_color = Color.YELLOW
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(self,"modulate",class_color,0.2)
+	tween.tween_property(self,"modulate",Color.WHITE,0.2)
+	
 #shield #heal #kill enemies #freeze enemies
 func manage_animations(direction):
 	if direction:  #and is_on_floor():
@@ -218,11 +221,6 @@ func define_role(Role: Statics.Role):
 	return "Unknown"
 
 	
-# defecto : ("authority", "call_remote", "reliable")
-@rpc("authority", "call_local", "reliable")
-func test() -> void:
-	Debug.log("test %s" % _data.name)
-	Debug.log("role: %s " % role_name)
 	
 
 
@@ -232,6 +230,8 @@ func send_position(pos: Vector2) -> void:
 	if is_multiplayer_authority():
 		return
 	position = position.lerp(pos, 0.2)
+	
+
 
 func _on_sync_timeout() -> void:
 	if is_multiplayer_authority():
@@ -242,7 +242,7 @@ func buff_player():
 	var old_stats = [SPEED,JUMP_VELOCITY,Gravity_factor]
 	SPEED *= 1.75
 	JUMP_VELOCITY *= 1.5
-	Gravity_factor *= 1.5
+	Gravity_factor *= 1.25
 	var particle_inst = particles.instantiate()
 	add_child(particle_inst)
 	await get_tree().create_timer(buff_time).timeout
@@ -256,7 +256,7 @@ func buff_player():
 	
 
 func _on_health_changed(value: int) -> void:
-	Debug.log("Stun %d" % value)
+	pass
 
 @rpc("any_peer", "call_local", "reliable")
 func apply_stun():

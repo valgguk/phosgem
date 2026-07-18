@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var frozen: bool = false
+
 @onready var health_component: HealthComponent = $Pivote/HurtboxComponent/HealthComponent
 @onready var pivote: Node2D = $Pivote
 @onready var hitbox_component: HitboxComponent = $Pivote/HitboxComponent
@@ -8,6 +10,7 @@ extends CharacterBody2D
 @onready var ray_cast_2d: RayCast2D = $Pivote/RayCast2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
+
 
 
 const SPEED = 200.0
@@ -52,6 +55,8 @@ func _ready() -> void:
 	playback.travel("idle")
 
 func _physics_process(delta: float) -> void:
+	if frozen:
+		return
 	if is_multiplayer_authority(): # clientes no ejecutan physics_process
 		var g = get_gravity()
 		if g.length() == 0:
@@ -112,13 +117,33 @@ func _physics_process(delta: float) -> void:
 	
 	
 func take_damage(damage: int) -> void:
-	Debug.log("Mario hit %d" % damage)
+	pass
+
+@rpc("any_peer","call_local","reliable")
+func get_frozen(active=true):
+	if active== false:
+		frozen= false
+		animation_tree.active= true
+		modulate = Color(1.0, 1.0, 1.0, 1.0)
+		
+		return
 	
+	animation_tree.active= false
+	frozen= true
+	modulate = Color(0.062, 0.3, 1.0, 1.0)
+	await get_tree().create_timer(15).timeout
+	get_frozen(false)
 
 func _on_health_changed(value: int) -> void:
 	take_damage(value)
 	
 func _on_damage_dealt(body_target: CharacterBody2D):
+	$AudioStreamPlayer.play()
+	if frozen:
+		die.rpc(true)
+		return
+		
+	
 	if not is_multiplayer_authority():
 		return
 	if not body_target:
@@ -137,7 +162,7 @@ func _on_damage_dealt(body_target: CharacterBody2D):
 		return
 	
 	already_hit[id] = true
-	
+
 	body_target.apply_stun.rpc()
 	
 	if state != State.CHASE:
@@ -299,8 +324,11 @@ func _on_died():
 	die.rpc()
 	
 @rpc("authority", "call_local", "reliable")
-func die():
-	Debug.log("Alien murió")
+func die(fast= false):
+	if fast:
+		await get_tree().create_timer(0.1).timeout
+		queue_free()
+	
 	playback.travel("die")
 	await get_tree().create_timer(1).timeout
 	call_deferred("queue_free")

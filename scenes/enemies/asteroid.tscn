@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="3_08eb2"]
 [ext_resource type="Shader" uid="uid://cbhvhx2kybskc" path="res://resources/asteroid_shader.gdshader" id="3_j2n00"]
 [ext_resource type="Texture2D" uid="uid://d0uy3irx00cqs" path="res://assets/white32.png" id="4_2h6hj"]
+[ext_resource type="AudioStream" uid="uid://bjrukc1bmp5b8" path="res://assets/audio/Boom.wav" id="5_j2n00"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w7b4c"]
 
@@ -83,3 +84,6 @@ shape = SubResource("CircleShape2D_2h6hj")
 
 [node name="updateTimer" type="Timer" parent="." unique_id=1433989719]
 wait_time = 0.1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1988993197]
+stream = ExtResource("5_j2n00")

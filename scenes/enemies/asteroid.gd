@@ -53,6 +53,7 @@ func _physics_process(delta: float) -> void:
 	
 @rpc("authority", "call_local", "reliable")
 func destroy() -> void:
+	$AudioStreamPlayer.play()
 	trail.emitting = false
 	get_tree().create_timer(trail.lifetime).timeout
 	queue_free()

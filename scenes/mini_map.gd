@@ -27,7 +27,6 @@ func _find_ship() -> void:
 	var ships := get_tree().get_nodes_in_group("ship")
 	if ships.size() > 0:
 		_ship_ref = ships[0]
-		Debug.log("Minimapa: nave encontrada " + str(_ship_ref.name))
 	else:
 		Debug.log("Minimapa: nave no encontrada")
 

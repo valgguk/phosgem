@@ -7,7 +7,7 @@
 [sub_resource type="Resource" id="Resource_nviqh"]
 script = ExtResource("2_xaonh")
 name = "server"
-role = 4
+role = 1
 
 [sub_resource type="Resource" id="Resource_ckjww"]
 script = ExtResource("2_xaonh")

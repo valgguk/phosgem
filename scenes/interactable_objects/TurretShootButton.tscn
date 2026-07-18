@@ -18,7 +18,7 @@ shape = SubResource("RectangleShape2D_7u13s")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1833913899]
 modulate = Color(0.7202103, 0.21320073, 0.2385513, 1)
-scale = Vector2(6.2987046, 6.2987046)
+scale = Vector2(5.6941147, 5.6941147)
 texture = ExtResource("2_6gciq")
 region_enabled = true
 region_rect = Rect2(111, 15, 34, 34)

@@ -113,8 +113,14 @@ func shield_ship(duration: int,):
 	shield.visible = false
 	%HealthManager.invulnerable = false
 	Debug.log("shield off")
-	
 
+func freeze_aliens(time:int):
+	var aliens= $Ship/Aliens.get_children()
+	for alien in aliens:
+		alien.get_frozen.rpc()
+
+func heal(amount:int):
+	%HealthManager.heal_damage(amount)
 # mandarle rotacion al server 
 # se llama cuando se aprieta el boton
 # unreliable garantiza inputs continuos	
