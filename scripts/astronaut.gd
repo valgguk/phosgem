@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Astronaut
 
 @onready var animated_sprite = $AnimatedSprite2D
 @export var default_color: int = 0
@@ -16,9 +17,9 @@ var ship_velocity: Vector2 = Vector2.ZERO
 
 var _data: Statics.PlayerData
 
-const SPEED = 500.0
-const JUMP_VELOCITY = -900.0 
-const Gravity_factor=2 #1 is like a super jump
+var SPEED = 500.0
+var JUMP_VELOCITY = -900.0 
+var Gravity_factor=2 #1 is like a super jump
 
 @export var walking = false
 var stunned = false
@@ -26,6 +27,15 @@ var jump_damage = false
 var stomped := false
 var bounce_velocity := Vector2.ZERO
 var bounce_timer := 0.0
+var active_role_special: Statics.Role
+
+
+#Special move related
+var buff_time = 3
+var cooldown = 5 #time defore using ability again
+var particles = preload("res://scenes/buff_particles.tscn")
+@onready var cooldown_timer = $CooldownTimer
+
 
 func _ready() -> void:
 	add_to_group("players_instances")
@@ -75,6 +85,11 @@ func _physics_process(delta):
 		stomped = false
 		notify_jump.rpc()
 		input_synchronizer.jump = false
+		
+	if input_synchronizer.special:
+		#Debug.log("EFECTO ESPECIAL")
+		special_move()
+		input_synchronizer.special= false
 	
 	velocity = horizontal_velocity + vertical_velocity
 	if move_input:
@@ -115,7 +130,34 @@ func change_sprite_direction(direction:int)-> void:
 		animated_sprite.flip_h=false
 	else: return
 
-
+func special_move():
+	var players
+	if cooldown_timer.time_left> 0:
+		return
+	cooldown_timer.start()
+	match active_role_special:
+		0: Debug.log("no power")
+		1: 
+			
+			players = get_tree().get_nodes_in_group("players_instances") as Array[Astronaut]
+			for player in players:
+				player.buff_player.rpc()
+				
+			Debug.log("red power")
+		2: 
+			var aliens= get_tree().get_nodes_in_group("alien_instances")
+			for alien in aliens:
+				pass
+			Debug.log("blue power")
+		3:
+			Debug.log("green power")
+		
+		4:
+			Debug.log("yellow power")
+			var main = get_tree().get_nodes_in_group("main")[0]
+			main.shield_ship(10)
+			
+#shield #heal #kill enemies #freeze enemies
 func manage_animations(direction):
 	if direction:  #and is_on_floor():
 		walking_wobble.rpc(direction)
@@ -149,15 +191,30 @@ func setup(data: Statics.PlayerData) -> void:
 	if is_multiplayer_authority():
 		sync_timer.start()
 	
-	
+
+
 func define_role(Role: Statics.Role):
 	role_name = Statics.get_role_name(role)
 	animated_sprite.frame= clampi(role-1,0,Statics.Role.size())
+	if role == 4:
+		animated_sprite.frame = 4
 	match Role:
 		Statics.Role.NONE:
+			active_role_special= Statics.Role.NONE
 			return "None"
 		Statics.Role.ROLE_A:
+			active_role_special= Statics.Role.ROLE_A
 			return "Redie"
+		Statics.Role.ROLE_B:
+			active_role_special= Statics.Role.ROLE_B
+			return "Bluey"
+		Statics.Role.ROLE_C:
+			active_role_special = Statics.Role.ROLE_C
+			return "Greenet"
+		Statics.Role.ROLE_D:
+			active_role_special = Statics.Role.ROLE_D
+			return "Yelly"
+			
 	return "Unknown"
 
 	
@@ -179,10 +236,23 @@ func send_position(pos: Vector2) -> void:
 func _on_sync_timeout() -> void:
 	if is_multiplayer_authority():
 		send_position.rpc(position)
+
+@rpc("any_peer", "call_local","reliable")
+func buff_player():
+	var old_stats = [SPEED,JUMP_VELOCITY,Gravity_factor]
+	SPEED *= 1.75
+	JUMP_VELOCITY *= 1.5
+	Gravity_factor *= 1.5
+	var particle_inst = particles.instantiate()
+	add_child(particle_inst)
+	await get_tree().create_timer(buff_time).timeout
+	SPEED = old_stats[0]
+	JUMP_VELOCITY= old_stats[1]
+	Gravity_factor = old_stats[2]
+	remove_child(particle_inst)
+
 	
-	
-#func take_damage(damage: int) -> void:
-	#Debug.log("Stun: %d, , alien->player" % damage)
+
 	
 
 func _on_health_changed(value: int) -> void:

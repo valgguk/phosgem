@@ -4,6 +4,7 @@ class_name HealthManager
 @export var MAX_HEALTH: int = 100
 @export var ShipHealth: int
 @export var UI_health: TextureProgressBar
+@export var invulnerable: bool = false
 signal game_over
 
 # Called when the node enters the scene tree for the first time.
@@ -16,6 +17,8 @@ func _process(delta):
 	
 
 func _update_health(amount: int) -> void:
+	if invulnerable:
+		return
 	Debug.log("DAMAGE" + str(amount))
 	ShipHealth = clampi(ShipHealth+ amount,0,MAX_HEALTH)
 	#do sync shinenigans
@@ -23,6 +26,8 @@ func _update_health(amount: int) -> void:
 		game_over.emit()
 	
 func take_damage(amount:int= 1)-> void:
+	if invulnerable:
+		return
 	_update_health(-amount)
 	
 func heal_damage(amount:int= 1)-> void:

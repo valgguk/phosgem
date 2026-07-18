@@ -26,8 +26,7 @@ func update() -> void:
 		return
 	name_label.text = player.name
 	role_label.text = Statics.get_role_name(player.role)
-	ready_icon.modulate = Color.GREEN if player.vote else Color.WHITE
-
+	ready_icon.visible = true if player.vote else false
 
 func _handle_player_updated(id: int) -> void:
 	if player and player.id == id:
