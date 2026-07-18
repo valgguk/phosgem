@@ -1,6 +1,7 @@
 class_name LobbyWaitingScreen
 extends Control
 
+@onready var player_ready_texture = %PlayerReadyTexture
 @onready var player_texture: TextureRect = %PlayerTexture
 @onready var player_name: Label = %PlayerName
 @onready var role_button: Button = %RoleButton
@@ -55,7 +56,7 @@ func _toggle_ready() -> void:
 
 func _update_player() -> void:
 	var player_ready: bool = Game.get_current_player().vote
-	player_texture.modulate = Color.GREEN if player_ready else Color.WHITE
+	player_ready_texture.visible = true if player_ready else false
 	role_container.hide()
 
 
