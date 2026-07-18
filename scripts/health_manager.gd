@@ -19,7 +19,6 @@ func _process(delta):
 func _update_health(amount: int) -> void:
 	if invulnerable:
 		return
-	Debug.log("DAMAGE" + str(amount))
 	ShipHealth = clampi(ShipHealth+ amount,0,MAX_HEALTH)
 	#do sync shinenigans
 	if ShipHealth<=0.5:

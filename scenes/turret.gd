@@ -3,7 +3,7 @@ extends Node2D
 @export var bullet_scene: PackedScene
 @onready var boca: Marker2D = $Boca
 var rotate_dir := 0.0
-var rotation_speed := 5.0
+var rotation_speed := 2
 @onready var label: Label = $Label
 @export var turret_id: int = 0
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -46,9 +46,12 @@ func sync_rotation(rot: float):
 
 
 func shoot():
+	$AudioStreamPlayer.play()
 	if not is_multiplayer_authority():
 		return
+	
 	_play_fire_animation()
+	
 	var bullet = bullet_scene.instantiate()
 	
 	var bullets_node = get_node("/root/Main/Ship/Bullets")

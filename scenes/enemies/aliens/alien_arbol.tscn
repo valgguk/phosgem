@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://b7owxkq83i2m2" path="res://components/hurtbox_component.gd" id="3_fjroi"]
 [ext_resource type="Script" uid="uid://dnu0ib00h5rhg" path="res://components/health_component.gd" id="4_usysr"]
 [ext_resource type="Script" uid="uid://b4jdacy8shnmu" path="res://components/hitbox_component.gd" id="5_e123m"]
+[ext_resource type="AudioStream" uid="uid://diij3ioveatvl" path="res://assets/audio/Hit.wav" id="6_mhf8a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8rjw"]
 radius = 9.0
@@ -19,6 +20,9 @@ radius = 9.787805
 height = 32.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_07eov"]
+properties/0/path = NodePath(".:frozen")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [sub_resource type="Animation" id="Animation_o540p"]
 length = 0.001
@@ -304,3 +308,7 @@ libraries/ = SubResource("AnimationLibrary_usysr")
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=26466757]
 tree_root = SubResource("AnimationNodeStateMachine_vdfp4")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1782241117]
+stream = ExtResource("6_mhf8a")
+volume_db = -11.3

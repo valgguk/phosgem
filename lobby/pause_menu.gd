@@ -34,7 +34,6 @@ func _set_paused(value: bool) -> void:
 		resume_button.grab_focus()
 		# buscar jugador justo cuando se pausa
 		_local_player = _get_local_player()
-		Debug.log("Pausando, jugador local: " + str(_local_player))
 	if _local_player and is_instance_valid(_local_player):
 		_local_player.set_process_input(not _paused)
 		_local_player.set_physics_process(not _paused)

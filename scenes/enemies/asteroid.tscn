@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d0uy3irx00cqs" path="res://assets/white32.png" id="4_2h6hj"]
 [ext_resource type="Script" uid="uid://b7owxkq83i2m2" path="res://components/hurtbox_component.gd" id="5_w7b4c"]
 [ext_resource type="Script" uid="uid://dnu0ib00h5rhg" path="res://components/health_component.gd" id="6_prswt"]
+[ext_resource type="AudioStream" uid="uid://bjrukc1bmp5b8" path="res://assets/audio/Boom.wav" id="7_prswt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w7b4c"]
 
@@ -106,3 +107,6 @@ debug_color = Color(0.8879459, 0.325064, 0.13293323, 0.41960785)
 [node name="HealthComponent" type="Node" parent="HurtboxComponent" unique_id=1717811686]
 script = ExtResource("6_prswt")
 metadata/_custom_type_script = "uid://dnu0ib00h5rhg"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2105207737]
+stream = ExtResource("7_prswt")
