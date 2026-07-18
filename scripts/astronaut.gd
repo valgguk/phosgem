@@ -32,7 +32,7 @@ var active_role_special: Statics.Role
 #Special move related
 var buff_time = 10
 var cooldown = 30 #time defore using ability again
-var particles = preload("res://scenes/buff_particles.tscn")
+var particles = preload("uid://11dkmguq62m")
 @onready var cooldown_timer = $CooldownTimer
 signal freeze
 
