@@ -2,14 +2,13 @@ class_name HurtboxComponent
 extends Area2D
 
 @export var health_component: HealthComponent
-@export var owner_body: CharacterBody2D
+@export var owner_body: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
-	
 	if owner_body == null:
-		owner_body = get_parent() as CharacterBody2D
+		owner_body = get_parent() as Node2D
 	
 	
 func _on_area_entered(area: Area2D) -> void:
@@ -44,8 +43,11 @@ func _on_area_entered(area: Area2D) -> void:
 				return
 	# ------
 	if hitbox and health_component:
+		print("Soy authority?", owner_body.is_multiplayer_authority())
 		if owner_body.is_multiplayer_authority():
+			print("HP antes:", health_component.health)
 			health_component.take_damage(hitbox.damage)
+			print("HP después:", health_component.health)
 		hitbox.damage_dealt.emit(owner_body) # <-- avisamos que hicimos daño
 		
 

@@ -6,7 +6,9 @@ var lifetime := 6.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	add_to_group("player_bullets")
+	owner_body = self
+	area_entered.connect(_on_area_entered)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -41,3 +43,12 @@ func destroy_rpc():
 	if is_multiplayer_authority():
 		return
 	queue_free()
+	
+func _on_area_entered(area: Area2D) -> void:
+	if not multiplayer.is_server():
+		return
+	if not is_multiplayer_authority():
+		return
+	var hurtbox := area as HurtboxComponent
+	if hurtbox:
+		destroy()

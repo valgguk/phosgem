@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
 @onready var health_component: HealthComponent = $HurtboxComponent/HealthComponent
+@onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 
 @export var bullet_scene : PackedScene
 @onready var bullet_spawn: Marker2D = $BulletSpawn
@@ -50,7 +51,7 @@ func _on_died():
 func die():
 	print("Alien-Ship destruída")
 	playback.travel("die")
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(0.8).timeout
 	call_deferred("queue_free")
 
 @rpc("authority", "call_local", "reliable")
