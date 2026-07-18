@@ -8,9 +8,24 @@ func _ready() -> void:
 	visible = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
+#func play_game_over() -> void:
+	#visible = true
+	#game_over_sound.play(17.75)
+	#await get_tree().create_timer(7.0, true).timeout
+	#get_tree().change_scene_to_file("res://lobby/waiting_screen.tscn") # ver después
+	
+
+
+
+
 func play_game_over() -> void:
+	if not is_multiplayer_authority():
+		return
+	_synced_game_over.rpc()
+
+@rpc("authority", "call_local", "reliable")
+func _synced_game_over() -> void:
 	visible = true
 	game_over_sound.play(17.75)
 	await get_tree().create_timer(7.0, true).timeout
-	get_tree().change_scene_to_file("res://lobby/waiting_screen.tscn") # ver después
-	
+	get_tree().change_scene_to_file("res://lobby/waiting_screen.tscn")

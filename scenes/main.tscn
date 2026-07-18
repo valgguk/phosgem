@@ -1094,6 +1094,7 @@ metadata/_edit_lock_ = true
 
 [node name="OxigenGenerator" parent="Ship/Visuals" unique_id=432383899 instance=ExtResource("10_choun")]
 position = Vector2(1823, -33)
+OXIGEN_MAX = 6
 oxigen_per_pump = 10
 
 [node name="LeverAnti2" parent="Ship/Visuals" unique_id=887291864 instance=ExtResource("8_choun")]
