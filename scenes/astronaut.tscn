@@ -132,8 +132,8 @@ owner_body = NodePath("..")
 metadata/_custom_type_script = "uid://b4jdacy8shnmu"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=221278949]
-position = Vector2(-5.5362415, 46.05442)
-scale = Vector2(1.1644359, 1.0680238)
+position = Vector2(-3.6363635, 45.45454)
+scale = Vector2(1.6, 1.468)
 shape = SubResource("RectangleShape2D_a04db")
 
 [node name="CooldownTimer" type="Timer" parent="." unique_id=740268805]

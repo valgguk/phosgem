@@ -13,7 +13,7 @@ extends Control
 @onready var start_timer: Timer = $StartTimer
 @onready var game_start_container: PanelContainer = %GameStartContainer
 @onready var game_start_counter: Label = %GameStartCounter
-
+@export var role_textures: Dictionary[Statics.Role,Texture2D]
 
 
 var LOBBY_PLAYER_SCENE: PackedScene = preload("res://lobby/lobby_player.tscn")
@@ -96,6 +96,7 @@ func _fill_role_container() -> void:
 func _update_role(role: Statics.Role) -> void:
 	Game.set_current_player_role(role)
 	role_button.text = Statics.get_role_name(role)
+	player_texture.texture= role_textures[role]
 	role_container.hide()
 
 

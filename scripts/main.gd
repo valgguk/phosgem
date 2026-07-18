@@ -1,6 +1,5 @@
 extends Node2D
 
-
 @export var player_scene: PackedScene
 @onready var players: Node2D = $Ship/Players
 
@@ -11,6 +10,7 @@ extends Node2D
 @onready var label = $Ship/CanvasLayer/Label
 @onready var asteroid_spawner: AsteroidSpawner= $AsteroidSpawner
 
+@onready var alien_spawn_points: Node2D = $Ship/AlienSpawnPoints
 @onready var aliens: Node2D = $Ship/Aliens
 
 @export var camera_max_zoom: float=1.5
@@ -19,6 +19,7 @@ extends Node2D
 @onready var gravity_zone: Area2D = $Ship/GravityZone
 @onready var lever_thrust: Area2D = $Ship/Visuals/LeverThrust
 
+@onready var planet: Planet = $Planet
 
 
 const rotation_vel=1.5
@@ -77,17 +78,28 @@ func _update_camera() -> void:
 	
 func _ready() -> void:
 	players.add_to_group("players_node")
+	ship.add_to_group("ship")
 	for i in Game.players.size():
 		var player_data = Game.players[i]
 		var player_inst = player_scene.instantiate()
+		
 		players.add_child(player_inst, true)
+		player_inst.add_to_group("players_instances")
 		var spawn_point = spawn_points.get_child(i)
 		player_inst.global_position = spawn_point.global_position
 		player_inst.setup(player_data)
 	if multiplayer.is_server():
 		asteroid_spawner.initialize(ship)
+	planet.planet_reached.connect(_on_planet_reached)
 
-
+func _on_planet_reached() -> void:
+	if not multiplayer.is_server():
+		return
+	_trigger_victory.rpc()
+	
+@rpc("authority", "call_local", "reliable")
+func _trigger_victory() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/winning_game.tscn")
 
 # mandarle rotacion al server 
 # se llama cuando se aprieta el boton
@@ -110,3 +122,21 @@ func sync_ship(pos: Vector2, rot: float):
 func _apply_ship_velocity():
 	for body in get_tree().get_nodes_in_group("affected_by_ship"):
 		body.ship_velocity = ship_velocity
+
+@rpc("any_peer", "call_local", "reliable")
+func turret_rotate(turret_path: NodePath, dir: float):
+	var turret = get_node(turret_path)
+	turret.rotate_turret(dir)
+
+@rpc("any_peer", "call_local", "reliable")
+func turret_shoot(turret_path: NodePath):
+	if not has_node(turret_path):
+		print("✕ turret_path inválido:", turret_path)
+		return
+	var turret = get_node(turret_path)
+	turret.shoot()
+	
+@rpc("any_peer", "call_local", "reliable")
+func turret_set_shooting(turret_path: NodePath, state: bool):
+	var turret = get_node(turret_path)
+	turret.set_shooting(state)

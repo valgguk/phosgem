@@ -3,7 +3,7 @@ class_name AlienShipSpawner
 
 @export var alien_scene: PackedScene
 @export var wave_size_min := 1
-@export var wave_size_max := 3
+@export var wave_size_max := 2
 
 @export var time_between_waves_min := 30.0
 @export var time_between_waves_max := 60.0
