@@ -15,11 +15,14 @@
 [ext_resource type="PackedScene" uid="uid://bf37aval36plk" path="res://scenes/interactable_objects/leverThrust.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://nkscoxvh6eys" path="res://scenes/interactable_objects/LeverAnti.tscn" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://b5nbnoh566dn2" path="res://scenes/interactable_objects/oxigen_generator.tscn" id="10_choun"]
-[ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/scoreTracker.tscn" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://dkkvj0iyib860" path="res://scenes/UI/scoreTracker.tscn" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://coyeip22k6ylj" path="res://scenes/interactable_objects/TurretShootButton.tscn" id="13_0ld40"]
 [ext_resource type="Script" uid="uid://brigqeuhhmrig" path="res://scenes/enemies/aliens/alien_ship_spawner.gd" id="13_muem4"]
 [ext_resource type="Theme" uid="uid://bgvflwj8dsfhy" path="res://ui/menuTheme.tres" id="13_trceg"]
+[ext_resource type="PackedScene" uid="uid://xbgtsptqyqu2" path="res://scenes/interactable_objects/TurretRotateButton.tscn" id="14_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://bio3yxjk43fbs" path="res://scenes/interactable_objects/energy_generator.tscn" id="16_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://bsbxha73bpp1w" path="res://scenes/enemies/aliens/alien_ship.tscn" id="17_muem4"]
+[ext_resource type="PackedScene" uid="uid://c7mpg3nfvbm65" path="res://scenes/Turret.tscn" id="18_dp3eg"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o6xl0"]
 
@@ -979,6 +982,7 @@ GameOverLayer = NodePath("../Ship/CanvasLayer/GameOver")
 [node name="HealthManager" type="Node" parent="." unique_id=1246870109 node_paths=PackedStringArray("UI_health")]
 unique_name_in_owner = true
 script = ExtResource("4_jkv2x")
+MAX_HEALTH = 500
 UI_health = NodePath("../Ship/CanvasLayer/TextureProgressBar")
 
 [node name="BackGroundParallax" type="Node2D" parent="." unique_id=491027278]
@@ -1027,10 +1031,6 @@ position = Vector2(7700, 3961)
 [node name="Ship" type="Node2D" parent="." unique_id=625195637]
 metadata/_edit_lock_ = true
 
-[node name="AlienShip" parent="Ship" unique_id=23759853 instance=ExtResource("17_muem4")]
-position = Vector2(1217, 1230)
-scale = Vector2(4, 4)
-
 [node name="asteroidColision" type="Area2D" parent="Ship" unique_id=1296018100]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/asteroidColision" unique_id=1209477821]
@@ -1040,7 +1040,7 @@ shape = SubResource("RectangleShape2D_jkv2x")
 [node name="BulletColision2" type="Area2D" parent="Ship" unique_id=350363016 groups=["bullet_area"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship/BulletColision2" unique_id=1161224847]
-position = Vector2(725, 456)
+position = Vector2(725, 240)
 shape = SubResource("RectangleShape2D_jkv2x")
 
 [node name="GravityZone" type="Area2D" parent="Ship" unique_id=339119337]
@@ -1100,6 +1100,34 @@ position = Vector2(600, 8)
 position = Vector2(-612, -12)
 polygon = PackedVector2Array(-570, 736, -538, 735, -546, 728, -532, 697, -537, 671, -564, 654, -578, 667, -551, 675, -548, 696, -560, 718, -573, 709)
 
+[node name="Turrets" type="Node2D" parent="Ship/Visuals" unique_id=957740163]
+
+[node name="Turret1" parent="Ship/Visuals/Turrets" unique_id=2007913444 instance=ExtResource("18_dp3eg")]
+position = Vector2(-806, -408)
+turret_id = 1
+
+[node name="Turret2" parent="Ship/Visuals/Turrets" unique_id=2080458840 instance=ExtResource("18_dp3eg")]
+position = Vector2(1312, 902)
+turret_id = 2
+
+[node name="TurretShootButton" parent="Ship/Visuals/Turrets" unique_id=126549046 instance=ExtResource("13_0ld40")]
+position = Vector2(-235, 330)
+turret_path = NodePath("/root/Main/Ship/Visuals/Turrets/Turret1")
+turret_id = 1
+
+[node name="TurretShootButton2" parent="Ship/Visuals/Turrets" unique_id=39208067 instance=ExtResource("13_0ld40")]
+position = Vector2(1171, 346)
+turret_path = NodePath("/root/Main/Ship/Visuals/Turrets/Turret2")
+turret_id = 2
+
+[node name="TurretRotateButton" parent="Ship/Visuals/Turrets" unique_id=790381026 instance=ExtResource("14_gqmmt")]
+position = Vector2(-749, -6)
+turret_path = NodePath("/root/Main/Ship/Visuals/Turrets/Turret1")
+
+[node name="TurretRotateButton2" parent="Ship/Visuals/Turrets" unique_id=1942187135 instance=ExtResource("14_gqmmt")]
+position = Vector2(1023, 626)
+turret_path = NodePath("/root/Main/Ship/Visuals/Turrets/Turret2")
+
 [node name="EnergyGenerator" parent="Ship" unique_id=247079671 instance=ExtResource("16_jbj1t")]
 position = Vector2(2111, 681)
 scale = Vector2(6.4173546, 6.4173546)
@@ -1121,6 +1149,24 @@ gizmo_extents = 100.0
 [node name="Marker2D3" type="Marker2D" parent="Ship/SpawnPoints" unique_id=1001443462]
 position = Vector2(264, 327)
 gizmo_extents = 100.0
+
+[node name="AlienSpawnPoints" type="Node2D" parent="Ship" unique_id=1707680808]
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="Ship/AlienSpawnPoints" unique_id=927339005]
+position = Vector2(-736, -16)
+gizmo_extents = 100.0
+metadata/_edit_lock_ = true
+
+[node name="Marker2D2" type="Marker2D" parent="Ship/AlienSpawnPoints" unique_id=311560713]
+position = Vector2(608, 314)
+gizmo_extents = 100.0
+metadata/_edit_lock_ = true
+
+[node name="Marker2D3" type="Marker2D" parent="Ship/AlienSpawnPoints" unique_id=1968086088]
+position = Vector2(1578, 507)
+gizmo_extents = 100.0
+metadata/_edit_lock_ = true
 
 [node name="AlienShipSpawner" type="Node2D" parent="Ship" unique_id=664725783 node_paths=PackedStringArray("spawn_areas")]
 script = ExtResource("13_muem4")
@@ -1148,25 +1194,21 @@ metadata/_edit_lock_ = true
 
 [node name="Aliens" type="Node2D" parent="Ship" unique_id=1794615966]
 
-[node name="AlienShip" parent="Ship/Aliens" unique_id=167436696 instance=ExtResource("17_muem4")]
-position = Vector2(722, 1312)
+[node name="Bullets" type="Node2D" parent="Ship" unique_id=265351821]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Ship" unique_id=1321271366]
 process_mode = 3
-visible = false
 
 [node name="GameOver" parent="Ship/CanvasLayer" unique_id=1794529264 instance=ExtResource("3_ya4ey")]
 visible = false
 metadata/_edit_lock_ = true
 
 [node name="Label" parent="Ship/CanvasLayer" unique_id=359397464 instance=ExtResource("12_eb6dy")]
-visible = false
 theme = ExtResource("13_trceg")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Ship/CanvasLayer" unique_id=1094680437]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

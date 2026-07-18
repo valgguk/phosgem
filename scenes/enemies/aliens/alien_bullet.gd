@@ -9,6 +9,7 @@ var target: Node2D = null
 var direction: Vector2
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree["parameters/playback"]
+@export var alien_scene: PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,6 +57,10 @@ func _on_area_entered(area: Area2D) -> void:
 func _enter_to_ship():
 	play_enter_animation.rpc()
 	await get_tree().create_timer(1.5).timeout
+	# SOLO SERVER decide spawn
+	if is_multiplayer_authority():
+		var spawn_pos = _get_spawn_point()
+		spawn_alien_inside_ship.rpc(spawn_pos)
 	destroy_bullet.rpc()
 	
 @rpc("authority", "call_local", "reliable")
@@ -65,7 +70,6 @@ func destroy_bullet():
 @rpc("authority", "call_local", "reliable")
 func play_enter_animation():
 	entering = true
-	
 	playback.travel("enter")
 	
 @rpc("authority", "unreliable")
@@ -76,3 +80,28 @@ func setup(target_node: Node2D) -> void:
 	target = target_node
 	direction = (target.global_position - global_position).normalized()
 	rotation = direction.angle()
+	
+func _get_spawn_point() -> Vector2:
+	var spawn_container = get_node("/root/Main/Ship/AlienSpawnPoints")
+	var points = spawn_container.get_children()
+	if points.is_empty():
+		return spawn_container.global_position
+		
+	var chosen = points.pick_random()
+	return chosen.global_position
+	
+@rpc("authority", "call_local", "reliable")
+func spawn_alien_inside_ship(pos: Vector2):
+	if alien_scene == null:
+		print("✕ ERROR: alien_scene es NULL")
+		return
+		
+	var alien = alien_scene.instantiate()
+	var aliens_node = get_node("/root/Main/Ship/Aliens")
+	alien.set_multiplayer_authority(1)
+	aliens_node.add_child(alien)
+	alien.global_position = pos
+	
+	print("✓ ALIEN SPAWNEADO en:", pos)
+	print("Scale alien:", alien.scale)
+	print("Scale parent:", aliens_node.scale)
