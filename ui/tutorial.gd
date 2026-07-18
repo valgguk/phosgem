@@ -59,6 +59,11 @@ Si un alien entra a la nave, te aturde. ¡Sáltale encima para eliminarlo!",
 		
 	},
 	{
+		"title": "Movimiento super duper especial",
+		"description": "Presiona [Q] para realizar un movimiento especial exclusivo de tu personaje.",
+		"demo": ""
+	},
+	{
 		"title": "Menú de pausa",
 		"description": "Presiona [Escape] para pausar. Puedes reanudar, volver al menú o salir.",
 		"demo": ""

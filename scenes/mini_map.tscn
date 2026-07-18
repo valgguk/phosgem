@@ -19,10 +19,10 @@ grow_vertical = 2
 [node name="Control" type="Control" parent="RootControl" unique_id=2002358804]
 layout_mode = 1
 anchors_preset = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 190.0
-offset_bottom = 190.0
+offset_left = 20.0
+offset_top = 54.0
+offset_right = 200.0
+offset_bottom = 234.0
 
 [node name="ColorRect" type="ColorRect" parent="RootControl/Control" unique_id=456315651]
 layout_mode = 0
@@ -43,16 +43,16 @@ anchors_preset = 0
 layout_mode = 0
 offset_left = 41.0
 offset_top = 61.0
-offset_right = 61.0
-offset_bottom = 73.0
+offset_right = 90.0
+offset_bottom = 90.0
 color = Color(1, 0.3254902, 1, 1)
 
 [node name="expandButton" type="Button" parent="RootControl" unique_id=2060573450]
 layout_mode = 0
-offset_left = 75.0
-offset_top = 10.0
-offset_right = 192.0
-offset_bottom = 54.0
+offset_left = 81.0
+offset_top = 54.0
+offset_right = 198.0
+offset_bottom = 98.0
 theme = ExtResource("2_5uo74")
 theme_override_font_sizes/font_size = 35
 text = "minimap"
