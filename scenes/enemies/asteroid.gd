@@ -11,6 +11,9 @@ signal asteroid_hit_ship(asteroid: Asteroid)
 @onready var navigation_agent_2d: NavigationAgent2D = $NavigationAgent2D
 @onready var update_timer: Timer = $updateTimer
 
+@onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
+@onready var health_component: HealthComponent = $HurtboxComponent/HealthComponent
+
 
 var speed: int = 50
 var velocity: Vector2 = Vector2.ZERO
@@ -68,6 +71,7 @@ func _ready() -> void:
 	detection_area_2d.area_entered.connect(_on_detection_area_entered)
 	detection_area_2d.area_exited.connect(_on_detection_area_entered)
 	update_timer.timeout.connect(_update_target_position)
+	health_component.died.connect(_on_died)
 	
 func _on_body_entered(body:Node)->void:
 	var ship = body as Node2D
@@ -88,3 +92,8 @@ func _on_body_exited(body:Node)->void:
 func _update_target_position() -> void:
 	if target_ship:
 		navigation_agent_2d.target_position = target_ship.global_position
+		
+func _on_died():
+	if not is_multiplayer_authority():
+		return
+	destroy.rpc()
