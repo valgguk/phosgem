@@ -95,13 +95,16 @@ func spawn_alien_inside_ship(pos: Vector2):
 	if alien_scene == null:
 		print("✕ ERROR: alien_scene es NULL")
 		return
+	var aliens_node = get_node("/root/Main/Ship/Aliens")
+	# LIMITE DE ALIENS
+	var current_aliens = aliens_node.get_child_count()
+	if current_aliens >= 3:
+		print("(=) LIMITE DE ALIENS ALCANZADO:", current_aliens)
+		return
 		
 	var alien = alien_scene.instantiate()
-	var aliens_node = get_node("/root/Main/Ship/Aliens")
 	alien.set_multiplayer_authority(1)
 	aliens_node.add_child(alien)
 	alien.global_position = pos
 	
 	print("✓ ALIEN SPAWNEADO en:", pos)
-	print("Scale alien:", alien.scale)
-	print("Scale parent:", aliens_node.scale)

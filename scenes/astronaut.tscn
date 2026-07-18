@@ -129,6 +129,7 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("7_75ag2")
 owner_body = NodePath("..")
+damage = 50
 metadata/_custom_type_script = "uid://b4jdacy8shnmu"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=221278949]
