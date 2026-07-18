@@ -43,8 +43,8 @@ anchors_preset = 0
 layout_mode = 0
 offset_left = 41.0
 offset_top = 61.0
-offset_right = 61.0
-offset_bottom = 73.0
+offset_right = 90.0
+offset_bottom = 90.0
 color = Color(1, 0.3254902, 1, 1)
 
 [node name="expandButton" type="Button" parent="RootControl" unique_id=2060573450]
