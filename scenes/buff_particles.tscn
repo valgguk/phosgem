@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://11dkmguq62m"]
+
+[ext_resource type="PackedScene" uid="uid://k0rn1h3ux3do" path="res://scenes/astronaut.tscn" id="1_fw103"]
+[ext_resource type="Material" uid="uid://b5rjytkoiqosi" path="res://resources/buff_particle_res.tres" id="2_8icnh"]
+
+[node name="Node2D" type="Node2D" unique_id=1174654823]
+
+[node name="Astronaut" parent="." unique_id=653814398 instance=ExtResource("1_fw103")]
+position = Vector2(3, -18)
+
+[node name="BuffParticles" type="GPUParticles2D" parent="." unique_id=945574173]
+position = Vector2(-3, -17)
+process_material = ExtResource("2_8icnh")

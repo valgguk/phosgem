@@ -28,11 +28,23 @@ theme_override_font_sizes/normal_font_size = 46
 theme_override_font_sizes/bold_font_size = 35
 bbcode_enabled = true
 text = "[center]
-[b]Lobby[/b]
-Elías Zelada
+[b]Produced by[/b]
+[shake][font_size={70}]PhosGem[/font_size][/shake]
+[fill][font_size={30}]XavierSSS[/font_size][b]            Xavier Sepúlveda[/b][/fill]
+[fill][font_size={30}]franlipa[/font_size][b]                 Francisca López[/b][/fill]
+[fill][font_size={30}]Valgguk[/font_size][b]               Valentina Ramírez[/b][/fill]
+[hr]
 [b]Background stars[/b]
 ansimuz - itchio
 
 [b]Planet[/b]
 deep-fold - itchio
+[b]Arcade Style Aliens[/b]
+CheckpointCafé.Dev
+
+[b]Simple Turret[/b]
+Cazbee
+
+[b]19+ Pixel Ability/Button Icons![/b]
+M. DeVs
 [/center]"

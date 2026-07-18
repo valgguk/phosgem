@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://xbgtsptqyqu2"]
+
+[ext_resource type="Script" uid="uid://bmhbsihicp3ns" path="res://scenes/interactable_objects/turret_rotate_button.gd" id="1_de7rv"]
+[ext_resource type="Texture2D" uid="uid://63qytiyk57ey" path="res://assets/sprites/bfc-11f1-b083-6bc938b2ac56.png" id="2_de7rv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwwo6"]
+size = Vector2(59.44229, 30.217482)
+
+[node name="TurretRotateButton" type="Area2D" unique_id=1108067853]
+script = ExtResource("1_de7rv")
+sprite_reversed = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2050636935]
+position = Vector2(-5, 5)
+scale = Vector2(3.1987224, 6.1064525)
+shape = SubResource("RectangleShape2D_jwwo6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1874389218]
+modulate = Color(1, 0.60800004, 0.52, 1)
+position = Vector2(-2, -31)
+rotation = 1.5707964
+scale = Vector2(-4.812041, -4.812041)
+texture = ExtResource("2_de7rv")
+hframes = 2
+frame = 1
+region_enabled = true
+region_rect = Rect2(15, 0, 96, 64)

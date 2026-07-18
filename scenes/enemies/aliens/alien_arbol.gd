@@ -36,6 +36,8 @@ var aggro_time := 2.0
 var aggro_timer := 0.0
 
 func _ready() -> void:
+	print("Alien authority:", get_multiplayer_authority())
+	print("Soy autoridad?:", is_multiplayer_authority())
 	add_to_group("aliens_instances")
 	add_to_group("affected_by_ship")
 	health_component.health_changed.connect(_on_health_changed)
@@ -51,7 +53,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority(): # clientes no ejecutan physics_process
-		
 		var g = get_gravity()
 		if g.length() == 0:
 			g = Vector2.DOWN * 980
@@ -299,7 +300,7 @@ func _on_died():
 	
 @rpc("authority", "call_local", "reliable")
 func die():
-	print("Alien murió")
+	Debug.log("Alien murió")
 	playback.travel("die")
 	await get_tree().create_timer(1).timeout
 	call_deferred("queue_free")
