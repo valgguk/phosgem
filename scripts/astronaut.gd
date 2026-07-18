@@ -28,9 +28,14 @@ var stomped := false
 var bounce_velocity := Vector2.ZERO
 var bounce_timer := 0.0
 var active_role_special: Statics.Role
+
+
+#Special move related
 var buff_time = 3
 var cooldown = 5 #time defore using ability again
 var particles = preload("res://scenes/buff_particles.tscn")
+@onready var cooldown_timer = $CooldownTimer
+
 
 func _ready() -> void:
 	add_to_group("players_instances")
@@ -127,15 +132,23 @@ func change_sprite_direction(direction:int)-> void:
 
 func special_move():
 	var players
+	if cooldown_timer.time_left> 0:
+		return
+	cooldown_timer.start()
 	match active_role_special:
 		0: Debug.log("no power")
 		1: 
+			
 			players = get_tree().get_nodes_in_group("players_instances") as Array[Astronaut]
 			for player in players:
-				buff_player.rpc(player)
+				player.buff_player.rpc()
 				
 			Debug.log("red power")
-		2: Debug.log("blue power")
+		2: 
+			var aliens= get_tree().get_nodes_in_group("alien_instances")
+			for alien in aliens:
+				pass
+			Debug.log("blue power")
 
 
 func manage_animations(direction):
@@ -211,18 +224,18 @@ func _on_sync_timeout() -> void:
 		send_position.rpc(position)
 
 @rpc("any_peer", "call_local","reliable")
-func buff_player(astronaut:Astronaut):
+func buff_player():
 	var old_stats = [SPEED,JUMP_VELOCITY,Gravity_factor]
-	astronaut.SPEED *= 1.75
-	astronaut.JUMP_VELOCITY *= 1.5
-	astronaut.Gravity_factor *= 2
+	SPEED *= 1.75
+	JUMP_VELOCITY *= 1.5
+	Gravity_factor *= 1.5
 	var particle_inst = particles.instantiate()
-	astronaut.add_child(particle_inst)
+	add_child(particle_inst)
 	await get_tree().create_timer(buff_time).timeout
-	astronaut.SPEED = old_stats[0]
-	astronaut.JUMP_VELOCITY= old_stats[1]
-	astronaut.Gravity_factor = old_stats[2]
-	astronaut.remove_child(particle_inst)
+	SPEED = old_stats[0]
+	JUMP_VELOCITY= old_stats[1]
+	Gravity_factor = old_stats[2]
+	remove_child(particle_inst)
 
 	
 

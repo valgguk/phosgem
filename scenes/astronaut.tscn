@@ -135,3 +135,7 @@ metadata/_custom_type_script = "uid://b4jdacy8shnmu"
 position = Vector2(-5.5362415, 46.05442)
 scale = Vector2(1.1644359, 1.0680238)
 shape = SubResource("RectangleShape2D_a04db")
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=740268805]
+wait_time = 3.0
+one_shot = true
