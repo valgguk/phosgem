@@ -59,6 +59,7 @@ func destroy() -> void:
 	$AudioStreamPlayer.play()
 	trail.emitting = false
 	get_tree().create_timer(trail.lifetime).timeout
+	await get_tree().create_timer(0.05).timeout
 	queue_free()
 	
 func _on_detection_area_entered(area: Area2D) -> void:
