@@ -1119,21 +1119,33 @@ position = Vector2(1312, 902)
 turret_id = 2
 
 [node name="TurretShootButton" parent="Ship/Visuals/Turrets" unique_id=126549046 instance=ExtResource("13_0ld40")]
-position = Vector2(-235, 330)
+position = Vector2(-206, 301)
 turret_path = NodePath("/root/Main/Ship/Visuals/Turrets/Turret1")
 turret_id = 1
 
 [node name="TurretShootButton2" parent="Ship/Visuals/Turrets" unique_id=39208067 instance=ExtResource("13_0ld40")]
-position = Vector2(1171, 346)
+position = Vector2(1023, 297)
 turret_path = NodePath("/root/Main/Ship/Visuals/Turrets/Turret2")
 turret_id = 2
 
 [node name="TurretRotateButton" parent="Ship/Visuals/Turrets" unique_id=790381026 instance=ExtResource("14_gqmmt")]
-position = Vector2(-749, -6)
+position = Vector2(-709, -57)
+sprite_reversed = false
+turret_path = NodePath("/root/Main/Ship/Visuals/Turrets/Turret1")
+
+[node name="TurretRotateButton3" parent="Ship/Visuals/Turrets" unique_id=1105898792 instance=ExtResource("14_gqmmt")]
+position = Vector2(-110, -57)
+direction = -1
 turret_path = NodePath("/root/Main/Ship/Visuals/Turrets/Turret1")
 
 [node name="TurretRotateButton2" parent="Ship/Visuals/Turrets" unique_id=1942187135 instance=ExtResource("14_gqmmt")]
 position = Vector2(1023, 626)
+direction = -1
+turret_path = NodePath("/root/Main/Ship/Visuals/Turrets/Turret2")
+
+[node name="TurretRotateButton4" parent="Ship/Visuals/Turrets" unique_id=1264765877 instance=ExtResource("14_gqmmt")]
+position = Vector2(664, 649)
+sprite_reversed = false
 turret_path = NodePath("/root/Main/Ship/Visuals/Turrets/Turret2")
 
 [node name="EnergyGenerator" parent="Ship" unique_id=247079671 instance=ExtResource("16_jbj1t")]

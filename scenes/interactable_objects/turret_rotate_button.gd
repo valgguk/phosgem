@@ -1,5 +1,6 @@
 extends Area2D
 
+@export var sprite_reversed: bool
 @export var direction: int = 1
 var player_inside := false
 @export var turret_path: NodePath
@@ -9,6 +10,7 @@ var last_dir := 999
 var visual_dir := 0
 
 func _ready() -> void:
+	if sprite_reversed: $Sprite2D.frame= 0
 	set_multiplayer_authority(1)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
